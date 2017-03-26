@@ -79,7 +79,7 @@ function throwOrReject(a_test, operation, fn, obj, args,  message, cb)
 //@{
 {
 console.log('++++++++++++++++++++++++++++++++++++')
-console.log(operation)
+console.log(operation.idlType)
     if (operation.idlType.idlType!== "Promise") {
         assert_throws(new TypeError(), function() {
             fn.apply(obj, args);
