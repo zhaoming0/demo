@@ -78,6 +78,11 @@ function minOverloadLength(overloads)
 function throwOrReject(a_test, operation, fn, obj, args,  message, cb)
 //@{
 {
+    if (operation.name == "setLocalDescription"){
+        console.log('*******')
+        console.log(operation)
+        console.log('*******')
+    }
     if (operation.idlType.generic !== "Promise") {
         console.log(operation);
         console.log('1111111111')
