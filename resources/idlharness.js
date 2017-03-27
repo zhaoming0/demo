@@ -80,7 +80,7 @@ function throwOrReject(a_test, operation, fn, obj, args,  message, cb)
 {
 console.log('++++++++++++++++++++++++++++++++++++')
 console.log(operation)
-    if (operation.idlType.generic !== "Promise") {
+    if (operation.generic !== "Promise") {
 console.log('--------------------------------------------')
         assert_throws(new TypeError(), function() {
             fn.apply(obj, args);
