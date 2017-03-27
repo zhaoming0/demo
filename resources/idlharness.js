@@ -79,13 +79,15 @@ function throwOrReject(a_test, operation, fn, obj, args,  message, cb)
 //@{
 {
 console.log('++++++++++++++++++++++++++++++++++++')
-console.log(operation.idlType)
-    if (operation.idlType.idlType!== "Promise") {
+console.log(operation)
+    if (operation.idlType.generic !== "Promise") {
+console.log('--------------------------------------------')
         assert_throws(new TypeError(), function() {
             fn.apply(obj, args);
         }, message);
         cb();
     } else {
+console.log('*********************************************')
         try {
             promise_rejects(a_test, new TypeError(), fn.apply(obj, args)).then(cb, cb);
         } catch (e){

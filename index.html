@@ -23,29 +23,29 @@ interface EventTarget {
 };
 [ Constructor (optional RTCConfiguration configuration)]
 interface RTCPeerConnection : EventTarget  {
-    //Promise<RTCSessionDescription> createOffer (optional RTCOfferOptions options);
-    //Promise<RTCSessionDescription> createAnswer (optional RTCAnswerOptions options);
-    Promise<void>                  setLocalDescription (RTCSessionDescription description);
-    //readonly    attribute RTCSessionDescription? localDescription;
-    //readonly    attribute RTCSessionDescription? currentLocalDescription;
-    //readonly    attribute RTCSessionDescription? pendingLocalDescription;
-    //Promise<void>                  setRemoteDescription (RTCSessionDescription description);
-    //readonly    attribute RTCSessionDescription? remoteDescription;
-    //readonly    attribute RTCSessionDescription? currentRemoteDescription;
-    //readonly    attribute RTCSessionDescription? pendingRemoteDescription;
-    //Promise<void>                  addIceCandidate (RTCIceCandidate candidate);
-    //readonly    attribute RTCSignalingState      signalingState;
-    //readonly    attribute RTCIceGatheringState   iceGatheringState;
-    //readonly    attribute RTCIceConnectionState  iceConnectionState;
-    //readonly    attribute boolean?               canTrickleIceCandidates;
-    //RTCConfiguration               getConfiguration ();
-    //void                           setConfiguration (RTCConfiguration configuration);
-    //void                           close ();
-    //            attribute EventHandler           onnegotiationneeded;
-    //            attribute EventHandler           onicecandidate;
-    //            attribute EventHandler           onsignalingstatechange;
-    //            attribute EventHandler           oniceconnectionstatechange;
-    //            attribute EventHandler           onicegatheringstatechange;
+    Promise<RTCSessionDescription> createOffer (optional RTCOfferOptions options);
+    Promise<RTCSessionDescription> createAnswer (optional RTCAnswerOptions options);
+    Promise<void> setLocalDescription (RTCSessionDescription description);
+//    readonly    attribute RTCSessionDescription? localDescription;
+//    readonly    attribute RTCSessionDescription? currentLocalDescription;
+//    readonly    attribute RTCSessionDescription? pendingLocalDescription;
+    Promise<void>                  setRemoteDescription (RTCSessionDescription description);
+//    readonly    attribute RTCSessionDescription? remoteDescription;
+//    readonly    attribute RTCSessionDescription? currentRemoteDescription;
+//    readonly    attribute RTCSessionDescription? pendingRemoteDescription;
+    Promise<void>                  addIceCandidate (RTCIceCandidate candidate);
+//    readonly    attribute RTCSignalingState      signalingState;
+//    readonly    attribute RTCIceGatheringState   iceGatheringState;
+//    readonly    attribute RTCIceConnectionState  iceConnectionState;
+//    readonly    attribute boolean?               canTrickleIceCandidates;
+//    RTCConfiguration               getConfiguration ();
+//    void                           setConfiguration (RTCConfiguration configuration);
+//    void                           close ();
+//                attribute EventHandler           onnegotiationneeded;
+//                attribute EventHandler           onicecandidate;
+//                attribute EventHandler           onsignalingstatechange;
+//                attribute EventHandler           oniceconnectionstatechange;
+//                attribute EventHandler           onicegatheringstatechange;
 };
 
 //partial interface RTCPeerConnection {
