@@ -26,11 +26,11 @@ test(function() {
 //watch
 promise_test(t => {
   return navigator.nfc.watch(function() {}).then(result => {
-    console.log(result);
-    console.log("========");
-    assert_greater_than(result, 0, 'greater than zero')
+    assert_greater_than(result, 0, 'greater than zero');
+    resolve();
   }).catch((err) => {
-    console.log(err);
+    assert_reject(err);
+    reject();
   })
 }, "Test that nfc watch success if NFC HW is enable.")
 
