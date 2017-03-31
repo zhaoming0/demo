@@ -28,6 +28,7 @@ promise_test(t => {
   return navigator.nfc.watch(function() {}).then(result => {
     console.log(result);
     console.log("========");
+    assert_greater_than(result, 0, 'greater than zero')
   }).catch((err) => {
     console.log(err);
   })
