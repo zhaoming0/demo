@@ -27,7 +27,7 @@ test(function() {
 promise_test(t => {
   return navigator.nfc.watch(function() {}).then(result => {
     console.log(result);
-    conosle.log("========");
+    console.log("========");
   }).catch((err) => {
     console.log(err);
   })
