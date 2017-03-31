@@ -78,14 +78,7 @@ function minOverloadLength(overloads)
 function throwOrReject(a_test, operation, fn, obj, args,  message, cb)
 //@{
 {
-    if (operation.name == "setLocalDescription"){
-        console.log('*******')
-        console.log(operation)
-        console.log('*******')
-    }
     if (operation.idlType.generic !== "Promise") {
-        console.log(operation);
-        console.log('1111111111')
         assert_throws(new TypeError(), function() {
             fn.apply(obj, args);
         }, message);
@@ -1369,9 +1362,6 @@ IdlInterface.prototype.do_member_operation_asserts = function(memberHolderObject
             cb = awaitNCallbacks(2, done);
             throwOrReject(a_test, member, memberHolderObject[member.name], null, args,
                           "calling operation with this = null didn't throw TypeError", cb);
-                    if (member.idlType.idlType == "Promise") {
-                        console.log('33333333333')
-                    }
         } else {
             cb = awaitNCallbacks(1, done);
         }
@@ -1383,9 +1373,6 @@ IdlInterface.prototype.do_member_operation_asserts = function(memberHolderObject
         // interface.  (Have to be sure to get inheritance right.)
         throwOrReject(a_test, member, memberHolderObject[member.name], {}, args,
                       "calling operation with this = {} didn't throw TypeError", cb);
-                    if (member.idlType.idlType == "Promise") {
-                        console.log('22222222222')
-                    }
     } else {
         done();
     }
@@ -1777,9 +1764,6 @@ IdlInterface.prototype.test_interface_of = function(desc, obj, exception, expect
                 var cb = awaitNCallbacks(minLength, a_test.done.bind(a_test));
                 for (var i = 0; i < minLength; i++) {
                     throwOrReject(a_test, member, obj[member.name], obj, args,  "Called with " + i + " arguments", cb);
-                    if (member.idlType.idlType == "Promise") {
-                        console.log('11111111')
-                    }
 
                     args.push(create_suitable_object(member.arguments[i].idlType));
                 }
