@@ -52,6 +52,8 @@ promise_test(t => {
   let watchOptions = createNFCWatchOptions(test_message_origin, 'json', 'application/json', 'any');
   return navigator.nfc.watch(noop, watchOptions)
     .then((data) => {
+      console.log(typeof(data));
+      console.log('++++++++')
       assert_true(typeof(data), 'number');
       console.log(typeof(data));
       assert_greater_than(data, 0, 'greater than zero');
