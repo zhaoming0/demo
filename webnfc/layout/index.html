@@ -52,7 +52,8 @@ promise_test(t => {
   let watchOptions = createNFCWatchOptions(test_message_origin, 'json', 'application/json', 'any');
   return navigator.nfc.watch(noop, watchOptions)
     .then((data) => {
-      console.log(data)
+      console.log(data);
+      console.log('============');
     })
 },'aaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 </script>
