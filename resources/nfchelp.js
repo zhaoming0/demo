@@ -1,4 +1,5 @@
 'use strict';
+const test_message_origin = "https://127.0.0.1:8443";
 function noop() {};
 
 function toNFCWatchMode(mode) {
