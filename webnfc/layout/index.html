@@ -39,5 +39,20 @@ promise_test(t => {
 promise_test(t => {
   return promise_rejects(t, "NotSupportedError", navigator.nfc.watch(()=>{}));
 }, "Test that nfc.watch fails is NFC HW is not supported.");
+
+//promise_test(t => {
+//  return navigator.nfc.watch(noop)
+//    .then(() => {
+//      assertNFCWatchOptionsEqual(createNFCWatchOptions(), )
+//    })
+//}, "Test that default NFCWatchOptions values are set correctly.");
+
+promise_test(t => {
+  let watchOptions = createNFCWatchOptions(test_message_origin, 'json', 'application/json', 'any');
+  return navigator.nfc.watch(noop, watchOptions)
+    .then((data) => {
+      console.log(data)
+    })
+});
 </script>
 
