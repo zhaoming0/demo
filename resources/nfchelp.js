@@ -1,5 +1,4 @@
 'use strict';
-const test_message_origin = "https//127.0.0.1:8443";
 function noop() {};
 
 function toNFCWatchMode(mode) {
@@ -23,9 +22,8 @@ function toNFCRecordType(type) {
 }
 
 function createNFCWatchOptions(url, recordType, mediaType, mode) {
-  return {url, recordType, mediaType, mode};
+  return {url, recordType, mediaType, mode}
 }
-
 function assertNFCWatchOptionsEqual(provided, received) {
   if (provided.url !== undefined) {
     assert_equals(provided.url, received.url);
