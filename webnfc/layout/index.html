@@ -32,13 +32,12 @@ promise_test(t => {
   })
 }, "Test that nfc watch success if NFC HW is enable.")
 
-//promise_test(t => {
-//  promise_rejects(t, new Error("NotSupportedError: NFC operation not supported."),navigator.nfc.watch(function() {}));
-//}, "Test that nfc.watch fails if NFC HW is disable.");
+promise_test(t => {
+ return  promise_rejects(t, "NotSupportedError", navigator.nfc.watch(function() {}));
+}, "Test that nfc.watch fails if NFC HW is disable.");
 
 promise_test(t => {
-  return navigator.nfc.watch(()=>{})
-    .then()
-});
+  return promise_rejects(t, "NotSupportedError", navigator.nfc.watch(()=>{}));
+}, "Test that nfc.watch fails is NFC HW is not supported.");
 </script>
 
