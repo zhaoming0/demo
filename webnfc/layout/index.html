@@ -69,14 +69,14 @@ promise_test(t => {
 promise_test(t => {
   return navigator.nfc.watch(noop)
     .then(id => {
-      navigator.nfc.cancelWatch(id);
+      return navigator.nfc.cancelWatch(id);
     });
 }, "Test that nfc.cancelWatch succeeds if correct watch id is provided.");
 
 promise_test(t => {
   return navigator.nfc.watch(noop)
     .then(() => {
-      navigator.nfc.cancelWatch();
+      return navigator.nfc.cancelWatch();
     });
 }, "Test that nfc.cancelWatch succeeds if there are active watchers.");
 
