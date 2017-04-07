@@ -50,20 +50,15 @@ promise_test(t => {
 
 promise_test(t => {
   let watchOptions = createNFCWatchOptions(test_message_origin, 'json', 'application/json', 'any');
-  console.log('++++++++++++');
-  console.log(watchOptions)
-  console.log('++++++++++++');
   return navigator.nfc.watch(noop, watchOptions)
     .then((data) => {
-      console.log('--------------')
-      console.log(data)
-      console.log('--------------')
       assert_equals(typeof(data), 'number');
       assert_greater_than(data, 0, 'greater than zero');
     })
 }, "Positive Test NFCWatchOptions value are correctly converted.");
 
 promise_test(t => {
+  return navigator.nfc.cancelWatch(1).then(data => {console.log(data);console.log('=========')})
   return promise_rejects(t, "NotFoundError", navigator.nfc.cancelWatch(1));
 }, "Test that nfc.cancelWatch fails if invalid watch ID is provided.");
 
