@@ -58,7 +58,9 @@
 //}, "Positive Test NFCWatchOptions value are correctly converted.");
 
 promise_test(t => {
+  return navigator.nfc.cancelWatch(1).then(data => {console.log(data);console.log('=========')}).then(() => {
   return promise_rejects(t, "NotFoundError", navigator.nfc.cancelWatch(1));
+  })
 }, "Test that nfc.cancelWatch fails if invalid watch ID is provided.");
 
 //promise_test(t => {
