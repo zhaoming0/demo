@@ -3,80 +3,78 @@
 <script src="../../resources/testharnessreport.js"></script>
 <script src="../../resources/nfchelp.js"></script>
 <script>
-//test(function() {
-//  assert_throws(null, function() {
-//    new NFC();
-//  }, "the constructor should not be callable with 'new'");
-//  assert_throws(null, function() {
-//    NFC();
-//  }, "the constructor should not be callable");
-//}, "Make sure constructor call type.");
-//
-//test(function() {
-//  ['cancelPush', 'push', 'watch', 'cancelWatch']
-//    .forEach((method) => {
-//      assert_true(method in navigator.nfc)
-//    })
-//}, "Make sure methods are all there.")
-//
-//test(function() {
-//  assert_true(navigator.nfc instanceof Object, 'navigator.nfc exists.');
-//  assert_true('nfc' in navigator, 'navigator.nfc exists.');
-//}, "Make sure 'navigator.nfc' exists and type is correct.");
-//
-////watch
-//promise_test(t => {
-//  return navigator.nfc.watch(function() {}).then(result => {
-//    assert_greater_than(result, 0, 'greater than zero');
-//  }).catch((err) => {
-//    assert_reject(err);
-//  })
-//}, "Test that nfc watch success if NFC HW is enable.")
-//
-//promise_test(t => {
-// return  promise_rejects(t, "NotSupportedError", navigator.nfc.watch(function() {}));
-//}, "Test that nfc.watch fails if NFC HW is disable.");
-//
-//promise_test(t => {
-//  return promise_rejects(t, "NotSupportedError", navigator.nfc.watch(()=>{}));
-//}, "Test that nfc.watch fails is NFC HW is not supported.");
+test(function() {
+  assert_throws(null, function() {
+    new NFC();
+  }, "the constructor should not be callable with 'new'");
+  assert_throws(null, function() {
+    NFC();
+  }, "the constructor should not be callable");
+}, "Make sure constructor call type.");
 
-////promise_test(t => {
-////  return navigator.nfc.watch(noop)
-////    .then(() => {
-////      assertNFCWatchOptionsEqual(createNFCWatchOptions(), )
-////    })
-////}, "Test that default NFCWatchOptions values are set correctly.");
-//
-//promise_test(t => {
-//  let watchOptions = createNFCWatchOptions(test_message_origin, 'json', 'application/json', 'any');
-//  return navigator.nfc.watch(noop, watchOptions)
-//    .then((data) => {
-//      assert_equals(typeof(data), 'number');
-//      assert_greater_than(data, 0, 'greater than zero');
-//    })
-//}, "Positive Test NFCWatchOptions value are correctly converted.");
+test(function() {
+  ['cancelPush', 'push', 'watch', 'cancelWatch']
+    .forEach((method) => {
+      assert_true(method in navigator.nfc)
+    })
+}, "Make sure methods are all there.")
+
+test(function() {
+  assert_true(navigator.nfc instanceof Object, 'navigator.nfc exists.');
+  assert_true('nfc' in navigator, 'navigator.nfc exists.');
+}, "Make sure 'navigator.nfc' exists and type is correct.");
+
+//watch
+promise_test(t => {
+  return navigator.nfc.watch(function() {}).then(result => {
+    assert_greater_than(result, 0, 'greater than zero');
+  }).catch((err) => {
+    assert_reject(err);
+  })
+}, "Test that nfc watch success if NFC HW is enable.")
+
+promise_test(t => {
+ return  promise_rejects(t, "NotSupportedError", navigator.nfc.watch(function() {}));
+}, "Test that nfc.watch fails if NFC HW is disable.");
+
+promise_test(t => {
+  return promise_rejects(t, "NotSupportedError", navigator.nfc.watch(()=>{}));
+}, "Test that nfc.watch fails is NFC HW is not supported.");
 
 //promise_test(t => {
-//  return promise_rejects(t, "NotFoundError", navigator.nfc.cancelWatch(1));
-//}, "Test that nfc.cancelWatch fails if invalid watch ID is provided.");
-//
-//promise_test(t => {
-//  return promise_rejects(t, "NotFoundError", navigator.nfc.cancelWatch());
-//}, "Test that nfc.cancelWatch fails if there are no active watchers.");
+//  return navigator.nfc.watch(noop)
+//    .then(() => {
+//      assertNFCWatchOptionsEqual(createNFCWatchOptions(), )
+//    })
+//}, "Test that default NFCWatchOptions values are set correctly.");
+
+promise_test(t => {
+  let watchOptions = createNFCWatchOptions(test_message_origin, 'json', 'application/json', 'any');
+  return navigator.nfc.watch(noop, watchOptions)
+    .then((data) => {
+      assert_equals(typeof(data), 'number');
+      assert_greater_than(data, 0, 'greater than zero');
+    })
+}, "Positive Test NFCWatchOptions value are correctly converted.");
+
+promise_test(t => {
+  return promise_rejects(t, "NotFoundError", navigator.nfc.cancelWatch(1));
+}, "Test that nfc.cancelWatch fails if invalid watch ID is provided.");
+
+promise_test(t => {
+  return promise_rejects(t, "NotFoundError", navigator.nfc.cancelWatch());
+}, "Test that nfc.cancelWatch fails if there are no active watchers.");
 
 promise_test(t => {
   return navigator.nfc.watch(noop)
     .then(id => {
-      console.log(id);
       navigator.nfc.cancelWatch(id);
     });
 }, "Test that nfc.cancelWatch succeeds if correct watch id is provided.");
 
 promise_test(t => {
   return navigator.nfc.watch(noop)
-    .then((id) => {
-      console.log(id);
+    .then(() => {
       navigator.nfc.cancelWatch();
     });
 }, "Test that nfc.cancelWatch succeeds if there are active watchers.");
