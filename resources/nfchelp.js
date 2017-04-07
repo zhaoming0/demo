@@ -1,5 +1,12 @@
 'use strict';
+const test_text_data = "Test text data.";
+const test_text_byte_array = new TextEncoder('utf-8').encode(test_text_data);
+const test_number_data = 42;
+const test_url_data = "https://w3c.github.io/web-nfc";
 const test_message_origin = "https://127.0.0.1:8443";
+const test_buffer_data = new ArrayBuffer(test_text_byte_array.length);
+const test_buffer_view = new Uint8Array(test_buffer_data).set(test_text_byte_array);
+
 function noop() {};
 
 function toNFCWatchMode(mode) {
@@ -45,4 +52,64 @@ function assertNFCWatchOptionsEqual(provided, received) {
     assert_equals(!+recevied.record_filter, true);
     assert_equals(toNFCRecordType(provided.recordType), recevied.record_filter.record_type);
   }
+}
+
+function assertNFCPushOptionsEqual(provided, received) {
+  if (provided.ignoreRead !== undefined) {
+    assert_equals(provided.ignoreRead, !!+received.ignore_read);
+  }else{
+    assert_equals(!!+received.ignore_read, true);
+  }
+  if (provided.timeout !== undefined) {
+    assert_equals(provided.timeout, received.timeout);
+  }else{
+    assert_equals(received.timeout, Infinity);
+  }
+  if (provided.target !== undefined) {
+    assert_equals(toMojoNFCPushTarget(provided.target), received.target);
+  }else{
+    assert_equals(received.target, nfc.NFCPushTarget.ANY);
+  }
+}
+
+function createNFCPushOptions(target, timeout, ignoreRead) {
+  return { target, timeout, ignoreRead };
+}
+
+function createMessage(records) {
+  if (records !== undefined) {
+    let message = {};
+    message.data = records;
+    return message;
+  }
+}
+
+function createRecord(recordType, mediaType, data) {
+  let record = {};
+  if (recordType !== undefined) {
+    record.recordType = recordType;
+  }
+  if (mediaType !== undefined) {
+    record.mediaType = mediaType;
+  }
+  if (data !== undefined) {
+    record.data = data;
+  }
+  return record;
+}
+
+function createTextRecord(text) {
+  return createRecord('text', 'text/plain', text);
+}
+
+function createJsonRecord(json) {
+  return createRecord('json', 'application/json', json);
+}
+
+function createOpaqueRecord(buffer) {
+  return createRecord('opaque', 'application/octet-stream', buffer);
+}
+
+function createUrlRecord(url) {
+  return createRecord('url', 'text/plain', url);
 }
