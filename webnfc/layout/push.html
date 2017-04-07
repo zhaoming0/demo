@@ -113,8 +113,5 @@ promise_test(t => {
   return promise_rejects(t, "NotSupportedError", navigator.nfc.push(new ArrayBuffer(32 * 1024 + 1)));
 }, "Reject promise with NotSupportedError if NFC message size exceeds 32KB.");
 
-
-
-
 </script>
 
