@@ -65,14 +65,13 @@ const invalid_messages =
 //   })
 // }, "Test that promise is rejected with SyntaxError if NFCMessage is invalid.")
 
-test(function(){
-return new Promise((resolve, reject) => {
-  let pp = [];
-  invalid_messages.forEach(message => {
-    assert_throws("SyntaxError", navigator.nfc.push(message));
-    console.log("88888888888888888888888888888888888888888888888888888888888888")
+promise_test(t => {
+  return new Promise((resolve, reject) => {
+    invalid_messages.forEach(message => {
+      assert_throws("SyntaxError", navigator.nfc.push(message));
+      console.log("88888888888888888888888888888888888888888888888888888888888888")
+    })
   })
-})
 }, "testtestestsetst")
 // invalid_messages.forEach(message => {
 //   promise_test(t => {
