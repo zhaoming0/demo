@@ -67,11 +67,10 @@ const invalid_messages =
 
 promise_test(t => {
   for (let i = 0; i < invalid_messages.length; i++){
-  }
       console.log(invalid_messages[i]);
       return promise_rejects(t, "SyntaxError", navigator.nfc.push(invalid_messages[i]));
-    })
-}, "t777777")
+  }
+}, "t99999")
 // invalid_messages.forEach(message => {
 //   promise_test(t => {
 //     return promise_rejects(t, "SyntaxError", navigator.nfc.push(message));
