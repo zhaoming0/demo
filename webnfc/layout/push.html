@@ -77,7 +77,6 @@ promise_test(t => {
     pp.push(
         promise_rejects(t, "SyntaxError", navigator.nfc.push(message)))
   });
-  resolve();
   return Promise.all(pp)
 }, "1111");
 
