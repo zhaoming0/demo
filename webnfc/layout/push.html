@@ -60,8 +60,6 @@ promise_test(t => {
     console.log("*************************")
     console.log(pp[0])
     console.log("++++++++++++++++++++++++++++++++++++++++++++++++++")
-    console.log(pp)
-    console.log(message)
         return promise_rejects(t, "SyntaxError", navigator.nfc.push(message));
   })
 }, "Test that promise is rejected with SyntaxError if NFCMessage is invalid.")
