@@ -567,17 +567,17 @@ policies and contribution forms [3].
 
     function promise_rejects(test, expected, promise, description) {
         return promise.then(test.unreached_func("Should have rejected: " + description)).catch(function(e) {
-          console.log("DEBUG 1");
-          console.log(e)
-          console.log("DEBUG 2");
-          console.log(test)
-          console.log("DEBUG 3");
-          console.log(expected)
-          console.log("DEBUG 4");
-          console.log(promise)
-          console.log("DEBUG 5");
-          console.log(description)
-          console.log("DEBUG 6");
+//          console.log("DEBUG 1");
+//          console.log(e)
+//          console.log("DEBUG 2");
+//          console.log(test)
+//          console.log("DEBUG 3");
+//          console.log(expected)
+//          console.log("DEBUG 4");
+//          console.log(promise)
+//          console.log("DEBUG 5");
+//          console.log(description)
+//          console.log("DEBUG 6");
             assert_throws(expected, function() { throw e }, description);
         });
     }
