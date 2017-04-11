@@ -932,6 +932,9 @@ policies and contribution forms [3].
         assert(!same_value(actual, expected), "assert_not_equals", description,
                                               "got disallowed value ${actual}",
                                               {actual:actual});
+        console.log(actual);
+        console.log("DEBUG-8");
+        console.log(expected);
     }
     expose(assert_not_equals, "assert_not_equals");
 
