@@ -68,7 +68,7 @@ const invalid_messages =
 promise_test(t => {
   return new Promise((resolve, reject) => {
     invalid_messages.forEach(message => {
-      assert_throws("SyntaxError", navigator.nfc.push(message));
+      return promise_rejects(t, "SyntaxError", navigator.nfc.push(message));
       console.log("88888888888888888888888888888888888888888888888888888888888888")
     })
   })
