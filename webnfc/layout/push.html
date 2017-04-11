@@ -65,6 +65,7 @@ const invalid_messages =
 //   })
 // }, "Test that promise is rejected with SyntaxError if NFCMessage is invalid.")
 
+test(function(t) => {
 return new Promise((resolve, reject) => {
   let pp = [];
   invalid_message.forEach(message => {
@@ -72,7 +73,7 @@ return new Promise((resolve, reject) => {
     resolve();
   })
 })
-
+}, "testtestestsetst")
 // invalid_messages.forEach(message => {
 //   promise_test(t => {
 //     return promise_rejects(t, "SyntaxError", navigator.nfc.push(message));
