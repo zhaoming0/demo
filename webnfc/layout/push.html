@@ -47,19 +47,21 @@ const invalid_messages =
 //   return promise_rejects(t, "TypeMismatchError", navigator.nfc.push(undefined));
 // }), "Test that passing undefined to nfc.push would raise TypeMismatchError.";
 // 
-promise_test(t => {
-  let promises = [];
-  invalid_messages.forEach(message => {
-    console.log(message);
-    console.log('DEBUG-1');
-    //promises.push(
-        return promise_rejects(t, "DOMException", navigator.nfc.push(message));
-    //    )
-  })
-  //return Promise.all(promises);
-}, "Test that promise is rejected with SyntaxError if NFCMessage is invalid.")
+// promise_test(t => {
+//   let promises = [];
+//   invalid_messages.forEach(message => {
+//     console.log(message);
+//     console.log('DEBUG-1');
+//     //promises.push(
+//         return promise_rejects(t, "DOMException", navigator.nfc.push(message));
+//     //    )
+//   })
+//   //return Promise.all(promises);
+// }, "Test that promise is rejected with SyntaxError if NFCMessage is invalid.")
 invalid_messages.forEach(message => {
-  console.log(message)
+  promise_test(t => {
+    return promise_rejects(t, "DOMException", navigator.nfc.push(message));
+  });
 });
 // 
 // promise_test(t => {
