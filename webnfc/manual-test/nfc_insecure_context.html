@@ -46,5 +46,6 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 <script>
 "use strict";
-runNFCInsecureContext(navigator.nfc);
+let nfc_inter = navigator.nfc;
+runNFCInsecureContext(nfc_inter);
 </script>
