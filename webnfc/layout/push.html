@@ -70,9 +70,10 @@ promise_test(t => {
     invalid_messages.forEach(message => {
       return promise_rejects(t, "SyntaxError", navigator.nfc.push(message));
       console.log("88888888888888888888888888888888888888888888888888888888888888")
+      resolve();
     })
   })
-}, "tessssssssssssssssssssssssssssssssssssss")
+}, "tesssssssss0000000000000")
 // invalid_messages.forEach(message => {
 //   promise_test(t => {
 //     return promise_rejects(t, "SyntaxError", navigator.nfc.push(message));
