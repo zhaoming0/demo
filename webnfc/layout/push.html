@@ -50,6 +50,8 @@ const invalid_messages =
 promise_test(t => {
   let promises = [];
   invalid_messages.forEach(message => {
+    console.log(message);
+    console.log('DEBUG-1');
     //promises.push(
         return promise_rejects(t, "SyntaxError", navigator.nfc.push(message));
     //    )
