@@ -26,7 +26,7 @@ test(function() {
 
 //watch
 promise_test(t => {
-  return navigator.nfc.watch(function() {}).then(result => {
+  return navigator.nfc.watch(noop).then(result => {
     assert_greater_than(result, 0, 'greater than zero');
   }).catch((err) => {
     assert_reject(err);
@@ -34,11 +34,11 @@ promise_test(t => {
 }, "Test that nfc watch success if NFC HW is enable.")
 
 promise_test(t => {
- return  promise_rejects(t, "NotSupportedError", navigator.nfc.watch(function() {}));
+ return  promise_rejects(t, "NotSupportedError", navigator.nfc.watch(noop));
 }, "Test that nfc.watch fails if NFC HW is disable.");
 
 promise_test(t => {
-  return promise_rejects(t, "NotSupportedError", navigator.nfc.watch(()=>{}));
+  return promise_rejects(t, "NotSupportedError", navigator.nfc.watch(noop));
 }, "Test that nfc.watch fails is NFC HW is not supported.");
 
 //promise_test(t => {
