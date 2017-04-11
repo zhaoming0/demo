@@ -77,9 +77,9 @@ const invalid_messages =
     createMessage([createOpaqueRecord(test_json_data)])
   ];
 
-promise_test(t => {
-  return promise_rejects(t, "TypeMismatchError", navigator.nfc.push(undefined));
-}, "Test that passing undefined to nfc.push would raise TypeMismatchError.");
+//promise_test(t => {
+//  return promise_rejects(t, "TypeMismatchError", navigator.nfc.push(undefined));
+//}, "Test that passing undefined to nfc.push would raise TypeMismatchError.");
 
 //promise_test(t => {
 //  let promises = [];
