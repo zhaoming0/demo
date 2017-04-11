@@ -47,23 +47,31 @@ const invalid_messages =
 //   return promise_rejects(t, "TypeMismatchError", navigator.nfc.push(undefined));
 // }), "Test that passing undefined to nfc.push would raise TypeMismatchError.";
 // 
-promise_test(t => {
+// promise_test(t => {
+//   let pp = [];
+//   invalid_messages.forEach(message => {
+//     console.log("111111111111111111111111111111111111111111111111111111111111")
+//     console.log(message);
+//     console.log('DEBUG-1');
+//     console.log("+++++++++");
+//     pp.push(message);
+//     console.log(pp);
+//     console.log("DEBUG-2");
+//     console.log("--------")
+//     console.log("*************************")
+//     console.log(pp[0])
+//     console.log("++++++++++++++++++++++++++++++++++++++++++++++++++")
+//         return promise_rejects(t, "SyntaxError", navigator.nfc.push(message));
+//   })
+// }, "Test that promise is rejected with SyntaxError if NFCMessage is invalid.")
+
+return new Promise((resolve, reject) => {
   let pp = [];
-  invalid_messages.forEach(message => {
-    console.log("111111111111111111111111111111111111111111111111111111111111")
-    console.log(message);
-    console.log('DEBUG-1');
-    console.log("+++++++++");
-    pp.push(message);
-    console.log(pp);
-    console.log("DEBUG-2");
-    console.log("--------")
-    console.log("*************************")
-    console.log(pp[0])
-    console.log("++++++++++++++++++++++++++++++++++++++++++++++++++")
-        return promise_rejects(t, "SyntaxError", navigator.nfc.push(message));
+  invalid_message.forEach(message => {
+    assert_throws("SyntaxError", navigator.nfc.push(message));
+    resolve();
   })
-}, "Test that promise is rejected with SyntaxError if NFCMessage is invalid.")
+})
 
 // invalid_messages.forEach(message => {
 //   promise_test(t => {
