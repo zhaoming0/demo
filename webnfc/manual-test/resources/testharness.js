@@ -1408,6 +1408,7 @@ policies and contribution forms [3].
         this.set_status(this.TIMEOUT, "Test timed out");
         console.log('9999999999999999999');
         console.log(this.status)
+        console.log('7777777777777777777')
 
 
         tests.started = true;
