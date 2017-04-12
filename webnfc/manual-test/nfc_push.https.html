@@ -116,6 +116,9 @@ const invalid_messages =
 // 
 promise_test(t => {
   return navigator.nfc.push(test_text_data)
+}, "bbb.");
+promise_test(t => {
+  return navigator.nfc.push(test_text_data)
     .then(() => {
       navigator.nfc.cancelPush;
     });
