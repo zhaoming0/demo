@@ -102,7 +102,7 @@ const invalid_messages =
 //           // }, "nfc.push should fail with TimeoutError when push operation is not completed before specified timeout value.");
   
  promise_test(t => {
-   return promise_rejects(t, "SyntaxError", navigator.nfc.push(test_text_data, { timeout: -1}));
+   return promise_rejects(t, "SyntaxError", navigator.nfc.push(test_text_data, { timeout: "aa"}));
  }, "nfc.push should fail with SyntaxError when push operation is not completed before invilid timeout value.");
 
 // promise_test(t => {

@@ -1,44 +1,54 @@
-<script>
-navigator.nfc.watch((message) => {
-  if (message.data[0].recordType == 'empty') {
-    navigator.nfc.push({
-      url: "/custom/path",
-      data: [{ recordType: "text", data: 'Hello World' }]
-    });
-  } else {
-    console.log('Read message written by ' + message.url);
-    processMessage(message);
-  }
-}).then(() => {
-  console.log("Added a watch.");
-}).catch((error) => {
-  console.log("Adding watch failed: " + error.name);
-});
+<meta charset=utf-8>
+<title>Web NFC Watch Tests</title>
+<link rel="author" title="Intel" href="http://www.intel.com"/>
+<link rel="author" title="Zhao Ming" href="mailto:mingx.zhao@intel.com"/>
+<link rel="help" href="https://w3c.github.io/web-nfc/#the-nfc-interface"/>
+<script src="./resources/testharness.js"></script>
+<script src="./resources/testharnessreport.js"></script>
 
-function processMessage(message) {
-  console.log('-----------------------------')
-  for (let record of message.data) {
-    switch (record.recordType) {
-      case "text":
-        console.log('Data is text: ' + record.data);
-        break;
-      case "url":
-        console.log('Data is URL: ' + record.data);
-        break;
-      case "json":
-        console.log('JSON data: ' + record.data.myProperty.toString());
-        break;
-      case "opaque":
-        if (record.mediaType == 'image/png') {
-          var img = document.createElement("img");
-          img.src = URL.createObjectURL(new Blob(record.data, record.mediaType));
-          img.onload = function() {
-            window.URL.revokeObjectURL(this.src);
-          };
-        }
-        break;
+<div id="log"></div>
+<script>
+promise_test(t => {
+  navigator.nfc.watch((message) => {
+    if (message.data[0].recordType == 'empty') {
+      navigator.nfc.push({
+        url: "/custom/path",
+        data: [{ recordType: "text", data: 'Hello World' }]
+      });
+    } else {
+      console.log('Read message written by ' + message.url);
+      processMessage(message);
+    }
+  }).then(() => {
+    console.log("Added a watch.");
+  }).catch((error) => {
+    console.log("Adding watch failed: " + error.name);
+  });
+  
+  function processMessage(message) {
+    console.log('-----------------------------')
+    for (let record of message.data) {
+      switch (record.recordType) {
+        case "text":
+          console.log('Data is text: ' + record.data);
+          break;
+        case "url":
+          console.log('Data is URL: ' + record.data);
+          break;
+        case "json":
+          console.log('JSON data: ' + record.data.myProperty.toString());
+          break;
+        case "opaque":
+          if (record.mediaType == 'image/png') {
+            var img = document.createElement("img");
+            img.src = URL.createObjectURL(new Blob(record.data, record.mediaType));
+            img.onload = function() {
+              window.URL.revokeObjectURL(this.src);
+            };
+          }
+          break;
+      }
     }
   }
-}
-
+})
 </script>
