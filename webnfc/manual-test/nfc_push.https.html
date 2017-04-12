@@ -92,14 +92,18 @@ const invalid_messages =
 //}, "Test that promise is rejected with SyntaxError if NFCMessage is invalid.");
 // blocked!
 
-// promise_test(t => {
-//   return navigator.nfc.push(test_text_data, { timeout: 1 });
-// }, "nfc.push should succeed when NFC HW is enabled.");
-// need interactive
-
-// promise_test(t => {
-//   return promise_rejects(t, "TimeoutError", navigator.nfc.push(test_text_data, { timeout: 0}));
-// }, "nfc.push should fail with TimeoutError when push operation is not completed before specified timeout value.");
+//           // promise_test(t => {
+//           //   return navigator.nfc.push(test_text_data, { timeout: 1000 });
+//           // }, "nfc.push should succeed when NFC HW is enabled.");
+//           // need interactive
+//           
+//           // promise_test(t => {
+//           //   return promise_rejects(t, "TimeoutError", navigator.nfc.push(test_text_data, { timeout: 0}));
+//           // }, "nfc.push should fail with TimeoutError when push operation is not completed before specified timeout value.");
+  
+ promise_test(t => {
+   return promise_rejects(t, "SyntaxError", navigator.nfc.push(test_text_data, { timeout: -1}));
+ }, "nfc.push should fail with SyntaxError when push operation is not completed before invilid timeout value.");
 
 // promise_test(t => {
 //   return navigator.nfc.push(test_text_data).then(() => {
@@ -114,15 +118,15 @@ const invalid_messages =
 //   });
 // }, "Check that provided NFCPushOptions values are correctly converted.");
 // 
-promise_test(t => {
-  return navigator.nfc.push("bbbb")
-}, "bbb.");
-promise_test(t => {
-  return navigator.nfc.push("aaa")
-    .then(() => {
-      navigator.nfc.cancelPush();
-    });
-}, "nfc.cancelPush should succeed if there is pending push operation.");
+// promise_test(t => {
+//   return navigator.nfc.push("bbbb")
+// }, "bbb.");
+// promise_test(t => {
+//   return navigator.nfc.push("aaa")
+//     .then(() => {
+//       navigator.nfc.cancelPush();
+//     });
+// }, "nfc.cancelPush should succeed if there is pending push operation.");
 
 //promise_test(t => {
 //  return navigator.nfc.push("cccc", { timeout :100 });
