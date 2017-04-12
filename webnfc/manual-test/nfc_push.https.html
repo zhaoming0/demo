@@ -77,10 +77,9 @@ const invalid_messages =
     createMessage([createOpaqueRecord(test_json_data)])
   ];
 
-// promise_test(t => {
-//   return promise_rejects(t, "TypeMismatchError", navigator.nfc.push(undefined));
-// }, "Test that passing undefined to nfc.push would raise TypeMismatchError.");
-// #it will pass 
+promise_test(t => {
+  return promise_rejects(t, "SyntaxError", navigator.nfc.push(undefined));
+}, "Test that passing undefined to nfc.push would raise SyntaxError.");
 
 //promise_test(t => {
 //  let promises = [];
@@ -102,8 +101,8 @@ const invalid_messages =
 //           // }, "nfc.push should fail with TimeoutError when push operation is not completed before specified timeout value.");
   
  promise_test(t => {
-   return promise_rejects(t, "SyntaxError", navigator.nfc.push(test_text_data, { timeout: "aa"}));
- }, "nfc.push should fail with SyntaxError when push operation is not completed before invilid timeout value.");
+   return promise_rejects(t, "SyntaxError", navigator.nfc.push(test_text_data, { timeout: "invalid"}));
+ }, "nfc.push should fail with SyntaxError when timeout value is invalid.");
 
 // promise_test(t => {
 //   return navigator.nfc.push(test_text_data).then(() => {
