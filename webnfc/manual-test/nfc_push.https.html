@@ -106,11 +106,11 @@ promise_test(t => {
    return promise_rejects(t, "SyntaxError", navigator.nfc.push(test_text_data, { timeout: "invalid"}));
  }, "nfc.push should fail with SyntaxError when timeout value is invalid.");
 
-// promise_test(t => {
-//   return navigator.nfc.push(test_text_data).then(() => {
-//     assertNFCPushOptionsEqual(createNFCPushOptions("any", Infinity, true), test_text_data);
-//   });
-// }, "Check that default NFCPushOptions values are correctly set.");
+promise_test(t => {
+  return navigator.nfc.push(test_text_data).then(() => {
+    assertNFCPushOptionsEqual(createNFCPushOptions("any", Infinity, true), test_text_data);
+  });
+}, "Check that default NFCPushOptions values are correctly set.");
 // 
 // promise_test(t => {
 //   let nfcPushOptions = createNFCPushOptions("tag", 1, false);
