@@ -47,7 +47,7 @@ promise_test(t => {
 }, "Test that nfc watch success if NFC HW is enable.");
 
 promise_test(t => {
-  let watchOptions = createNFCWatchOptions(test_message_origin, "json", "application/json", "any");
+  let watchOptions = createNFCWatchOptions(test_message_origin, "json", "application/json", "web-nfc-only");
   return navigator.nfc.watch(noop, watchOptions)
     .then((data) => {
       assert_equals(typeof(data), "number");

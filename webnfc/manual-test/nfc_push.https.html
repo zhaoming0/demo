@@ -97,10 +97,9 @@ const invalid_messages =
 // }, "nfc.push should succeed when NFC HW is enabled.");
 // need interactive
 
-promise_test(t => {
-  return promise_rejects(t, "TimeoutError", navigator.nfc.push(test_text_data, { timeout: 0}));
-//   t.step_timeout(function() { t.done();}, 3000);
-}, "nfc.push should fail with TimeoutError when push operation is not completed before specified timeout value.");
+// promise_test(t => {
+//   return promise_rejects(t, "TimeoutError", navigator.nfc.push(test_text_data, { timeout: 0}));
+// }, "nfc.push should fail with TimeoutError when push operation is not completed before specified timeout value.");
 
 // promise_test(t => {
 //   return navigator.nfc.push(test_text_data).then(() => {
