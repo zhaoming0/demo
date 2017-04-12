@@ -38,22 +38,22 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 <script>
 "use strict";
-promise_test(t => {
-  return navigator.nfc.watch(noop).then(result => {
-    assert_greater_than(result, 0, "greater than zero");
-  }).catch((err) => {
-    assert_reject(err);
-  })
-}, "Test that nfc watch success if NFC HW is enable.");
-
-promise_test(t => {
-  let watchOptions = createNFCWatchOptions(test_message_origin, "json", "application/json", "web-nfc-only");
-  return navigator.nfc.watch(noop, watchOptions)
-    .then((data) => {
-      assert_equals(typeof(data), "number");
-      assert_greater_than(data, 0, "greater than zero");
-    })
-}, "Test NFCWatchOptions value are correctly converted.");
+// promise_test(t => {
+//   return navigator.nfc.watch(noop).then(result => {
+//     assert_greater_than(result, 0, "greater than zero");
+//   }).catch((err) => {
+//     assert_reject(err);
+//   })
+// }, "Test that nfc watch success if NFC HW is enable.");
+// 
+// promise_test(t => {
+//   let watchOptions = createNFCWatchOptions(test_message_origin, "json", "application/json", "any");
+//   return navigator.nfc.watch(noop, watchOptions)
+//     .then((data) => {
+//       assert_equals(typeof(data), "number");
+//       assert_greater_than(data, 0, "greater than zero");
+//     })
+// }, "Test NFCWatchOptions value are correctly converted.");
 
 promise_test(t => {
   return promise_rejects(t, "NotFoundError", navigator.nfc.cancelWatch(1));
