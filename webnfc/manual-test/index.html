@@ -57,7 +57,9 @@
 // }, "1111123456789")
 
 new Promise((resolve,reject) => {
-  return navigator.nfc.push("00000000000").then(() => {
+  return navigator.nfc.push("00000000000").then((data) => {
+    console.log(data);
+    console.log("---------")
     return navigator.nfc.cancelPush();
     resolve();
   })
