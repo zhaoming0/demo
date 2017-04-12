@@ -118,14 +118,14 @@ promise_test(t => {
   return navigator.nfc.push("bbbb")
 }, "bbb.");
 promise_test(t => {
-  return navigator.nfc.push(test_text_data)
+  return navigator.nfc.push("aaa")
     .then(() => {
       navigator.nfc.cancelPush;
     });
 }, "nfc.cancelPush should succeed if there is pending push operation.");
 
 promise_test(t => {
-  return navigator.nfc.push(test_text_data, { timeout :100 });
+  return navigator.nfc.push("cccc", { timeout :100 });
   return promise_rejects(t, "AbortError", navigator.nfc.cancelPush());
 }, "nfc.cancelPush should reject pending promise with AbortError.");
 
