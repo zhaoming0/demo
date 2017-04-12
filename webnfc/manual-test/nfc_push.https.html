@@ -85,7 +85,7 @@ promise_test(t => {
   let promises = [];
   invalid_messages.forEach(message => {
     promises.push(
-      promise_rejects(t, "TypeError", navigator.nfc.push(message)));
+      promise_rejects(t, "TimeoutError", navigator.nfc.push(message)));
   });
   return Promise.all(promises);
 }, "Test that promise is rejected with SyntaxError if NFCMessage is invalid.");
