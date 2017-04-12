@@ -98,8 +98,8 @@ const invalid_messages =
 // need interactive
 
 promise_test(t => {
-  return promise_rejects(t, "TimeoutError", navigator.nfc.push(test_text_data, { timeout: 1 }));
-  t.step_timeout(function() { t.done();}, 3000);
+  return promise_rejects(t, "TimeoutError", navigator.nfc.push(test_text_data, { timeout: 0.0000001 }));
+//   t.step_timeout(function() { t.done();}, 3000);
 }, "nfc.push should fail with TimeoutError when push operation is not completed before specified timeout value.");
 
 // promise_test(t => {

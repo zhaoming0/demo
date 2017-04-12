@@ -569,6 +569,15 @@ policies and contribution forms [3].
         return promise.then(test.unreached_func("Should have rejected: " + description)).catch(function(e) {
             assert_throws(expected, function() { throw e }, description);
         });
+        console.log('DEBUG-1')
+        console.log(test)
+        console.log('DEBUG-2')
+        console.log(expected)
+        console.log('DEBUG-3')
+        console.log(promise)
+        console.log('DEBUG-4')
+        console.log(description)
+        console.log('DEBUG-5')
     }
 
     /**
