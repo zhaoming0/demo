@@ -74,7 +74,7 @@ const invalid_messages =
     // NFCRecord.data for "opaque" record must be ArrayBuffer.
     createMessage([createOpaqueRecord(test_text_data)]),
     createMessage([createOpaqueRecord(test_number_data)]),
-    createMessage(createOpaqueRecord(test_json_data))
+    createMessage([createOpaqueRecord(test_json_data)])
   ];
 
 promise_test(t => {
