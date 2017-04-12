@@ -120,7 +120,7 @@ promise_test(t => {
 promise_test(t => {
   return navigator.nfc.push("aaa")
     .then(() => {
-      return navigator.nfc.cancelPush();
+      navigator.nfc.cancelPush();
     });
 }, "nfc.cancelPush should succeed if there is pending push operation.");
 
