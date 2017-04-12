@@ -1406,6 +1406,8 @@ policies and contribution forms [3].
         this.phase = this.phases.STARTED;
         //If we don't get a result before the harness times out that will be a test timout
         this.set_status(this.TIMEOUT, "Test timed out");
+        console.log('9999999999999999999');
+
 
         tests.started = true;
         tests.notify_test_state(this);
@@ -1515,6 +1517,7 @@ policies and contribution forms [3].
         this.timeout_id = null;
         this.set_status(this.TIMEOUT, "Test timed out");
         this.phase = this.phases.HAS_RESULT;
+        console.log('8888888888888888888888888888888888')
         this.done();
     };
 
