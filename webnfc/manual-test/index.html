@@ -27,6 +27,7 @@ navigator.nfc.watch((message) => {
 });
 
 function processMessage(message) {
+  console.log('-----------------------------')
   for (let record of message.data) {
     switch (record.recordType) {
       case "text":
