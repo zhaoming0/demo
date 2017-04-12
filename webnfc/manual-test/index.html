@@ -52,8 +52,8 @@
 //   }
 // })
 promise_test(t=> {
-  return navigator.nfc.push("12345678").then(() => {
-    navigator.nfc.cancelPush()
+  return navigator.nfc.push("12345678")
+  return navigator.nfc.cancelPush()
   })
 }, "1111123456789")
 </script>
