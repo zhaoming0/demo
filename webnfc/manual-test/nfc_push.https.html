@@ -83,6 +83,7 @@ promise_test(t => {
 
 promise_test(t => {
   let promises = [];
+  console.log(invalid_messages)
   invalid_messages.forEach(message => {
     console.log(message[data])
     promises.push(
