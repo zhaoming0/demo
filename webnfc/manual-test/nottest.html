@@ -1,0 +1,22 @@
+//           // promise_test(t => {
+//           //   return navigator.nfc.push(test_text_data, { timeout: 1000 });
+//           // }, "nfc.push should succeed when NFC HW is enabled.");
+//           // need interactive
+//           
+//           // promise_test(t => {
+//           //   return promise_rejects(t, "TimeoutError", navigator.nfc.push(test_text_data, { timeout: 0}));
+//           // }, "nfc.push should fail with TimeoutError when push operation is not completed before specified timeout value.");
+
+promise_test(t => {
+  return navigator.nfc.push(test_text_data).then(() => {
+    assertNFCPushOptionsEqual(createNFCPushOptions("any", Infinity, true), test_text_data);
+  });
+}, "Check that default NFCPushOptions values are correctly set.");
+
+
+// promise_test(t => {
+//   let nfcPushOptions = createNFCPushOptions("tag", 1, false);
+//   return navigator.nfc.push(test_text_data, nfcPushOptions).then((pushOptions) => {
+//     assert_equals(nfcPushOptions, pushOptions);
+//   });
+// }, "Check that provided NFCPushOptions values are correctly converted.");
