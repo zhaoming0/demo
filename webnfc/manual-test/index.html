@@ -72,8 +72,6 @@
 //    console.log("1111111111111111111111111111111111111111111111111111111111111111111111111")
 //})
 
-//navigator.nfc.push("111").catch((e) => {console.log("132",e.name)})
-//navigator.nfc.cancelPush().catch((b) => {console.log("4444", e.name)})
 promise_test(t=> {
   let promise = navigator.nfc.push(test_text_data);
   navigator.nfc.cancelPush();
