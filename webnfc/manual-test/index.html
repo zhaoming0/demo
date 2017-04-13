@@ -66,7 +66,7 @@
 //  })
 //})
 promise_test(t=> {
-  return  promise_rejects(t, "", navigator.nfc.push("aaa"))
+  return  promise_rejects(t, "AbortError", navigator.nfc.push("aaa"))
     navigator.nfc.cancelPush()
     console.log("1111111111111111111111111111111111111111111111111111111111111111111111111")
 })
