@@ -57,6 +57,14 @@ promise_test(t => {
 }, "Test NFCWatchOptions value are correctly converted.");
 
 promise_test(t => {
+  return promise_rejects(t, "NotFoundError", navigator.nfc.cancelWatch(1));
+}, "Test that nfc.cancelWatch fails if invalid watch ID is provided.");
+
+promise_test(t => {
+  return promise_rejects(t, "NotFoundError", navigator.nfc.cancelWatch());
+}, "Test that nfc.cancelWatch fails if there are no active watchers.");
+
+promise_test(t => {
   return navigator.nfc.watch(noop)
     .then(id => {
       navigator.nfc.cancelWatch(id);
@@ -70,11 +78,4 @@ promise_test(t => {
     });
 }, "Test that nfc.cancelWatch succeeds if there are active watchers.");
 
-promise_test(t => {
-  return promise_rejects(t, "NotFoundError", navigator.nfc.cancelWatch(1));
-}, "Test that nfc.cancelWatch fails if invalid watch ID is provided.");
-
-promise_test(t => {
-  return promise_rejects(t, "NotFoundError", navigator.nfc.cancelWatch());
-}, "Test that nfc.cancelWatch fails if there are no active watchers.");
 </script>
