@@ -55,14 +55,20 @@
 //   return navigator.nfc.push("12345678")
 //   return navigator.nfc.cancelPush()
 // }, "1111123456789")
-promise_test(t => {
-  new Promise((resolve,reject) => {
-    return navigator.nfc.push("00000000000").then((data) => {
-      console.log(data);
-      console.log("---------")
-      return navigator.nfc.cancelPush();
-      resolve();
-    })
-  })
+//promise_test(t => {
+//  new Promise((resolve,reject) => {
+//    return navigator.nfc.push("00000000000").then((data) => {
+//      console.log(data);
+//      console.log("---------")
+//      return navigator.nfc.cancelPush();
+//      resolve();
+//    })
+//  })
+//})
+promise_test(t=> {
+  return  promise_rejects(t, "", navigator.nfc.push("aaa"))
+    navigator.nfc.cancelPush()
+    console.log("1111111111111111111111111111111111111111111111111111111111111111111111111")
 })
+
 </script>
