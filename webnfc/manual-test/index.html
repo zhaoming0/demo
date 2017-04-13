@@ -74,7 +74,7 @@
 //navigator.nfc.push("111").catch((e) => {console.log("132",e.name)})
 //navigator.nfc.cancelPush().catch((b) => {console.log("4444", e.name)})
 promise_test(t=> {
-  let promise = navigator.nfc.push(test_text_data));
+  let promise = navigator.nfc.push(test_text_data);
   navigator.nfc.cancelPush();
   return promise_rejects(t, 'AbortError', promise);
 }, "nfc.cancelPush should reject pending promise with AbortError");
