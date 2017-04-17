@@ -73,7 +73,7 @@ function pushCheck(arg1, arg2, arg3) {
             console.log("debug -4");
             console.log(typeof(arg2));
             console.log(record.recordType);
-            assert_equals(typeof(record.recordType), arg2);
+            assert_equals(record.recordType, arg2);
           }
         })
       }).catch((error) => {
