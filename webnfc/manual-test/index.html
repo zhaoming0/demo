@@ -71,9 +71,9 @@
 //        )})
 //  }, "test comm")
 //}
-let a = "test strings zhaoming"
-let b = "1text"
-let c = "this is test case for automachie"
+//let a = "test strings zhaoming"
+//let b = "1text"
+//let c = "this is test case for automachie"
 //pushCheck(a, b , c)
 //promise_test(t => {
 //  let message;
@@ -96,6 +96,7 @@ promise_test(t => {
       return navigator.nfc.watch(message => {
         console.log("2222")
         console.log(message)
+        console.log(message.data.recordType)
         assert_equals(message.data.recordType, "text");
         t.done();
       })
