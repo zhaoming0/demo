@@ -9,49 +9,49 @@
 
 <div id="log"></div>
 <script>
-// promise_test(t => {
-//   navigator.nfc.watch((message) => {
-//     if (message.data[0].recordType == 'empty') {
-//       navigator.nfc.push({
-//         url: "/custom/path",
-//         data: [{ recordType: "text", data: 'Hello World' }]
-//       });
-//     } else {
-//       console.log('Read message written by ' + message.url);
-//       processMessage(message);
-//     }
-//   }).then(() => {
-//     console.log("Added a watch.");
-//   }).catch((error) => {
-//     console.log("Adding watch failed: " + error.name);
-//   });
-//   
-//   function processMessage(message) {
-//     console.log('-----------------------------')
-//     for (let record of message.data) {
-//       switch (record.recordType) {
-//         case "text":
-//           console.log('Data is text: ' + record.data);
-//           break;
-//         case "url":
-//           console.log('Data is URL: ' + record.data);
-//           break;
-//         case "json":
-//           console.log('JSON data: ' + record.data.myProperty.toString());
-//           break;
-//         case "opaque":
-//           if (record.mediaType == 'image/png') {
-//             var img = document.createElement("img");
-//             img.src = URL.createObjectURL(new Blob(record.data, record.mediaType));
-//             img.onload = function() {
-//               window.URL.revokeObjectURL(this.src);
-//             };
-//           }
-//           break;
-//       }
-//     }
-//   }
-// })
+promise_test(t => {
+  navigator.nfc.watch((message) => {
+    if (message.data[0].recordType == 'empty') {
+      navigator.nfc.push({
+        url: "/custom/path",
+        data: [{ recordType: "text", data: 'Hello World' }]
+      });
+    } else {
+      console.log('Read message written by ' + message.url);
+      processMessage(message);
+    }
+  }).then(() => {
+    console.log("Added a watch.");
+  }).catch((error) => {
+    console.log("Adding watch failed: " + error.name);
+  });
+  
+  function processMessage(message) {
+    console.log('-----------------------------')
+    for (let record of message.data) {
+      switch (record.recordType) {
+        case "text":
+          console.log('Data is text: ' + record.data);
+          break;
+        case "url":
+          console.log('Data is URL: ' + record.data);
+          break;
+        case "json":
+          console.log('JSON data: ' + record.data.myProperty.toString());
+          break;
+        case "opaque":
+          if (record.mediaType == 'image/png') {
+            var img = document.createElement("img");
+            img.src = URL.createObjectURL(new Blob(record.data, record.mediaType));
+            img.onload = function() {
+              window.URL.revokeObjectURL(this.src);
+            };
+          }
+          break;
+      }
+    }
+  }
+})
 // promise_test(t=> {
 //   return navigator.nfc.push("12345678")
 //   return navigator.nfc.cancelPush()
@@ -64,17 +64,17 @@
 //      return navigator.nfc.cancelPush();
 //      resolve();
 //    })
-//  })
-//})
+////  })
+////})
+////promise_test(t=> {
+////  return  promise_rejects(t, "AbortError", navigator.nfc.push("aaa"))
+////    navigator.nfc.cancelPush()
+////    console.log("1111111111111111111111111111111111111111111111111111111111111111111111111")
+////})
+//
 //promise_test(t=> {
-//  return  promise_rejects(t, "AbortError", navigator.nfc.push("aaa"))
-//    navigator.nfc.cancelPush()
-//    console.log("1111111111111111111111111111111111111111111111111111111111111111111111111")
-//})
-
-promise_test(t=> {
-  let promise = navigator.nfc.push(test_text_data);
-  navigator.nfc.cancelPush();
-  return promise_rejects(t, 'AbortError', promise);
-}, "nfc.cancelPush should reject pending promise with AbortError");
+//  let promise = navigator.nfc.push(test_text_data);
+//  navigator.nfc.cancelPush();
+//  return promise_rejects(t, 'AbortError', promise);
+//}, "nfc.cancelPush should reject pending promise with AbortError");
 </script>
