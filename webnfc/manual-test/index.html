@@ -81,6 +81,10 @@ promise_test(t => {
       navigator.nfc.watch((message) => {
           console.log(message.data.recordType);
           assert_unreached();
+      }).then(()=>{
+          assert_unreached("22222222222222")
+
+        
       })
     })
   })
