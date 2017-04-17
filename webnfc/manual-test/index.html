@@ -58,23 +58,24 @@
 //    }
 //  }
 
-function pushCheck(arg1, arg2, arg3) {
+//function pushCheck(arg1, arg2, arg3) {
   // arg1 : context    arg2 : type     arg3 : comment 
   promise_test(t => {
-    return navigator.nfc.push(arg1)
+    return navigator.nfc.push("aaabbbccc")
       .then(() => {
         navigator.nfc.watch((message)
             .then(()=> {
               console.log(message.data.recordType)
-              assert_equals(message.data.recordType, arg2);
+              assert_equals(message.data.recordType, "text");
             })
         })
-  }, arg3)
-}
+  }, "test comm")
+//}
 let a = "test strings zhaoming"
 let b = "1text"
 let c = "this is test case for automachie"
-pushCheck(a, b , c)
+//pushCheck(a, b , c)
+
 
 
 // promise_test(t=> {
