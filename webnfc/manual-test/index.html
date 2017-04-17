@@ -97,7 +97,7 @@ promise_test(t => {
         console.log("2222")
         console.log(message.data.recordType)
         t.step(function () {
-          assert_equals(message.data.recordType, "text");
+          assert_equals(message.data.recordType, "1text");
           t.done();
         })
       })
