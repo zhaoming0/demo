@@ -63,7 +63,7 @@ function pushCheck(arg1, arg2, arg3) {
   promise_test(t => {
     console.log("debug -1")
     console.log("arg1")
-    return navigaotr.nfc.push(arg1)
+    return navigator.nfc.push(arg1)
       .then(() => {
         console.log("debug -2")
         console.log("nfc.push(arg1)");
