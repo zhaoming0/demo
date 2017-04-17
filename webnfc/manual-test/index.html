@@ -87,6 +87,7 @@ promise_test(t=> {
             if (record.recordType == "text") {
               console.log("333");
               console.log(record.recordType)
+              assert_equals(record.recordType, "text")
               resolve();
             }else{
               console.log("444");
