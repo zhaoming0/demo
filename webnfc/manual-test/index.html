@@ -80,6 +80,7 @@ promise_test(t => {
   return navigator.nfc.push("aaaaaa")
     .then(() => {
       return navigator.nfc.watch(message => {
+        console.log("2222")
         console.log(message)
       })
     }).then(() =>{
