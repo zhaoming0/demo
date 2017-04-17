@@ -64,11 +64,11 @@ function pushCheck(arg1, arg2, arg3) {
     return navigator.nfc.push(arg1)
       .then(() => {
         navigator.nfc.watch((message).then(()=> {
-          for (let record of message.data) {
+//          for (let record of message.data) {
             console.log("debug -4");
-            console.log(record.recordType)
-            assert_equals(record.recordType, arg2);
-          }
+            console.log(message.data.recordType)
+            assert_equals(message.data.recordType, arg2);
+//  }
         })
       });
   }, arg3)
