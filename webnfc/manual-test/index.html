@@ -70,6 +70,9 @@ function pushCheck(arg1, arg2, arg3) {
             console.log("debug -4");
             assert_equals(record.recordType, arg2);
           }
+        }).catch((err) => {
+          console.log("debug -6");
+          console.log("NFC watch failed: " + err.name)
         })
       }).catch((error) => {
         console.log("debug -5")
