@@ -60,22 +60,30 @@
 
 //function pushCheck(arg1, arg2, arg3) {
   // arg1 : context    arg2 : type     arg3 : comment 
-  promise_test(t => {
-    return navigator.nfc.push("aaabbbccc")
-      .then(() => {
-        navigator.nfc.watch((message)
-            .then(()=> {
-              console.log(message.data.recordType)
-              assert_equals(message.data.recordType, "text");
-            })
-        })
-  }, "test comm")
+//  promise_test(t => {
+//    return navigator.nfc.push("aaabbbccc")
+//      .then(() => {
+//        navigator.nfc.watch((message)
+//            .then(()=> {
+//              console.log(message.data.recordType)
+//              assert_equals(message.data.recordType, "text");
+//            })
+//        )})
+//  }, "test comm")
 //}
 let a = "test strings zhaoming"
 let b = "1text"
 let c = "this is test case for automachie"
 //pushCheck(a, b , c)
-
+promise_test(t => {
+  return navigator.nfc.push("aaaaaa")
+    .then(() => {
+      navigator.nfc.watch(message)
+        .then(() => {
+          console.log(message.data.recordType)
+        })
+    })
+})
 
 
 // promise_test(t=> {
