@@ -76,15 +76,13 @@ let b = "1text"
 let c = "this is test case for automachie"
 //pushCheck(a, b , c)
 promise_test(t => {
+  let message;
   return navigator.nfc.push("aaaaaa")
     .then(() => {
-      navigator.nfc.watch((message) => {
-          console.log(message.data.recordType);
-          assert_unreached();
-      }).then((aaa)=>{
-        console.log(aaa)
-          console.log(aaa.data.recordType)
+      return navigator.nfc.watch((message) => {
+      }).then(()=>{
           assert_unreached("22222222222222")
+          console.log(message.data.recordType);
       })
     })
   })
