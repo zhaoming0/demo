@@ -74,35 +74,6 @@
 //let a = "test strings zhaoming"
 //let b = "1text"
 //let c = "this is test case for automachie"
-//pushCheck(a, b , c)
-//promise_test(t => {
-//  let message;
-//  return navigator.nfc.push("aaaaaa")
-//    .then(() => {
-//      return navigator.nfc.watch(message => {
-//        console.log("2222")
-//        console.log(message)
-//      })
-//    }).then(() =>{
-//        console.log("3333")
-//        console.log(message);
-//    })
-//  })
-
-//promise_test(t => {
-//  let message;
-//  return navigator.nfc.push("bbb")
-//    .then(() => {
-//      navigator.nfc.watch(message => {
-//        console.log("2222")
-//        console.log(message.data.recordType)
-//        t.step(function () {
-//          assert_equals(message.data.recordType, "1text");
-//          t.done();
-//        })
-//      })
-//    })
-//})
 
 
 promise_test(t=> {
@@ -112,8 +83,17 @@ promise_test(t=> {
         return navigator.nfc.watch(message => {
           console.log("222");
           console.log(message);
-          assert_equals(message.data.recordType, "text")
-          resolve();
+          for (let record of message.data) {
+            if (record.recordType == "text") {
+              console.log("333");
+              console.log(record.recordType)
+              resolve();
+            }else{
+              console.log("444");
+              console.log(record.recordType)
+              resolve();
+            }
+          }
         })
       })
   })
