@@ -78,11 +78,12 @@ let c = "this is test case for automachie"
 promise_test(t => {
   return navigator.nfc.push("aaaaaa")
     .then(() => {
-      navigator.nfc.watch(message)
-        .then(() => {
-          console.log(message.data.recordType)
-        })
+      navigator.nfc.watch((message) => {
+          console.log(message.data.recordType);
+          assert_unreach();
+      })
     })
+  })
 })
 
 
