@@ -61,22 +61,15 @@
 function pushCheck(arg1, arg2, arg3) {
   // arg1 : context    arg2 : type     arg3 : comment 
   promise_test(t => {
-    console.log("debug -1")
     return navigator.nfc.push(arg1)
       .then(() => {
-        console.log("debug -2")
         return navigator.nfc.watch((message) => {
           for (let record of message.data) {
             console.log("debug -4");
+            console.log(record.recordType)
             assert_equals(record.recordType, arg2);
           }
-        }).catch((err) => {
-          console.log("debug -6");
-          console.log("NFC watch failed: " + err.name)
         })
-      }).catch((error) => {
-        console.log("debug -5")
-        console.log("NFC push failed: " + error.name);
       });
   }, arg3)
 }
