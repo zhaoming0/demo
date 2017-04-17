@@ -95,10 +95,11 @@ promise_test(t => {
     .then(() => {
       return navigator.nfc.watch(message => {
         console.log("2222")
-        console.log(message)
         console.log(message.data.recordType)
-        assert_equals(message.data.recordType, "text");
-        t.done();
+        t.step(function () {
+          assert_equals(message.data.recordType, "text");
+          t.done();
+        })
       })
     }).then(() => {
       console.log("3333");
