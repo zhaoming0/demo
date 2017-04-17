@@ -11,24 +11,31 @@
 <script>
   navigator.nfc.watch((message) => {
     if (message.data[0].recordType == 'empty') {
+      console.log("DEBUG-1")
       navigator.nfc.push({
         url: "/custom/path",
         data: [{ recordType: "text", data: 'Hello World' }]
       });
     } else {
+      console.log("DEBUG-2")
       console.log('Read message written by ' + message.url);
       processMessage(message);
     }
   }).then(() => {
+      console.log("DEBUG-3")
     console.log("Added a watch.");
   }).catch((error) => {
+      console.log("DEBUG-4")
     console.log("Adding watch failed: " + error.name);
   });
   
   function processMessage(message) {
+      console.log("DEBUG-5")
     console.log('-----------------------------')
     for (let record of message.data) {
+      console.log("DEBUG-6")
       switch (record.recordType) {
+      console.log("DEBUG-7")
         case "text":
           console.log('Data is text: ' + record.data);
           break;
