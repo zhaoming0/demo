@@ -63,7 +63,7 @@ function pushCheck(arg1, arg2, arg3) {
   promise_test(t => {
     return navigator.nfc.push(arg1)
       .then(() => {
-        return navigator.nfc.watch((message) => {
+        navigator.nfc.watch((message) => {
           for (let record of message.data) {
             console.log("debug -4");
             console.log(record.recordType)
