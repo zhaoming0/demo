@@ -89,22 +89,33 @@
 //    })
 //  })
 
-promise_test(t => {
-  let message;
-  return navigator.nfc.push("bbb")
-    .then(() => {
-      return navigator.nfc.watch(message => {
-        console.log("2222")
-        console.log(message.data.recordType)
-        t.step(function () {
-          assert_equals(message.data.recordType, "1text");
-          t.done();
+//promise_test(t => {
+//  let message;
+//  return navigator.nfc.push("bbb")
+//    .then(() => {
+//      navigator.nfc.watch(message => {
+//        console.log("2222")
+//        console.log(message.data.recordType)
+//        t.step(function () {
+//          assert_equals(message.data.recordType, "1text");
+//          t.done();
+//        })
+//      })
+//    })
+//})
+
+
+promise_test(t=> {
+  new Promise((resolve, reject) => {
+    return navigator.nfc.push("bbb")
+      .then(() => {
+        return navigator.nfc.watch(message => {
+          console.log("222");
+          console.log(message);
+          resolve();
         })
       })
-    }).then(() => {
-      console.log("3333");
-      console.log(message)
-    })
+  })
 })
 // promise_test(t=> {
 //   return navigator.nfc.push("12345678")
