@@ -72,8 +72,8 @@ function pushCheck(arg1, arg2, arg3) {
           for (let record of message.data) {
             console.log("debug -4");
             console.log(typeof(arg2));
-            console.log(typeof(record.recordType));
-            assert_equals(record.recordType, arg2);
+            console.log(record.recordType);
+            assert_equals(typeof(record.recordType), arg2);
           }
         })
       }).catch((error) => {
