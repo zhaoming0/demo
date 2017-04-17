@@ -9,58 +9,81 @@
 
 <div id="log"></div>
 <script>
-  navigator.nfc.watch((message) => {
-    if (message.data[0].recordType == 'empty') {
-      console.log("DEBUG-1")
-      navigator.nfc.push({
-        url: "/custom/path",
-        data: [{ recordType: "text", data: 'Hello World' }]
-      });
-    } else {
-      console.log("DEBUG-2")
-      console.log('Read message written by ' + message.url);
-      processMessage(message);
-    }
-  }).then(() => {
-      console.log("DEBUG-3")
-    console.log("Added a watch.");
-  }).catch((error) => {
-      console.log("DEBUG-4")
-    console.log("Adding watch failed: " + error.name);
-  });
-  
-  function processMessage(message) {
-      console.log("DEBUG-5")
-    console.log('-----------------------------')
-    for (let record of message.data) {
-      console.log("DEBUG-6")
-      switch (record.recordType) {
-        case "text":
-      console.log("DEBUG-7")
-          console.log('Data is text: ' + record.data);
-          break;
-        case "url":
-          console.log('Data is URL: ' + record.data);
-          break;
-        case "json":
-          console.log('JSON data: ' + record.data.myProperty.toString());
-          break;
-        case "opaque":
-          if (record.mediaType == 'image/png') {
-            var img = document.createElement("img");
-            img.src = URL.createObjectURL(new Blob(record.data, record.mediaType));
-            img.onload = function() {
-              window.URL.revokeObjectURL(this.src);
-            };
-          }
-          break;
-      }
-    }
-  }
+//  navigator.nfc.watch((message) => {
+//    if (message.data[0].recordType == 'empty') {
+//      console.log("DEBUG-1")
+//      navigator.nfc.push({
+//        url: "/custom/path",
+//        data: [{ recordType: "text", data: 'Hello World' }]
+//      });
+//    } else {
+//      console.log("DEBUG-2")
+//      console.log('Read message written by ' + message.url);
+//      processMessage(message);
+//    }
+//  }).then(() => {
+//    console.log("DEBUG-3")
+//    console.log("Added a watch.");
+//  }).catch((error) => {
+//    console.log("DEBUG-4")
+//    console.log("Adding watch failed: " + error.name);
+//  });
+//  
+//  function processMessage(message) {
+//    console.log("DEBUG-5")
+//    console.log('-----------------------------')
+//    for (let record of message.data) {
+//      console.log("DEBUG-6")
+//      switch (record.recordType) {
+//        case "text":
+//          console.log("DEBUG-7")
+//          console.log('Data is text: ' + record.data);
+//          break;
+//        case "url":
+//          console.log('Data is URL: ' + record.data);
+//          break;
+//        case "json":
+//          console.log('JSON data: ' + record.data.myProperty.toString());
+//          break;
+//        case "opaque":
+//          if (record.mediaType == 'image/png') {
+//            var img = document.createElement("img");
+//            img.src = URL.createObjectURL(new Blob(record.data, record.mediaType));
+//            img.onload = function() {
+//              window.URL.revokeObjectURL(this.src);
+//            };
+//          }
+//          break;
+//      }
+//    }
+//  }
 
-function pushCheck(arg1, arg2) {
-  navigator.nfc.push(arg1)
+function pushCheck(arg1, arg2, arg3) {
+  // arg1 : context    arg2 : type     arg3 : comment 
+  promise_test(t => {
+    console.log("debug -1")
+    return navigaotr.nfc.push(arg1)
+      .then(() => {
+        console.log("debug -2")
+        console.log("nfc.push(arg1)");
+      }).then(() {
+        console.log("debug -3")
+        return navigator.nfc.watch((message) => {
+          for (let record of message.data) {
+            console.log("debug -4")
+            assert_equals(record.recordType, arg2);
+          }
+        })
+      }).catch((error) => {
+        console.log("debug -5")
+        console.log("NFC push failed: " + error.name);
+      });
+  }, "arg3")
 }
+let a = "test strings zhaoming"
+let b = "String"
+let c = "this is test case for automachie"
+pushCheck(a, b , c)
 
 
 // promise_test(t=> {
