@@ -112,6 +112,7 @@ promise_test(t=> {
         return navigator.nfc.watch(message => {
           console.log("222");
           console.log(message);
+          assert_equals(message.data.recordType, "text")
           resolve();
         })
       })
