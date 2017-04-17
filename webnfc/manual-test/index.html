@@ -62,7 +62,7 @@ function pushCheck(arg1, arg2, arg3) {
   // arg1 : context    arg2 : type     arg3 : comment 
   promise_test(t => {
     console.log("debug -1")
-    console.log("arg1")
+    console.log(arg1)
     return navigator.nfc.push(arg1)
       .then(() => {
         console.log("debug -2")
@@ -70,7 +70,9 @@ function pushCheck(arg1, arg2, arg3) {
         console.log("debug -3")
         return navigator.nfc.watch((message) => {
           for (let record of message.data) {
-            console.log("debug -4")
+            console.log("debug -4");
+            console.log(arg2);
+            console.log(record.recordType)
             assert_equals(record.recordType, arg2);
           }
         })
@@ -78,7 +80,7 @@ function pushCheck(arg1, arg2, arg3) {
         console.log("debug -5")
         console.log("NFC push failed: " + error.name);
       });
-  }, "arg3")
+  }, arg3)
 }
 let a = "test strings zhaoming"
 let b = "String"
