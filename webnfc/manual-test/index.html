@@ -79,7 +79,7 @@ promise_test(t => {
   let message;
   return navigator.nfc.push("aaaaaa")
     .then(() => {
-      return navigator.nfc.watch((message) => {
+      return navigator.nfc.watch(message => {
       }).then(()=>{
           console.log(message.data.recordType);
       })
