@@ -54,7 +54,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 setup({ explicit_timeout: true });
 console.log("999999")
 
-testPushType(createJsonRecord(test_json_data), "Test navigator.nfc.push NFCMessage with 'json' recordType");
+testPushType(createOpaqueRecord(test_buffer_data), "Test navigator.nfc.push NFCMessage with 'ArrayBuffer' recordType");
 
 console.log("zhaoming")
 </script>
