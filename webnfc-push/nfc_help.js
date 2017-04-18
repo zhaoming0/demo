@@ -139,15 +139,11 @@ function createUrlRecord(url) {
   return createRecord("url", "text/plain", url);
 }
 
-function pushDataAndOptions(data) {
-  return {data: [{data: data.data, recordType: data.recordType, mediaType: data.mediaType }]}
-}
 
-function testPushType(data, watchOptions, desc) {
-  //arg1: content, arg2: type, arg3:option, arg4: comment
+function testPushType(datas, watchOptions, desc) {
   promise_test(t => {
     console.log("debug --1")
-    return navigator.nfc.push(pushDataAndOptions(data))
+    return navigator.nfc.push({data:[data: datas.data, recordType: datas.recordTypes, mediaType: datas.mediaType]})
       .then(() => {
         return new Promise(resolve => {
           console.log("debug --2")
@@ -157,8 +153,8 @@ function testPushType(data, watchOptions, desc) {
             console.log("debug --3")
             if (record.recordType) {
               console.log("debug --4")
-              assert_equals(record.recordType, data.recordType);
-              assert_equals(record.data, data.data);
+              assert_equals(record.recordType, datas.recordType);
+              assert_equals(record.data, datas.data);
             }
           }
         })
