@@ -140,42 +140,42 @@ function createUrlRecord(url) {
 }
 
 
-function testPushType(datas, desc) {
-  promise_test(t => {
-    console.log("debug --1");
-    console.log(datas)
-    return navigator.nfc.push({data: [{data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
-      .then(() => {
-        return new Promise(resolve => {
-          console.log("debug --2")
-          navigator.nfc.watch((message) => resolve(message), {recordType: datas.recordTypes, mediaType: datas.mediaType});
-        }).then((message) => {
-          for (let record of message.data) {
-            console.log(message.data)
-            console.log("debug --3")
-            switch (record.recordType) {
-              case "text":
-              case "url":
-                assert_equals(record.recordType, datas.recordType);
-                assert_equals(record.data, datas.data);
-                break;
-              case "json":
-                assert_equals(record.data.myProperty.toString(), datas.data.myProperty.toString());
-                assert_equals(record.recordType, datas.recordType);
-                console.log(record.recordType, datas.recordType);
-                break;
-              case "opaque":
-                if (record.mediaType == "image/png") {
-                  let img = document.createElement("img");
-                  img.src = URL.createObjectURL(new Blob(record.data, record.mediaType));
-                  img.onload = function () {
-                    window.URL.revokeObjectURL(this.src);
-                  };
-                }
-                break;
-            }
-          }
-        })
-      })
-  }, desc)
-}
+//function testPushType(datas, desc) {
+//  promise_test(t => {
+//    console.log("debug --1");
+//    console.log(datas)
+//    return navigator.nfc.push({data: [{data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
+//      .then(() => {
+//        return new Promise(resolve => {
+//          console.log("debug --2")
+//          navigator.nfc.watch((message) => resolve(message), {recordType: datas.recordTypes, mediaType: datas.mediaType});
+//        }).then((message) => {
+//          for (let record of message.data) {
+//            console.log(message.data)
+//            console.log("debug --3")
+//            switch (record.recordType) {
+//              case "text":
+//              case "url":
+//                assert_equals(record.recordType, datas.recordType);
+//                assert_equals(record.data, datas.data);
+//                break;
+//              case "json":
+//                assert_equals(record.data.myProperty.toString(), datas.data.myProperty.toString());
+//                assert_equals(record.recordType, datas.recordType);
+//                console.log(record.recordType, datas.recordType);
+//                break;
+//              case "opaque":
+//                if (record.mediaType == "image/png") {
+//                  let img = document.createElement("img");
+//                  img.src = URL.createObjectURL(new Blob(record.data, record.mediaType));
+//                  img.onload = function () {
+//                    window.URL.revokeObjectURL(this.src);
+//                  };
+//                }
+//                break;
+//            }
+//          }
+//        })
+//      })
+//  }, desc)
+//}
