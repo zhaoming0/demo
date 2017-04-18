@@ -103,12 +103,16 @@ promise_test(t=> {
 }, "123456")*/
 
 promise_test(t => {
- return navigator.nfc.push("test").then(() => {
-    return navigator.nfc.watch(message => new Promise(resolve => {
-      console.log("message:", message.data);
-      assert_unreached();
-    }));    
-  });  
+ return navigator.nfc.push("test")
+   .then(() => {
+      return new Promise(resolve, reject)
+        .then(() => {
+          navigator.nfc.watch(message => resolve(message));
+        }).then((message) => {
+          console.log("message:", message.data);
+          assert_unreached();
+       });
+   });  
 }, "wanming test")
 // promise_test(t=> {
 //   return navigator.nfc.push("12345678")
