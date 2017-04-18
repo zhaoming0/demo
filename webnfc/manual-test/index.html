@@ -118,7 +118,9 @@ promise_test(t => {
               assert_equals(record.recordType, "1text");
             }
           }
-       });
+      }).catch((e) => {
+          console.log(e)
+        })
    });  
 }, "wanming test")
 // promise_test(t=> {
