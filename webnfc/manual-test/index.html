@@ -103,10 +103,15 @@ promise_test(t=> {
 }, "123456")*/
 
 promise_test(t => {
- return navigator.nfc.push(null)
+  let watchoptions = {
+    url : "https://www.w3.org/*", 
+    recordType: "json",
+    mediaType: "application/*+json"
+  }
+ return navigator.nfc.push("1233333")
    .then(() => {
       return new Promise(resolve => {
-          navigator.nfc.watch(message => resolve(message));
+        navigator.nfc.watch((message => resolve(message)),watchoptions );
         }).then((message) => {
           for (let record of message.data) {
             if (record.recordType == "text") {
