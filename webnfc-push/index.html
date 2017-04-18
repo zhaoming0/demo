@@ -85,6 +85,8 @@ function testPushType(datas, desc) {
                   img.onload = function () {
                     window.URL.revokeObjectURL(this.src);
                   };
+                  console.log("debug -4");
+                  console.log(img.onload)
                 }
                 break;
             }
