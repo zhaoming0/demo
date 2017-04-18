@@ -104,7 +104,8 @@ promise_test(t=> {
 
 promise_test(t => {
   let watchoptions = {
-    recordType: "text"
+    recordType: "text",
+    mediaType: "plain/text"
   }
  return navigator.nfc.push("1233333")
    .then(() => {
