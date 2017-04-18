@@ -162,6 +162,7 @@ function testPushType(datas, desc) {
               case "json":
                 assert_equals(record.data.myProperty.toString(), datas.data.myProperty.toString());
                 assert_equals(record.recordType, datas.recordType);
+                console.log(record.recordType, datas.recordType);
                 break;
               case "opaque":
                 if (record.mediaType == "image/png") {
