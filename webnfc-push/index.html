@@ -66,6 +66,9 @@ function testPushType(datas, desc) {
             console.log("debug --3")
             switch (record.recordType) {
               case "text":
+                assert_equals(record.recordType, datas.recordType);
+                assert_equals(record.data, datas.data);
+                break;
               case "url":
                 assert_equals(record.recordType, datas.recordType);
                 assert_equals(record.data, datas.data);
