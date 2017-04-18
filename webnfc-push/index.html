@@ -88,6 +88,11 @@ function testPushType(datas, desc) {
                 }
                 assert_equals(record.recordType, datas.recordType);
                 break;
+              case "empty":
+                console.log("debug ---6")
+                assert_equals(record.recordType, datas.recordType);
+                assert_equals(record.data, datas.data);
+                break;
             }
           }
         })
