@@ -77,7 +77,7 @@
 
 
 promise_test(t=> {
-  new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     return navigator.nfc.push("123456")
       .then(() => {
         return navigator.nfc.watch(message => {
