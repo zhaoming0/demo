@@ -105,12 +105,12 @@ promise_test(t=> {
 promise_test(t => {
   let watchoptions = {
     recordType: "text",
-    mediaType: "plain/text"
+    mediaType: "text/plain"
   }
  return navigator.nfc.push("1233333")
    .then(() => {
       return new Promise(resolve => {
-        navigator.nfc.watch((message) => {resolve(message);}, {recordType: 'text', mediaType:"plain/text"});
+        navigator.nfc.watch((message) => {resolve(message);}, watchoptions);
         }).then((message) => {
           console.log("in");
            console.log("message", message)
