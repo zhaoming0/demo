@@ -158,7 +158,7 @@ function testPushType(data, types, watchOptions, desc) {
             if (record.recordType) {
               console.log("debug --4")
               assert_equals(record.recordType, types);
-              assert_equals(record.data, data);
+              assert_equals(record.data, data.data);
             }
           }
         })
