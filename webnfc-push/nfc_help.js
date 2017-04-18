@@ -145,13 +145,13 @@ function testPushType(datas, desc) {
     console.log("debug --1")
     console.log( {data: [ {
       data: datas.data, 
-      recordType: datas.recordTypes, 
+      recordType: datas.recordType, 
       mediaType: datas.mediaType}
     ]
     })
     console.log("9090909090")
       console.log(datas)
-    return navigator.nfc.push({data: [{data: datas.data, recordType: datas.recordTypes, mediaType: datas.mediaType}]})
+    return navigator.nfc.push({data: [{data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
       .then(() => {
         return new Promise(resolve => {
           console.log("debug --2")
