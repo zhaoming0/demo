@@ -105,6 +105,10 @@ function testPushType(datas, desc) {
   }, desc)
 }
 
+
+function createemptyrecord(args) {
+    return createrecord("empty", "", args);
+}
 testPushType(createOpaqueRecord(test_buffer_data), "Test navigator.nfc.push NFCMessage with 'ArrayBuffer' recordType");
 let a = null
 testPushType(createemptyrecord(a), "Test null");

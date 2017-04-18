@@ -139,9 +139,9 @@ function createurlrecord(url) {
   return createrecord("url", "text/plain", url);
 }
 
-function createemptyrecord(args) {
-  return createrecord("empty", "", args);
-}
+//function createemptyrecord(args) {
+//  return createrecord("empty", "", args);
+//}
 
 //function testPushType(datas, desc) {
 //  promise_test(t => {
