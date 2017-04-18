@@ -103,7 +103,7 @@ promise_test(t=> {
 }, "123456")*/
 
 promise_test(t => {
-  navigator.nfc.push("test").then(() => {
+ return navigator.nfc.push("test").then(() => {
     return navigator.nfc.watch(message => new Promise(resolve => {
       console.log("message:", message.data);
       assert_unreached();
