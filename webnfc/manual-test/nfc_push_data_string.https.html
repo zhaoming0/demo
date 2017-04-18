@@ -47,8 +47,6 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <script>
 
 "use strict";
-let data = createTextRecord(test_text_data);
-console.log(data)
-testPushType(data, "text", {recordType: "text", mediaType: "text/plain"}, "Test navigator.nfc.push DOMSting type.");
+testPushType(test_text_data, "text", {recordType: "text", mediaType: "text/plain"}, "Test navigator.nfc.push DOMSting type, and check recordType and mediaType.");
 
 </script>
