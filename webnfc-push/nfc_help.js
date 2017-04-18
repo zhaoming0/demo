@@ -143,7 +143,13 @@ function createUrlRecord(url) {
 function testPushType(datas, desc) {
   promise_test(t => {
     console.log("debug --1")
-    return navigator.nfc.push({data: [data: datas.data, recordType: datas.recordTypes, mediaType: datas.mediaType]})
+    console.log( {data: [ {
+      data: datas.data, 
+      recordType: datas.recordTypes, 
+      mediaType: datas.mediaType}
+    ]
+    })
+    return navigator.nfc.push({data: [{data: datas.data, recordType: datas.recordTypes, mediaType: datas.mediaType}]})
       .then(() => {
         return new Promise(resolve => {
           console.log("debug --2")
