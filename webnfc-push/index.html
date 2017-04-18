@@ -52,11 +52,10 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 "use strict";
 
 setup({ explicit_timeout: true });
-function pushDataAndOptions(data) { 
-  return {data :[{data: data.data, recordType: data.recordType, mediaType: data.mediaType }]}
-}
 console.log("999999")
-//testPushType(test_url_data, "url", {recordType: "url", mediaType: "text/plain"}, "Test navigator.nfc.push NFCMessage with 'url' recordType");
+
+testPushType(createUrlRocord(test_url_data), "url", {recordType: "url", mediaType: "text/plain"}, "Test navigator.nfc.push NFCMessage with 'url' recordType");
+
 let a = createTextRecord(test_text_data)
   console.log(a)
   console.log("----------------------------------------")
