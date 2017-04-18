@@ -139,6 +139,10 @@ function createUrlRecord(url) {
   return createRecord("url", "text/plain", url);
 }
 
+function pushDataAndOptions(data) {
+  return {data: data.data, recordType: data.recordType, mediaType: data.mediaType }
+}
+
 function testPushType(data, types, watchOptions, desc) {
   //arg1: content, arg2: type, arg3:option, arg4: comment
   promise_test(t => {
