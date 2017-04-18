@@ -99,7 +99,23 @@ function testPushType(datas, desc) {
 }
 
 
-testPushType(createOpaqueRecord(test_buffer_data), "Test navigator.nfc.push NFCMessage with 'ArrayBuffer' recordType");
-testPushType(createTextRecord(test_text_data), "Test navigator.nfc.push DOMSting");
+//testPushType(createOpaqueRecord(test_buffer_data), "Test navigator.nfc.push NFCMessage with 'ArrayBuffer' recordType");
+//testPushType(createTextRecord(test_text_data), "Test navigator.nfc.push DOMSting");
 
+promise_test(t => {
+  return navigator.nfc.push("Pushing data is fun!", {target: "tag", ignoreRead: false})
+    .then(() => {
+      return new Promise(resolve => {
+        navigator.nfc.watch((message) => resolve(message))
+          .then((message) => {
+            for (let record of message.data) {
+              if (message.data) {
+                console.log("-------------------------------")
+                console.log(message.data)
+              }
+            }
+          })
+      })
+    })
+});
 </script>
