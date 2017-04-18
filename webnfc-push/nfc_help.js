@@ -143,7 +143,7 @@ function pushDataAndOptions(data) {
   return {data: [{data: data.data, recordType: data.recordType, mediaType: data.mediaType }]}
 }
 
-function testPushType(data, types, watchOptions, desc) {
+function testPushType(data, watchOptions, desc) {
   //arg1: content, arg2: type, arg3:option, arg4: comment
   promise_test(t => {
     console.log("debug --1")
@@ -157,7 +157,7 @@ function testPushType(data, types, watchOptions, desc) {
             console.log("debug --3")
             if (record.recordType) {
               console.log("debug --4")
-              assert_equals(record.recordType, types);
+              assert_equals(record.recordType, data.recordType);
               assert_equals(record.data, data.data);
             }
           }
