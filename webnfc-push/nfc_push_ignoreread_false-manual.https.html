@@ -48,6 +48,21 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 setup({ explicit_timeout: true });
 
-test();
+promise_test(t => {
+  return navigator.nfc.push("Pushing data is fun!", {target: "tag", ignoreRead: false})
+    .then(() => {
+      return new Promise(resolve => {
+        navigator.nfc.watch((message) => resolve(message))
+          .then((message) => {
+            for (let record of message.data) {
+              if (message.data) {
+                console.log("-------------------------------")
+                console.log(message.data)
+              }
+            }
+          })
+      })
+    })
+});
 
 </script>
