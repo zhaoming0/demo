@@ -135,10 +135,13 @@ function createOpaqueRecord(buffer) {
   return createRecord('opaque', 'application/octet-stream', buffer);
 }
 
-function createUrlRecord(url) {
-  return createRecord("url", "text/plain", url);
+function createurlrecord(url) {
+  return createrecord("url", "text/plain", url);
 }
 
+function createemptyrecord(null) {
+  return createrecord("empty", "", null);
+}
 
 //function testPushType(datas, desc) {
 //  promise_test(t => {
