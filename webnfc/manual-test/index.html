@@ -108,8 +108,9 @@ promise_test(t => {
       return new Promise(resolve => {
           navigator.nfc.watch(message => resolve(message));
         }).then((message) => {
-          console.log("message:", message.data);
-          assert_unreached();
+          console.log("message:", message.data.data);
+          assert_equals(message.data.recordType, "text");
+          assert_equals(message.data.data, "test1");
        });
    });  
 }, "wanming test")
