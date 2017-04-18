@@ -54,12 +54,12 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 setup({ explicit_timeout: true });
 console.log("999999")
 
-testPushType(createUrlRecord(test_url_data), "url", {recordType: "url", mediaType: "text/plain"}, "Test navigator.nfc.push NFCMessage with 'url' recordType");
+testPushType(createUrlRecord(test_url_data), {recordType: "url", mediaType: "text/plain"}, "Test navigator.nfc.push NFCMessage with 'url' recordType");
 
 let a = createTextRecord(test_text_data)
   console.log(a)
   console.log("----------------------------------------")
-let b=  pushDataAndOptions(a)
+let b=  pushDataAndOptions(a.data.data)
   console.log(b)
 console.log("00000000")
 console.log("8888888")
