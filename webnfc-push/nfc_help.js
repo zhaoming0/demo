@@ -149,6 +149,7 @@ function testPushType(datas, desc) {
       mediaType: datas.mediaType}
     ]
     })
+    console.log("9090909090")
     return navigator.nfc.push({data: [{data: datas.data, recordType: datas.recordTypes, mediaType: datas.mediaType}]})
       .then(() => {
         return new Promise(resolve => {
