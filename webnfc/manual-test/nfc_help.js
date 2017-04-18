@@ -148,9 +148,6 @@ function testPushType(data, types, watchOptions, desc) {
           navigator.nfc.watch((message) => resolve(message), watchOptions);
         }).then((message) => {
           for (let record of message.data) {
-            console.log(record.data);
-            console.log(record.recordType);
-console.log("999999999999999999999999999")
             if (record.recordType) {
               assert_equals(record.recordType, types);
               assert_equals(record.data, data);
