@@ -151,6 +151,7 @@ function testPushType(datas, desc) {
           navigator.nfc.watch((message) => resolve(message), {recordType: datas.recordTypes, mediaType: datas.mediaType});
         }).then((message) => {
           for (let record of message.data) {
+            console.log(message.data)
             console.log("debug --3")
             if (record.recordType) {
               console.log("debug --4")
