@@ -25,7 +25,7 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 **/
 'use strict';
-const test_text_data = "Test text data bbb.";
+const test_text_data = "Test text data.";
 const test_text_byte_array = new TextEncoder('utf-8').encode(test_text_data);
 const test_number_data = 42;
 const test_json_data = {level: 1, score: 100, label: 'Game'};
@@ -40,8 +40,9 @@ function toNFCWatchMode(mode) {
   if (mode === 'web-nfc-only') {
     return nfc.NFCWatchMode.WEBNFC_ONLY;
   }
-  return nfc.NFCWatchMode.ANY
+  return nfc.NFCWatchMode.ANY;
 }
+
 function toNFCRecordType(type) {
   switch (type) {
     case 'text':
@@ -59,20 +60,21 @@ function toNFCRecordType(type) {
 function createNFCWatchOptions(url, recordType, mediaType, mode) {
   return {url, recordType, mediaType, mode}
 }
+
 function assertNFCWatchOptionsEqual(provided, received) {
   if (provided.url !== undefined) {
     assert_equals(provided.url, received.url);
-  }else{
+  } else {
     assert_equals(received.url, '');
   }
   if (provided.mediaType !== undefined) {
     assert.equals(provided.mediaType, received.media_type);
-  }else{
+  } else {
     assert.equals(received.media_type, '');
   }
   if (provided.mode !== undefined) {
     assert_equals(toNFCWatchMode(provided.mode), received.mode);
-  }else{
+  } else {
     assert_equals(received.mode, nfc.NFCWatchMode.WEBNFC_ONLY);
   }
   if (provided.recordType !== undefined) {
@@ -84,23 +86,19 @@ function assertNFCWatchOptionsEqual(provided, received) {
 function assertNFCPushOptionsEqual(provided, received) {
   if (provided.ignoreRead !== undefined) {
     assert_equals(provided.ignoreRead, !!+received.ignore_read);
-  }else{
+  } else {
     assert_equals(!!+received.ignore_read, true);
   }
   if (provided.timeout !== undefined) {
     assert_equals(provided.timeout, received.timeout);
-  }else{
+  } else {
     assert_equals(received.timeout, Infinity);
   }
   if (provided.target !== undefined) {
     assert_equals(toMojoNFCPushTarget(provided.target), received.target);
-  }else{
+  } else {
     assert_equals(received.target, nfc.NFCPushTarget.ANY);
   }
-}
-
-function createNFCPushOptions(target, timeout, ignoreRead) {
-  return { target, timeout, ignoreRead };
 }
 
 function createMessage(records) {
@@ -141,16 +139,10 @@ function createUrlRecord(url) {
   return createRecord("url", "text/plain", url);
 }
 
-function runNFCInsecureContext(nfcInterface) {
-  test(() => {
-    assert_throws('SecurityError', () => { nfcInterface; });
-  }, "throw a 'SecurityError' when construct sensor in an insecure context.");
-}
-
-function checkPushType(pushMessage, types, watchOptions, comments) {
+function testPushType(data, types, watchOptions, desc) {
   //arg1: content, arg2: type, arg3:option, arg4: comment
   promise_test(t => {
-    return navigator.nfc.push(pushMessage)
+    return navigator.nfc.push(data)
       .then(() => {
         return new Promise(resolve => {
           navigator.nfc.watch((message) => resolve(message), watchOptions);
@@ -158,9 +150,10 @@ function checkPushType(pushMessage, types, watchOptions, comments) {
           for (let record of message.data) {
             if (record.recordType) {
               assert_equals(record.recordType, types);
+              assert_equals(record.data, data);
             }
           }
         })
       })
-  }, comments)
+  }, desc)
 }
