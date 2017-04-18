@@ -147,7 +147,7 @@ function testPushType(datas, watchOptions, desc) {
       .then(() => {
         return new Promise(resolve => {
           console.log("debug --2")
-          navigator.nfc.watch((message) => resolve(message), watchOptions);
+          navigator.nfc.watch((message) => resolve(message), {recordType: datas.recordTypes, mediaType: datas.mediaType});
         }).then((message) => {
           for (let record of message.data) {
             console.log("debug --3")
