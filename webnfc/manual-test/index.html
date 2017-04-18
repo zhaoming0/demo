@@ -103,14 +103,14 @@ promise_test(t=> {
 }, "123456")*/
 
 promise_test(t => {
- return navigator.nfc.push("test")
+ return navigator.nfc.push(null)
    .then(() => {
       return new Promise(resolve => {
           navigator.nfc.watch(message => resolve(message));
         }).then((message) => {
           for (let record of message.data) {
             if (record.recordType == "text") {
-              assert_equals(record.recordType, "1text");
+              assert_equals(record.recordType, "text");
             }
           }
        });
