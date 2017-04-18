@@ -75,76 +75,26 @@
 //let b = "1text"
 //let c = "this is test case for automachie"
 
-/*
-promise_test(t=> {
-  return new Promise((resolve, reject) => {
-    return navigator.nfc.push("123456")
-      .then(() => {
-        return navigator.nfc.watch(message => {
-          console.log("222");
-          console.log(message);
-          console.log("333")
-          for (let record of message.data) {
-            if (record.recordType == "text") {
-              console.log("444");
-              console.log(record.recordType)
-              assert_equals(record.recordType, "text")
-              console.log("555");
-              resolve();
-            }else{
-              console.log("666");
-              console.log(record.recordType)
-              resolve();
-            }
-          }
-        })
-      })
-  })
-}, "123456")*/
 
-promise_test(t => {
-  let watchoptions = {
-    recordType: "text",
-    mediaType: "text/plain"
-  }
- return navigator.nfc.push("1233333")
-   .then(() => {
-      return new Promise(resolve => {
-        navigator.nfc.watch((message) => resolve(message), watchoptions);
-        }).then((message) => {
-          console.log("in");
-           console.log("message", message)
-           for (let record of message.data) {
-            if (record.recordType == "text") {
-              assert_equals(record.recordType, "text1");
-            }
-          }
-      })
-   })  
-}, "wanming test")
-// promise_test(t=> {
-//   return navigator.nfc.push("12345678")
-//   return navigator.nfc.cancelPush()
-// }, "1111123456789")
 //promise_test(t => {
-//  new Promise((resolve,reject) => {
-//    return navigator.nfc.push("00000000000").then((data) => {
-//      console.log(data);
-//      console.log("---------")
-//      return navigator.nfc.cancelPush();
-//      resolve();
-//    })
-////  })
-////})
-////promise_test(t=> {
-////  return  promise_rejects(t, "AbortError", navigator.nfc.push("aaa"))
-////    navigator.nfc.cancelPush()
-////    console.log("1111111111111111111111111111111111111111111111111111111111111111111111111")
-////})
-//
-//promise_test(t=> {
-//  let promise = navigator.nfc.push(test_text_data);
-//  navigator.nfc.cancelPush();
-//  return promise_rejects(t, 'AbortError', promise);
-//}, "nfc.cancelPush should reject pending promise with AbortError");
+//  let watchoptions = {
+//    recordType: "text",
+//    mediaType: "text/plain"
+//  }
+// return navigator.nfc.push("1233333")
+//   .then(() => {
+//      return new Promise(resolve => {
+//        navigator.nfc.watch((message) => resolve(message), watchoptions);
+//        }).then((message) => {
+//          console.log("in");
+//           console.log("message", message)
+//           for (let record of message.data) {
+//            if (record.recordType == "text") {
+//              assert_equals(record.recordType, "text");
+//            }
+//          }
+//      })
+//   })  
+//}, "wanming test")
+checkPushType("9999", "text", {recordType: text}, "this is ****")
 </script>

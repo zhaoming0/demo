@@ -146,3 +146,21 @@ function runNFCInsecureContext(nfcInterface) {
     assert_throws('SecurityError', () => { nfcInterface; });
   }, "throw a 'SecurityError' when construct sensor in an insecure context.");
 }
+
+function checkPushType(pushMessage, types, watchOptions, comments) {
+  //arg1: content, arg2: type, arg3:option, arg4: comment
+  promise_test(t => {
+    return navigator.nfc.push(pushMessage)
+      .then(() => {
+        return new Promise(resolve => {
+          navigator.nfc.watch((message) => resolve(message), watchOptions);
+        }).then((message) => {
+          for (let record of message.data) {
+            if (record.recordType) {
+              assert_equals(record.recordType, types);
+            }
+          }
+        })
+      })
+  }, comments)
+}
