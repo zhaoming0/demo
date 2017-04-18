@@ -64,6 +64,7 @@ function testPushType(datas, desc) {
           for (let record of message.data) {
             console.log(message.data)
             console.log("debug --3")
+            console.log(record.recordType)
             switch (record.recordType) {
               case "text":
                 assert_equals(record.recordType, datas.recordType);
