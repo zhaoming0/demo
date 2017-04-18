@@ -153,10 +153,25 @@ function testPushType(datas, desc) {
           for (let record of message.data) {
             console.log(message.data)
             console.log("debug --3")
-            if (record.recordType) {
-              console.log("debug --4")
-              assert_equals(record.recordType, datas.recordType);
-              assert_equals(record.data, datas.data);
+            switch (record.recordType) {
+              case "text":
+              case "url":
+                assert_equals(record.recordType, datas.recordType);
+                assert_equals(record.data, datas.data);
+                break;
+              case "json":
+                assert_equals(record.data.myProperty.toString(), datas.data.myProperty.toString());
+                assert_equals(record.recordType, datas.recordType);
+                break;
+              case "opaque":
+                if (record.mediaType == "image/png") {
+                  let img = document.createElement("img");
+                  img.src = URL.createObjectURL(new Blob(record.data, record.mediaType));
+                  img.onload = function () {
+                    window.URL.revokeObjectURL(this.src);
+                  };
+                }
+                break;
             }
           }
         })
