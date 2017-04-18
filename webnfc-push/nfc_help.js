@@ -142,13 +142,17 @@ function createUrlRecord(url) {
 function testPushType(data, types, watchOptions, desc) {
   //arg1: content, arg2: type, arg3:option, arg4: comment
   promise_test(t => {
+    console.log("debug --1")
     return navigator.nfc.push(data)
       .then(() => {
         return new Promise(resolve => {
+          console.log("debug --2")
           navigator.nfc.watch((message) => resolve(message), watchOptions);
         }).then((message) => {
           for (let record of message.data) {
+            console.log("debug --3")
             if (record.recordType) {
+              console.log("debug --4")
               assert_equals(record.recordType, types);
               assert_equals(record.data, data);
             }
