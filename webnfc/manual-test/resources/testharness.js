@@ -547,6 +547,9 @@ policies and contribution forms [3].
             });
             var promise = test.step(func, test, test);
             test.step(function() {
+              console.log("line 550")
+              console.log(promise);
+              console.log("line 553")
                 assert_not_equals(promise, undefined);
             });
             Promise.resolve(promise).then(
@@ -927,6 +930,10 @@ policies and contribution forms [3].
           * Test if two primitives are unequal or two objects
           * are different objects
           */
+      console.log("Line 930");
+      console.log(actual);
+      console.log(expected);
+      console.log("Line 933");
         assert(!same_value(actual, expected), "assert_not_equals", description,
                                               "got disallowed value ${actual}",
                                               {actual:actual});
