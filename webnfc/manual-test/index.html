@@ -110,13 +110,13 @@ promise_test(t => {
  return navigator.nfc.push("1233333")
    .then(() => {
       return new Promise(resolve => {
-        navigator.nfc.watch((message) => {resolve(message);}, watchoptions);
+        navigator.nfc.watch((message) => resolve(message), watchoptions);
         }).then((message) => {
           console.log("in");
            console.log("message", message)
            for (let record of message.data) {
             if (record.recordType == "text") {
-              assert_equals(record.recordType, "text");
+              assert_equals(record.recordType, "text1");
             }
           }
       })
