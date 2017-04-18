@@ -547,9 +547,9 @@ policies and contribution forms [3].
             });
             var promise = test.step(func, test, test);
             test.step(function() {
-              console.log("line 550")
+              console.log("line 550");
               console.log(promise);
-              console.log("line 553")
+              console.log("line 553");
                 assert_not_equals(promise, undefined);
             });
             Promise.resolve(promise).then(
