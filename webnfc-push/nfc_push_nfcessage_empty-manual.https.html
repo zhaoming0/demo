@@ -48,6 +48,9 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 setup({ explicit_timeout: true });
 
-test();
+promise_test(t => {
+  return promise_rejects(t, "SyntaxError", navigator.nfc.push({data: [{data: null, mediaType: "", recordType: "empty"}]}))
+}, "Test navigator.nfc.push NFCMessage with 'empty' recordType");
+
 
 </script>

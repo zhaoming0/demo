@@ -118,9 +118,27 @@ function createemptyrecord() {
 //testPushType(createJsonRecord(test_json_data), "Test JSON")
 console.log("90909090909090")
 //testPushType(createOpaqueRecord(test_buffer_data), "test buffer")
-console.log(createemptyrecord())
-console.log("--------------------------")
+//promise_test(t => {
+//  return promise_rejects(t, "SyntaxError", navigator.nfc.push({data: [{data: null, mediaType: "", recordType: "empty"}]}))
+//})
+
+
 promise_test(t => {
-  return promise_rejects(t, "SyntaxError", navigator.nfc.push({data: [{data: null, mediaType: "", recordType: "empty"}]}))
-})
+  return navigator.nfc.push(test_text_data)
+    .then(() => {
+      return new Promise(resolve => {
+        navigator.nfc.watch(message) => resolve(message)
+      }).then((message) => {
+        for (let record of message.data) {
+          if (record.recordType) {
+            console.log(record.data + "------------" + test_text_data);
+            assert_equals(record.data, test_text_data);
+          }
+        }
+      })
+    })
+}, "test test text ");
+
+
+
 </script>
