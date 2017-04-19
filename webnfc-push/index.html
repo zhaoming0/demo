@@ -67,10 +67,6 @@ function testPushType(datas, desc) {
             console.log("Debug -3 ")
             switch (record.recordType) {
               case "text":
-                assert_equals(record.recordType, datas.recordType);
-                assert_equals(record.mediaType, datas.mediaType);
-                assert_equals(record.data, datas.data);
-                break;
               case "url":
                 assert_equals(record.recordType, datas.recordType);
                 assert_equals(record.mediaType, datas.mediaType);
@@ -123,6 +119,8 @@ function createemptyrecord() {
 console.log("90909090909090")
 //testPushType(createOpaqueRecord(test_buffer_data), "test buffer")
 console.log(createemptyrecord())
-testPushType(createemptyrecord(), "test empty")
 console.log("--------------------------")
+promise_test(t => {
+  return promise_rejects(t, "SyntaxError", navigator.nfc.push({data: [{data: null, mediaType: "", recordType: "empty"}]}))
+})
 </script>
