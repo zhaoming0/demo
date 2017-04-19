@@ -52,6 +52,7 @@ promise_test(t => {
   console.log("11111")
   return navigator.nfc.push(test_text_data)
     .then(() => {
+  console.log("1.5")
       return new Promise(resolve => {
   console.log("222222")
         navigator.nfc.push(test_url_data, {ignoreRead: false});
