@@ -127,24 +127,26 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //    })
 //}, "Test navigator.nfc.push NFCMessage with 'Text' recordTye");
 
-  console.log("1111")
-  navigator.nfc.watch(reader, {url: "*/mypath/magame/*"});
-  function reader(message) {
-    console.log("Source: " + message.url);
-    console.log("Game state: " + message.data);
-    let message = {
-      url: "/mypath/mygame/update",
-      data: [{
-        recordType: "json",
-        mediaType: "application/json",
-        data: {level:3, points: 4000, lives: 3}
-      }]
-    }
-    navigator.nfc.push(message).then(() => {
-      console.log("Progress stored!");
-    }).catch((error) => {
-      console.log("Failure, please try again.");
-    })
-  }
+navigator.nfc.watch(reader, { url: "*/mypath/mygame/*" });
 
+function reader(message) {
+    console.log("Source:     " + message.url);
+      console.log("Game state: " + message.data);
+
+        var message = {
+              url: "/mypath/mygame/update",
+                  data: [{
+                          recordType: "json",
+                                mediaType: "application/json",
+                                      data: { level: 3, points: 4500, lives: 3 }
+                              }]
+                };
+
+          navigator.nfc.push(message).then(() => {
+                console.log('Progress stored!');
+                  }).catch((error) => {
+                console.log('Failure, please try again.');
+                  });
+}
+    
 </script>
