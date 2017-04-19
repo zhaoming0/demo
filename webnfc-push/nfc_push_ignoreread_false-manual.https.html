@@ -52,15 +52,14 @@ promise_test(t => {
   console.log("11111")
   return navigator.nfc.push(test_text_data)
     .then(() => {
-  console.log("1.5")
       return new Promise(resolve => {
-  console.log("222222")
-        navigator.nfc.push(test_url_data, {ignoreRead: false});
-  console.log("333333")
+        console.log("222222")
+        //navigator.nfc.push(test_url_data, {ignoreRead: false});
+        console.log("333333")
         navigator.nfc.watch(message => resolve(message))
           .then((message) => {
             for (let record of message.data) {
-  console.log("444444")
+              console.log("444444")
               if (message.data) {
                 assert_equals(record.data, test_text_data);
               }
