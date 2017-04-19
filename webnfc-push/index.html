@@ -90,8 +90,9 @@ function testPushType(datas, desc) {
                   };
                 }
                 console.log(record.data)
+                console.log("debug opaque1")
                 console.log(datas.data)
-                console.log("debug opaque")
+                console.log("debug opaque2")
                 assert_equals(record.recordType, datas.recordType);
                 assert_equals(record.mediaType, datas.mediaType);
                 break;
