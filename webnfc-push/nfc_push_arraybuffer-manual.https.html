@@ -55,6 +55,10 @@ promise_test(t => {
         navigator.nfc.watch(message => resolve(message))
       }).then((message) => {
         for (let record of message.data) {
+          console.log("-------------------------------------")
+          console.log(record.mediaType);
+          console.log(record.recordType);
+          console.log("-------------------------------------")
           assert_equals(record.mediaType, "opaque");
           assert_equals(record.recordType, "application/octet-stream");
           for (let i= 0; i<= record.data.byteLength; i++) {
