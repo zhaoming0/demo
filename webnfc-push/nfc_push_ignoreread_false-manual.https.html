@@ -60,6 +60,7 @@ promise_test(t => {
             for (let record of message.data) {
               console.log("444444")
               if (message.data) {
+                console.log(record.data)
                 assert_equals(record.data, test_text_data);
               }
             }
