@@ -52,10 +52,10 @@ promise_test(t => {
   return navigator.nfc.push(test_text_data)
     .then(() => {
       return new Promise(resolve => {
-        console.log("222222")
-        navigator.nfc.push(test_url_data, {ignoreRead: false});
         console.log("333333")
         navigator.nfc.watch(message => resolve(message))
+        console.log("222222")
+        navigator.nfc.push(test_url_data, {ignoreRead: false});
       }).then((message) => {
             for (let record of message.data) {
               console.log("444444")
