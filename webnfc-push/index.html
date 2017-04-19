@@ -76,6 +76,7 @@ function testPushType(datas, desc) {
                 console.log("debug --json")
                 console.log(record.data.toString())
                 //console.log(record.data.myProperty.toString())
+                assert_array_equals(record.data, datas.data);
                 assert_equals(record.recordType, datas.recordType);
                 assert_equals(record.mediaType, datas.mediaType);
                 break;
