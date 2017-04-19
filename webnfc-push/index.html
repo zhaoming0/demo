@@ -124,23 +124,21 @@ console.log("90909090909090")
 
 
 promise_test(t => {
-  console.log("-1-1-1-1-1-1-1-1")
-  return navigator.nfc.push(test_text_data)
+  return navigator.nfc.push(test_text_data, {target: "tag", ignoreRead: false})
     .then(() => {
-      console.log("2-2-2-2-2-2-2-2")
       return new Promise(resolve => {
         navigator.nfc.watch(message => resolve(message))
       }).then((message) => {
-        console.log("3-3-3-3-3-3-3")
         for (let record of message.data) {
           if (record.recordType) {
-            console.log(record.data + "------------" + test_text_data);
+            console.log(record.data)
+              console.log(""9999999)
             assert_equals(record.data, test_text_data);
           }
         }
       })
     })
-}, "test test text ");
+}, "Test navigator.nfc.push NFCMessage with 'Text' recordTye");
 
 
 

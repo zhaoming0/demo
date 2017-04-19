@@ -52,15 +52,15 @@ promise_test(t => {
   return navigator.nfc.push(test_text_data)
     .then(() => {
       return new Promise(resolve => {
-        navigator.nfc.watch(message) => resolve(message)
+        navigator.nfc.watch(message => resolve(message))
       }).then((message) => {
         for (let record of message.data) {
           if (record.recordType) {
-            console.log(record.data + "------------" + test_text_data);
             assert_equals(record.data, test_text_data);
           }
         }
-      })
-    })
-});
+      });
+    });
+}, "Test navigator.nfc.push NFCMessage with 'Text' recordTye");
+
 </script>
