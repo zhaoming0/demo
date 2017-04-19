@@ -140,19 +140,13 @@ function createUrlRecord(url) {
 }
 
 function testPushType(datas, desc) {
-  console.log("Debug -1")
   promise_test(t => {
-    console.log("debug -1.5")
-    console.log({data: [{data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
     return navigator.nfc.push({data: [{data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
       .then(() => {
-        console.log("debug - 1.6")
         return new Promise(resolve => {
-          console.log("Debug -2")
           navigator.nfc.watch((message) => resolve(message), {recordType: datas.recordTypes, mediaType: datas.mediaType});
         }).then((message) => {
           for (let record of message.data) {
-            console.log("Debug -3 ")
             switch (record.recordType) {
               case "text":
               case "url":
@@ -189,6 +183,9 @@ function testPushType(datas, desc) {
                 assert_equals(record.recordType, datas.recordType);
                 assert_equals(record.mediaType, datas.mediaType);
                 assert_equals(record.data, datas.data);
+                break;
+              default:
+                assert_unreached("Invalid RecordType");
                 break;
             }
           }

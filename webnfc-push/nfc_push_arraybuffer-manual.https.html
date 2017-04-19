@@ -48,6 +48,18 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 setup({ explicit_timeout: true });
 
-testPushType(createOpaqueRecord(test_buffer_data), "Test navigator.nfc.push NFCMessage with 'ArrayBuffer' recordType");
+//testPushType(createOpaqueRecord(test_buffer_data), "Test navigator.nfc.push NFCMessage with 'ArrayBuffer' recordType");
+promise_test(t => {
+  return navigator.nfc.push(test_buffer_data)
+    .then(() => {
+      navigator.nfc.watch(message => resolve(message))
+    }).then((message) => {
+      for (let record of message.data) {
+        console.log(record.data);
+        console.log(record.mediaType);
+        console.log(record.recordType);
+        }
+    })
+}, "test-------")
 
 </script>
