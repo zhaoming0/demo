@@ -136,7 +136,7 @@ function createOpaqueRecord(buffer) {
 }
 
 function createurlrecord(url) {
-  return createrecord("url", "text/plain", url);
+  return createRecord("url", "text/plain", url);
 }
 
 //function createemptyrecord(args) {
