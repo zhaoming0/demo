@@ -127,9 +127,8 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //    })
 //}, "Test navigator.nfc.push NFCMessage with 'Text' recordTye");
 
-promise_test(t => {
   console.log("1111")
-  return navigator.nfc.watch(reader, {url: "*/mypath/magame/*"});
+  navigator.nfc.watch(reader, {url: "*/mypath/magame/*"});
   function reader(message) {
     console.log("Source: " + message.url);
     console.log("Game state: " + message.data);
@@ -147,6 +146,5 @@ promise_test(t => {
       console.log("Failure, please try again.");
     })
   }
-})
 
 </script>
