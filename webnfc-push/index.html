@@ -55,6 +55,7 @@ function testPushType(datas, desc) {
   console.log("Debug -1")
   promise_test(t => {
     console.log("debug -1.5")
+    console.log({data: [{data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
     return navigator.nfc.push({data: [{data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
       .then(() => {
         console.log("debug - 1.6")
