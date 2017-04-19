@@ -94,15 +94,9 @@ function testPushType(datas, desc) {
                     window.URL.revokeObjectURL(this.src);
                   };
                 }
-                console.log(record.data)
-                console.log("debug opaque1")
-                console.log(datas.data)
-                console.log("debug opaque2")
                 assert_equals(record.recordType, datas.recordType);
                 assert_equals(record.mediaType, datas.mediaType);
                 for (let i= 0; i<= record.data.byteLength; i++) {
-                  console.log(record.data[i]);
-                  console.log(datas.data[i]);
                   assert_equals(record.data[i], datas.data[i])
                 }
                 break;
@@ -126,7 +120,8 @@ function createemptyrecord() {
 //testPushType(createemptyrecord(), "test NULL")
 //testPushType(createJsonRecord(test_json_data), "Test JSON")
 console.log("90909090909090")
-console.log(createOpaqueRecord(test_buffer_data))
-testPushType(createOpaqueRecord(test_buffer_data), "test buffer")
+//testPushType(createOpaqueRecord(test_buffer_data), "test buffer")
+console.log(createemptyrecord)
+testPushType(createemptyrecord(), "test empty")
 console.log("--------------------------")
 </script>
