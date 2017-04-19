@@ -52,13 +52,15 @@ setup({ explicit_timeout: true });
 promise_test(t => {
   return navigator.nfc.push(test_buffer_data)
     .then(() => {
-      navigator.nfc.watch(message => resolve(message))
-    }).then((message) => {
-      for (let record of message.data) {
-        console.log(record.data);
-        console.log(record.mediaType);
-        console.log(record.recordType);
+      return new Promise(resolve => {
+        navigator.nfc.watch(message => resolve(message))
+      }).then((message) => {
+        for (let record of message.data) {
+          console.log(record.data);
+          console.log(record.recordType);
+          console.log(record.mediaType);
         }
+      })
     })
 }, "test-------")
 
