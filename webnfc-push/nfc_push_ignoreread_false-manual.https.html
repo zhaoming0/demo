@@ -49,15 +49,14 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 setup({ explicit_timeout: true });
 
 promise_test(t => {
-  console.log("11111")
   return navigator.nfc.push(test_text_data)
     .then(() => {
       return new Promise(resolve => {
         console.log("222222")
-        //navigator.nfc.push(test_url_data, {ignoreRead: false});
+        navigator.nfc.push(test_url_data, {ignoreRead: false});
         console.log("333333")
         navigator.nfc.watch(message => resolve(message))
-          .then((message) => {
+      }).then((message) => {
             for (let record of message.data) {
               console.log("444444")
               if (message.data) {
