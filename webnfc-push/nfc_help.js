@@ -139,7 +139,7 @@ function createUrlRecord(url) {
   return createRecord("url", "text/plain", url);
 }
 
-function testPushType(datas, desc) {
+function testNFCMessage(datas, desc) {
   promise_test(t => {
     return navigator.nfc.push({data: [{data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
       .then(() => {
