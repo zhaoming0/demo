@@ -59,8 +59,8 @@ promise_test(t => {
           console.log(record.mediaType);
           console.log(record.recordType);
           console.log("-------------------------------------")
-          assert_equals(record.mediaType, "opaque");
-          assert_equals(record.recordType, "application/octet-stream");
+          assert_equals(record.recordType, "opaque");
+          assert_equals(record.mediaType, "application/octet-stream");
           for (let i= 0; i<= record.data.byteLength; i++) {
             assert_equals(record.data[i], test_buffer_data[i]);
           }
