@@ -73,16 +73,11 @@ function testPushType(datas, desc) {
               case "json":
                 for (let prop in record.data) {
                   if (record.data[prop] instanceof Array) {
-                    console.log("22221")
                     assert_array_equals(record.data[prop], datas.data[prop])
                   }else{
-                    console.log("11112")
-                    console.log(record.data[prop])
-                    console.log(datas.data[prop])
                     assert_equals(record.data[prop], datas.data[prop])
                   }
                 }
-                assert_equals(JSON.stringify(record.data), JSON.stringify(datas.data))
                 assert_equals(record.recordType, datas.recordType);
                 assert_equals(record.mediaType, datas.mediaType);
                 break;
@@ -118,6 +113,6 @@ function createemptyrecord() {
 //testPushType(createOpaqueRecord(test_buffer_data), "Test navigator.nfc.push NFCMessage with 'ArrayBuffer' recordType");
 //testPushType(createTextRecord(test_text_data), "Test navigator.nfc.push DOMSting");
 //testPushType(createemptyrecord(), "test NULL")
-testPushType(createJsonRecord(test_json_data), "Test JSON")
+//testPushType(createJsonRecord(test_json_data), "Test JSON")
 testPushType(createOpaqueRecord(test_buffer_data), "test buffer")
 </script>
