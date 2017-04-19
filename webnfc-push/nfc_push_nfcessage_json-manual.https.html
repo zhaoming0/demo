@@ -36,17 +36,17 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <meta name="flags" content="interact">
 <meta name="timeout" content="long">
 
-<div id="log"></div>
-
 <p>Tap an NFC tag to the test device with NFC support.</p>
 
 <p>Note: All the actions need to be done in 60 seconds, otherwise it will get TIMEOUT.</p>
+
+<div id="log"></div>
 
 <script>
 
 "use strict";
 
 setup({ explicit_timeout: true });
-tPushType(createJsonRecord(test_json_data), "Test navigator.nfc.push NFCMessage with 'json' recordType");
+testPushType(createJsonRecord(test_json_data), "Test navigator.nfc.push NFCMessage with 'json' recordType");
 
 </script>
