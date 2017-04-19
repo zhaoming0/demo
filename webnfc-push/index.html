@@ -100,6 +100,11 @@ function testPushType(datas, desc) {
                 console.log("debug opaque2")
                 assert_equals(record.recordType, datas.recordType);
                 assert_equals(record.mediaType, datas.mediaType);
+                for (let i= 0; i<= record.data.byteLength; i++) {
+                  console.log(record.data[i]);
+                  console.log(datas.data[i]);
+                  assert_equals(record.data[i], datas.data[i])
+                }
                 break;
               case "empty":
                 assert_equals(record.recordType, datas.recordType);
