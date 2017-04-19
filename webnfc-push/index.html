@@ -77,6 +77,8 @@ function testPushType(datas, desc) {
                     assert_array_equals(record.data[prop], datas.data[prop])
                   }else{
                     console.log("11112")
+                    console.log(record.data[prop])
+                    console.log(datas.data[prop])
                     assert_equals(record.data[prop], datas.data[prop])
                   }
                 }
