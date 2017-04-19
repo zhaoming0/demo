@@ -108,19 +108,6 @@ function testPushType(datas, desc) {
       })
   }, desc)
 }
-function createemptyrecord() {
-  return createRecord("empty", "", null)
-}
-
-//testPushType(createOpaqueRecord(test_buffer_data), "Test navigator.nfc.push NFCMessage with 'ArrayBuffer' recordType");
-//testPushType(createTextRecord(test_text_data), "Test navigator.nfc.push DOMSting");
-//testPushType(createemptyrecord(), "test NULL")
-//testPushType(createJsonRecord(test_json_data), "Test JSON")
-console.log("90909090909090")
-//testPushType(createOpaqueRecord(test_buffer_data), "test buffer")
-//promise_test(t => {
-//  return promise_rejects(t, "SyntaxError", navigator.nfc.push({data: [{data: null, mediaType: "", recordType: "empty"}]}))
-//})
 
 
 promise_test(t => {
@@ -139,7 +126,5 @@ promise_test(t => {
       })
     })
 }, "Test navigator.nfc.push NFCMessage with 'Text' recordTye");
-
-
 
 </script>
