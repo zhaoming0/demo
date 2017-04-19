@@ -72,6 +72,8 @@ function testPushType(datas, desc) {
                 break;
               case "json":
                 //assert_equals(record.data.myProperty.toString(), datas.data.myProperty.toString());
+                console.log(record.data)
+                console.log(record.data.toString())
                 assert_equals(record.recordType, datas.recordType);
                 assert_equals(record.mediaType, datas.mediaType);
                 break;
@@ -104,4 +106,5 @@ function createemptyrecord() {
 //testPushType(createOpaqueRecord(test_buffer_data), "Test navigator.nfc.push NFCMessage with 'ArrayBuffer' recordType");
 //testPushType(createTextRecord(test_text_data), "Test navigator.nfc.push DOMSting");
 testPushType(createemptyrecord(), "test NULL")
+testPushType(createJsonRecord(test_json_data), "Test JSON")
 </script>
