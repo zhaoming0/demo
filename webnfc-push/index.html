@@ -109,28 +109,42 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //  }, desc)
 //}
 
+console.log("111")
+console.log(createUrlRecord(test_url_data));
 
-promise_test(t => {
-  return navigator.nfc.push(test_text_data, {target: "peer"})
-    .then(() => {
-      return new Promise(resolve => {
-        navigator.nfc.watch(message => resolve(message))
-      }).then((message) => {
-        for (let record of message.data) {
-          console.log("++++++++++++++++")
-          console.log(record.recordType)
-          console.log(record.mediaType)
-          console.log(record.data)
-          console.log("----------------")
-          if (record.recordType) {
-            console.log(record.data)
-              console.log("9999999")
-            //assert_equals(record.data, test_text_data);
-          }
-        }
-      })
-    })
-}, "test -------");
+//promise_test(t => {
+//  return navigator.nfc.push(test_text_data, {target: "tag"})
+//    .then(() => {
+//      return new Promise(resolve => {
+//        navigator.nfc.watch(message => resolve(message))
+//      }).then((message) => {
+//        for (let record of message.data) {
+//          console.log("++++++++++++++++")
+//          console.log(record.recordType)
+//          console.log(record.mediaType)
+//          console.log(record.data)
+//          console.log("----------------")
+//          if (record.recordType) {
+//            console.log(record.data)
+//              console.log("9999999")
+//            //assert_equals(record.data, test_text_data);
+//          }
+//        }
+//      })
+//    })
+//}, "test -------");
 
-    
+
+navigator.nfc.watch(reader, {url : "*/github/*"})
+
+function reader(message) {
+  console.log("source: " + message.url);
+  console.log("game state: " + message.data);
+  
+  navigator.nfc.push(createUrlRecord(test_url_data)).then(() => {
+    console.log("progress stored!");
+  }).catch((error) => {
+    console.log("failure , please try again")
+  })
+}
 </script>
