@@ -134,17 +134,17 @@ console.log(createUrlRecord(test_url_data));
 //    })
 //}, "test -------");
 
-
-navigator.nfc.watch(reader, {url : "*/github/*"})
-
-function reader(message) {
-  console.log("source: " + message.url);
-  console.log("game state: " + message.data);
-  
-  navigator.nfc.push(createUrlRecord(test_url_data)).then(() => {
-    console.log("progress stored!");
-  }).catch((error) => {
-    console.log("failure , please try again")
-  })
-}
+promise_test(t => {
+  return navigator.nfc.watch(reader, {url : "*/github/*"})
+  function reader(message) {
+    console.log("source: " + message.url);
+    console.log("game state: " + message.data);
+    
+    navigator.nfc.push(createUrlRecord(test_url_data)).then(() => {
+      console.log("progress stored!");
+    }).catch((error) => {
+      console.log("failure , please try again")
+    })
+  }
+})
 </script>
