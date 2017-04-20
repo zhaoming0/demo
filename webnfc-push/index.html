@@ -110,25 +110,8 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //}
 
 
-//promise_test(t => {
-//  return navigator.nfc.push(test_text_data, {target: "tag", ignoreRead: false})
-//    .then(() => {
-//      return new Promise(resolve => {
-//        navigator.nfc.watch(message => resolve(message))
-//      }).then((message) => {
-//        for (let record of message.data) {
-//          if (record.recordType) {
-//            console.log(record.data)
-//              console.log("9999999")
-//            assert_equals(record.data, test_text_data);
-//          }
-//        }
-//      })
-//    })
-//}, "Test navigator.nfc.push NFCMessage with 'Text' recordTye");
-
 promise_test(t => {
-  return navigator.nfc.push(test_text_data, {target: "peer"})
+  return navigator.nfc.push(test_text_data, {target: "tag", ignoreRead: false})
     .then(() => {
       return new Promise(resolve => {
         navigator.nfc.watch(message => resolve(message))
@@ -139,9 +122,15 @@ promise_test(t => {
           console.log(record.mediaType)
           console.log(record.data)
           console.log("----------------")
+          if (record.recordType) {
+            console.log(record.data)
+              console.log("9999999")
+            //assert_equals(record.data, test_text_data);
+          }
         }
       })
     })
-})
+}, "Test navigator.nfc.push NFCMessage with 'Text' recordTye");
+
     
 </script>
