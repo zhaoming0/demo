@@ -135,7 +135,7 @@ console.log(createUrlRecord(test_url_data));
 //}, "test -------");
 
 promise_test(t => {
-  return navigator.nfc.watch(reader, {url : "*/github/*"})
+  return navigator.nfc.watch(reader, {url : "*github*"})
   function reader(message) {
     console.log("source: " + message.url);
     console.log("game state: " + message.data);
@@ -147,4 +147,11 @@ promise_test(t => {
     })
   }
 })
+
+promise_test(t => {
+  return navigator.nfc.watch(createUrlRecord(test_url_data))
+    .then((data) => {
+      console.log("999999")
+    })
+}, "99999999")
 </script>
