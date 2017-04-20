@@ -134,24 +134,27 @@ console.log(createUrlRecord(test_url_data));
 //    })
 //}, "test -------");
 
-promise_test(t => {
-  return navigator.nfc.watch(reader, {url : "*github*"})
-  function reader(message) {
-    console.log("source: " + message.url);
-    console.log("game state: " + message.data);
-    
-    navigator.nfc.push(createUrlRecord(test_url_data)).then(() => {
-      console.log("progress stored!");
-    }).catch((error) => {
-      console.log("failure , please try again")
-    })
-  }
-})
+//promise_test(t => {
+//  return navigator.nfc.watch(reader, {url : "*github*"})
+//  function reader(message) {
+//    console.log("source: " + message.url);
+//    console.log("game state: " + message.data);
+//    
+//    navigator.nfc.push(createUrlRecord(test_url_data)).then(() => {
+//      console.log("progress stored!");
+//    }).catch((error) => {
+//      console.log("failure , please try again")
+//    })
+//  }
+//})
+
+console.log("2222222")
+console.log(createNFCWatchOptions(test_message_origin, "json", "application/json", "any"))
 
 promise_test(t => {
   return navigator.nfc.watch(createUrlRecord(test_url_data))
     .then((data) => {
-      console.log("999999")
+      console.log("999999");
     })
 }, "99999999")
 </script>
