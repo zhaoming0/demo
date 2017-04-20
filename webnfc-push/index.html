@@ -111,7 +111,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 promise_test(t => {
-  return navigator.nfc.push(test_text_data, {target: "tag", ignoreRead: false})
+  return navigator.nfc.push(test_text_data, {target: "tag"})
     .then(() => {
       return new Promise(resolve => {
         navigator.nfc.watch(message => resolve(message))
