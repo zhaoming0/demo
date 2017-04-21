@@ -148,22 +148,29 @@ console.log(createUrlRecord(test_url_data));
 //  }
 //})
 
-console.log("2222222")
-console.log(createNFCWatchOptions(test_message_origin, "json", "application/json", "any"))
-
-promise_test(t => {
-  return navigator.nfc.watch(createUrlRecord(test_url_data))
-    .then((data) => {
-      console.log("999999");
-    })
-}, "99999999")
+//console.log("2222222")
+//console.log(createNFCWatchOptions(test_message_origin, "json", "application/json", "any"))
+//
+//promise_test(t => {
+//  return navigator.nfc.watch(createUrlRecord(test_url_data))
+//    .then((data) => {
+//      console.log("999999");
+//    })
+//}, "99999999")
 
 
 promise_test(t => {
   return navigator.nfc.push({ data: [ { recordType: "json", mediaType: "application/json", data: {name: "Benny Jensen", title: "Banker"}},{recordType: "json", mediaType: "application/json", data: { name: "Zoey Braun", title: "Engineer"}}]})
     .then(() => {
       return new Promise(resolve => {
-        navigator.nfc.watch((message) => resolve(message), )
+        navigator.nfc.watch((message) => resolve(message), {url: document.baseURL, recordType: "json"})
+      }).then((message) => {
+        for (let record of message.data) {
+          console.log(record.data)
+          console.log(record.mediaType)
+          console.log(record.recordType);
+          console.log("+++++++++++++++++++")
+        }
       })
     })
 })
