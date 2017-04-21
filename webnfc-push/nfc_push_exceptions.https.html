@@ -78,7 +78,7 @@ const invalid_messages =
   ];
 
 promise_test(t => {
-  return promise_rejects(t, "TypeMissmatchError", navigator.nfc.push(undefined));
+  return promise_rejects(t, "TypeMismatchError", navigator.nfc.push(undefined));
 }, "Test that passing undefined to nfc.push would raise SyntaxError.");
 
 // promise_test(t => {
