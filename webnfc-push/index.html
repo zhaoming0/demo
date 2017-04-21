@@ -156,6 +156,9 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //    })
 //}, "99999999")
 
+console.log("-=-=-=-=-=")
+console.log(createJsonRecord(test_json_data)
+console.log("-=-=-=-=-=")
 
 promise_test(t => {
   return navigator.nfc.push({ data: [ { recordType: "json", mediaType: "application/json", data: {name: "Benny Jensen", title: "Banker"}},{recordType: "json", mediaType: "application/json", data: { name: "Zoey Braun", title: "Engineer"}}]})
@@ -176,5 +179,8 @@ promise_test(t => {
     })
 }, "99999999999999999999999999999999----------------------------------999999999999999999999999999999999")
 
+function testNFCWatchOptions(args) {
+
+}
 
 </script>
