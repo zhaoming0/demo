@@ -91,11 +91,11 @@ const invalid_messages =
 // }, "Test that promise is rejected with SyntaxError if NFCMessage is invalid.");
 
 promise_test(t => {
-  return promise_rejects(t, "NotSupportedError", navigator.nfc.push(test_text_data, {target: "invalid"}));
+  return promise_rejects(t, "TypeError", navigator.nfc.push(test_text_data, {target: "invalid"}));
 }, "Test that passing invaild target to nfc.push would raise TypeError.");
 
 promise_test(t => {
-  return promise_rejects(t, "NotSupportedError", navigator.nfc.cancelPush("invalid"));
+  return promise_rejects(t, "TypeError", navigator.nfc.cancelPush("invalid"));
 }, "Test that passing invaild target to nfc.cancelPush would raise TypeError.");
 
 // promise_test(t => {
