@@ -54,7 +54,7 @@ promise_test(t => {
   let watchOptions = { 
     data: [ 
         {recordType: "json", mediaType: "application/json", data: {name: "Benny Jensen", title: "Banker"}},
-        {recordType: "json", mediaType: "application/json", data: { name: "Zoey Braun", title: "Engineer"}}
+        {recordType: "json", mediaType: "application/json", data: {name: "Zoey Braun", title: "Engineer"}}
     ]
   }
   return navigator.nfc.push(watchOptions)
@@ -63,11 +63,10 @@ promise_test(t => {
         navigator.nfc.watch((message) => resolve(message), {url: document.baseURL, recordType: "json"})
       }).then((message) => {
         for (let record of message.data) {
-          console.log(record.data.title)
-          console.log(record.data.name)
-          console.log(watchOptions)
-          console.log(record)
-          //assert_equals(record.data.title, );
+          assert.equals(record.data.title, watchOptions.data.title)
+          assert.equals(record.data.name, watchOptions.data.name)
+          assert.equals(record.data.meidaType, watchOptions.data.mediaType)
+          assert.equals(record.data.recordType, watchOptions.data.recordType)
         }
       })
     })
