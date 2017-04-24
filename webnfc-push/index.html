@@ -111,43 +111,43 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //}, "Test that nfc.watch succeeds when NFCWatchOptions.mode is set to 'any'.");
 
 
-promise_test(t => {
-  let watchOptions = {
-    mediaType: "text/plain"
-  }
-  let datas = createTextRecord(test_url_data);
-    return navigator.nfc.push({data: [{data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
-    .then(() => {
-      return new Promise(resolve => {
-        navigator.nfc.watch((message) => resolve(message), watchOptions);
-      }).then((message) => {
-        for (let record of message.data) {
-          assert_equals(record.data, datas.data);
-          assert_equals(record.recordType, datas.recordType);
-          assert_equals(record.mediaType, datas.mediaType);
-        }
-      });
-    });
-}, "Test that nfc.watch succeeds when NFCWatchOptions.mediaType is set.");
-
-promise_test(t => {
-  let watchOptions = {
-    recordType : "text"
-  }
-  let datas = createTextRecord(test_url_data);
-    return navigator.nfc.push({data: [{data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
-    .then(() => {
-      return new Promise(resolve => {
-        navigator.nfc.watch((message) => resolve(message), watchOptions);
-      }).then((message) => {
-        for (let record of message.data) {
-          assert_equals(record.data, datas.data);
-          assert_equals(record.recordType, datas.recordType);
-          assert_equals(record.mediaType, datas.mediaType);
-        }
-      });
-    });
-}, "Test that nfc.watch succeeds when NFCWatchOptions.recordType is set.");
+//promise_test(t => {
+//  let watchOptions = {
+//    mediaType: "text/plain"
+//  }
+//  let datas = createTextRecord(test_url_data);
+//    return navigator.nfc.push({data: [{data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
+//    .then(() => {
+//      return new Promise(resolve => {
+//        navigator.nfc.watch((message) => resolve(message), watchOptions);
+//      }).then((message) => {
+//        for (let record of message.data) {
+//          assert_equals(record.data, datas.data);
+//          assert_equals(record.recordType, datas.recordType);
+//          assert_equals(record.mediaType, datas.mediaType);
+//        }
+//      });
+//    });
+//}, "Test that nfc.watch succeeds when NFCWatchOptions.mediaType is set.");
+//
+//promise_test(t => {
+//  let watchOptions = {
+//    recordType : "text"
+//  }
+//  let datas = createTextRecord(test_url_data);
+//    return navigator.nfc.push({data: [{data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
+//    .then(() => {
+//      return new Promise(resolve => {
+//        navigator.nfc.watch((message) => resolve(message), watchOptions);
+//      }).then((message) => {
+//        for (let record of message.data) {
+//          assert_equals(record.data, datas.data);
+//          assert_equals(record.recordType, datas.recordType);
+//          assert_equals(record.mediaType, datas.mediaType);
+//        }
+//      });
+//    });
+//}, "Test that nfc.watch succeeds when NFCWatchOptions.recordType is set.");
 
 promise_test(t => {
   let watchOptions = {
