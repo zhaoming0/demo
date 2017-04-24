@@ -77,6 +77,8 @@ promise_test(t => {
     mode: "web-nfc-only"
   }
   let push_data = createTextRecord(test_text_data);
+  console.log("123");
+  console.log(push_data)
   return navigator.nfc.push(push_data)
     .then(() => {
       return new Promise(resolve => {
@@ -89,6 +91,6 @@ promise_test(t => {
         }
       })
     })
-}, "Test that nfc.watch success when NFCWatchOptions.mode is set to 'web-nfc-only'.")
+}, "Test that nfc.watch success when NFCWatchOptions.mode is set to 'web-nfc-only'.");
 
 </script>
