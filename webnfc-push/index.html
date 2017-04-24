@@ -79,7 +79,7 @@ promise_test(t => {
   let push_data = createTextRecord(test_text_data);
   console.log("123");
   console.log(push_data)
-  return navigator.nfc.push(push_data)
+    return navigator.nfc.push({data: [{data: push_data.data, recordType: push_data.recordType, mediaType: push_data.mediaType}]})
     .then(() => {
       return new Promise(resolve => {
         navigator.nfc.watch((message) => resolve(message), watchOptions)
