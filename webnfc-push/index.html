@@ -168,9 +168,8 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //    });
 //}, "Test that nfc.watch succeeds when NFCWatchOptions.url is set.");
 
+
 function testWatchOptions(datas, watchOptions, desc) {
-  console.log(watchOptions)
-    console.log("1111")
   promise_test(t => {
     return navigator.nfc.push({data: [ { data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
       .then(() => {
@@ -178,19 +177,45 @@ function testWatchOptions(datas, watchOptions, desc) {
           navigator.nfc.watch((message) => resolve(message), watchOptions);
         }).then((message) => {
           for (let record of message.data) {
-            assert_equals(record.data, datas.data);
             assert_equals(record.recordType, datas.recordType);
             assert_equals(record.mediaType, datas.mediaType);
+            switch (record.recordType) {
+              case "text":
+              case "url":
+                assert_equals(record.data, datas.data);
+                break;
+              case "json":
+                for (let prop in record.data) {
+                  if (record.data[prop] instanceof Array) {
+                    assert_array_equals(record.data[prop], datas.data[prop]);
+                  }else{
+                    assert_equals(record.data[prop], datas.data[prop]);
+                  }
+                }
+                break;
+              case "opaque":
+                for (let i= 0; i<= record.data.byteLength; i++) {
+                  assert_equals(record.data[i], datas.data[i]);
+                }
+                break;
+              default:
+                assert_unreached("Invalid RecordType");
+                break;
+            }
           }
         })
       })
   }, desc)
 }
+
+
 let watchOptions = {
-  recordType : "text",
-  mediaType: "text/plain",
-  url: "",
+  recordType : "json",
+  mediaType : "application/json",
+  url : ""
 }
-testWatchOptions(createTextRecord(test_text_data), watchOptions, "tesxt--------")
-console.log("9999999999999999999999999999")
+testWatchOptions(createJsonRecord(test_json_data), watchOptions, "Test that nfc.watch succeeds when NFCWatchOptions recordType 'json' is set.");
+
+
+
 </script>
