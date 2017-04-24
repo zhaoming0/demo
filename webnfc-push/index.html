@@ -74,14 +74,11 @@ promise_test(t => {
       return new Promise(resolve => {
         navigator.nfc.watch((message) => resolve(message), {url: document.baseURL, recordType: "json"})
       }).then((message) => {
-        for (let i = 0; i< watchOptions.length; i++) {
+        for (let i = 0; i < watchOptions.data.length ; i++) {
           console.log(i)
           console.log(watchOptions.data[i])
           console.log("9090909090909090")
           console.log(message.data[i])
-        }
-        for (let record of message.data){
-          console.log(message.data.length)
         }
       })
     })
