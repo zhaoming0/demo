@@ -49,46 +49,45 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <script>
 
 "use strict";
-function JSONCompart(a,b) {
-  let t;
-  for (let i in a) {
-    t = typeof b[i];
-    if (t == "undefined"){
-      b[i] = a[i]
-    }else if (t=="object" || t == "array") {
-      JSONCompart(a[i], b[i]);
-    }
-  }
-}
+
+//promise_test(t => {
+//  let watchOptions = { 
+//    data: [ 
+//        {recordType: "json", mediaType: "application/json", data: {name: "Benny Jensen", title: "Banker"}},
+//        {recordType: "json", mediaType: "application/json", data: {name: "Zoey Braun", title: "Engineer"}}
+//    ]
+//  }
+//  return navigator.nfc.push(watchOptions)
+//    .then(() => {
+//      return new Promise(resolve => {
+//        navigator.nfc.watch((message) => resolve(message), {url: document.baseURL, recordType: "json"})
+//      }).then((message) => {
+//        for (let i = 0; i < watchOptions.data.length ; i++) {
+//          assert_equals(watchOptions.data[i].mediaType, message.data[i].mediaType);
+//          assert_equals(watchOptions.data[i].recordType, message.data[i].recordType);
+//          assert_equals(watchOptions.data[i].data.name, message.data[i].data.name);
+//          assert_equals(watchOptions.data[i].data.title, message.data[i].data.title);
+//        }
+//      })
+//    })
+//}, "Push and Read JSON 'serialized and deserialized'.");
 
 promise_test(t => {
-  let watchOptions = { 
-    data: [ 
-        {recordType: "json", mediaType: "application/json", data: {name: "Benny Jensen", title: "Banker"}},
-        {recordType: "json", mediaType: "application/json", data: {name: "Zoey Braun", title: "Engineer"}}
-    ]
+  let watchOptions = {
+    mode: "web-nfc-only"
   }
-  console.log(watchOptions.data.length)
-  return navigator.nfc.push(watchOptions)
+  return navigator.nfc.push(test_text_data)
     .then(() => {
       return new Promise(resolve => {
-        navigator.nfc.watch((message) => resolve(message), {url: document.baseURL, recordType: "json"})
+        navigator.nfc.watch((message) => resolve(message), watchOptions)
       }).then((message) => {
-        for (let i = 0; i < watchOptions.data.length ; i++) {
-          assert_equals(watchOptions.data[i].mediaType, message.data[i].mediaType)
-          assert_equals(watchOptions.data[i].recordType, message.data[i].recordType)
-          assert_equals(watchOptions.data[i].data.name, message.data[i].data.name)
-          assert_equals(watchOptions.data[i].data.title, message.data[i].data.title)
-          console.log(message.data[i])
-          console.log("_____________________")
-          console.log(watchOptions.data[i])
+        console.log("9999999")
+        for (let record of message.data) {
+          console.log(record);
+
         }
       })
     })
-}, "Push and Read JSON 'serialized and deserialized'.")
-
-function testNFCWatchOptions(args) {
-
-}
+}, "Test that nfc.watch success when NFCWatchOptions.mode is set to 'web-nfc-only'.")
 
 </script>
