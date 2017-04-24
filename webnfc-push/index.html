@@ -157,6 +157,7 @@ promise_test(t => {
   console.log(datas)
     return navigator.nfc.push({data: [{data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
     .then(() => {
+      console.log("4444")
       return new Promise(resolve => {
         console.log("33333")
         navigator.nfc.watch((message) => resolve(message), watchOptions);
