@@ -169,6 +169,8 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //}, "Test that nfc.watch succeeds when NFCWatchOptions.url is set.");
 
 function testWatchOptions(datas, watchOptions, desc) {
+  console.log(watchOptions)
+    console.log("1111")
   promise_test(t => {
     return navigator.nfc.push({data: [ { data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
       .then(() => {
