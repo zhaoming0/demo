@@ -163,6 +163,9 @@ promise_test(t => {
         navigator.nfc.watch((message) => resolve(message), watchOptions);
         console.log("22222")
       }).then((message) => {
+        console.log("1111");
+        console.log(message)
+        console.log(message.data)
         for (let record of message.data) {
           assert_equals(record.data, datas.data);
           assert_equals(record.recordType, datas.recordType);
