@@ -62,6 +62,9 @@ promise_test(t => {
       return new Promise(resolve => {
         navigator.nfc.watch((message) => resolve(message), {url: document.baseURL, recordType: "json"})
       }).then((message) => {
+        console.log(watchOptions[0])
+        console.log("1111111111111")
+        console.log(message.data);
         let record, options
         for (record of message.data) {
           continue
@@ -69,8 +72,6 @@ promise_test(t => {
         for (options of watchOptions.data) {
           continue
         }
-        console.log(record);
-        console.log(options)
       })
     })
 }, "Push and Read JSON 'serialized and deserialized'.")
