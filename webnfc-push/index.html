@@ -149,24 +149,24 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //    });
 //}, "Test that nfc.watch succeeds when NFCWatchOptions.recordType is set.");
 
-promise_test(t => {
-  let watchOptions = {
-    url: "https://w3c.github.io/*"
-  }
-  let datas = createUrlRecord(test_url_data);
-    return navigator.nfc.push({data: [{data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
-    .then(() => {
-      return new Promise(resolve => {
-        navigator.nfc.watch((message) => resolve(message), watchOptions);
-      }).then((message) => {
-        for (let record of message.data) {
-          assert_equals(record.data, datas.data);
-          assert_equals(record.recordType, datas.recordType);
-          assert_equals(record.mediaType, datas.mediaType);
-        }
-      });
-    });
-}, "Test that nfc.watch succeeds when NFCWatchOptions.url is set.");
+//promise_test(t => {
+//  let watchOptions = {
+//    url: "https://w3c.github.io/*"
+//  }
+//  let datas = createUrlRecord(test_url_data);
+//    return navigator.nfc.push({data: [{data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
+//    .then(() => {
+//      return new Promise(resolve => {
+//        navigator.nfc.watch((message) => resolve(message), watchOptions);
+//      }).then((message) => {
+//        for (let record of message.data) {
+//          assert_equals(record.data, datas.data);
+//          assert_equals(record.recordType, datas.recordType);
+//          assert_equals(record.mediaType, datas.mediaType);
+//        }
+//      });
+//    });
+//}, "Test that nfc.watch succeeds when NFCWatchOptions.url is set.");
 
 function testWatchOptions(datas, watchOptions, desc) {
   promise_test(t => {
@@ -184,4 +184,8 @@ function testWatchOptions(datas, watchOptions, desc) {
       })
   }, desc)
 }
+let watchOptions = {
+  recordType : "text"
+}
+testWatchOptions(createTextRecord(test_text_data), watchOptions, "tesxt--------")
 </script>
