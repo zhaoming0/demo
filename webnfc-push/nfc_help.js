@@ -219,3 +219,4 @@ function testWatchOptions(datas, watchOptions, desc) {
       })
   }, desc)
 }
+console.log("this is nfc_help.js log")
