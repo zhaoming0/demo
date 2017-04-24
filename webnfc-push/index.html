@@ -76,7 +76,7 @@ promise_test(t => {
   let watchOptions = {
     mode: "web-nfc-only"
   }
-let push_data = createTextRecord(test_text_data);
+  let push_data = createTextRecord(test_text_data);
   return navigator.nfc.push(push_data)
     .then(() => {
       return new Promise(resolve => {
@@ -86,7 +86,6 @@ let push_data = createTextRecord(test_text_data);
           assert_equals(record.data, push_data.data);
           assert_equals(record.recordType, push_data.recordType);
           assert_equals(record.mediaType, push_data.mediaType);
-
         }
       })
     })
