@@ -116,7 +116,6 @@ promise_test(t => {
     mediaType: "text/plain"
   }
   let datas = createTextRecord(test_url_data);
-  console.log(datas)
     return navigator.nfc.push({data: [{data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
     .then(() => {
       return new Promise(resolve => {
