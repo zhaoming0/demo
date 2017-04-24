@@ -49,6 +49,17 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <script>
 
 "use strict";
+function JSONCompart(a,b) {
+  let t;
+  for (let i in a) {
+    t = typeof b[i];
+    if (t == "undefined"){
+      b[i] = a[i]
+    }else if (t=="object" || t == "array") {
+      JSONCompart(a[i], b[i]);
+    }
+  }
+}
 
 promise_test(t => {
   let watchOptions = { 
@@ -57,21 +68,17 @@ promise_test(t => {
         {recordType: "json", mediaType: "application/json", data: {name: "Zoey Braun", title: "Engineer"}}
     ]
   }
+  console.log(watchOptions);
+  console.log(watchOptions.data)
+  console.log(watchOptions.data[0])
+  console.log("9999999")
   return navigator.nfc.push(watchOptions)
     .then(() => {
       return new Promise(resolve => {
         navigator.nfc.watch((message) => resolve(message), {url: document.baseURL, recordType: "json"})
       }).then((message) => {
-        console.log(watchOptions[0])
-        console.log("1111111111111")
-        console.log(message.data);
-        let record, options
-        for (record of message.data) {
-          continue
-        }
-        for (options of watchOptions.data) {
-          continue
-        }
+//        JSONCompart(watchOptions.data, message.data)
+        console.log("dddd")
       })
     })
 }, "Push and Read JSON 'serialized and deserialized'.")
