@@ -64,20 +64,13 @@ promise_test(t => {
       }).then((message) => {
         let record, options
         for (record of message.data) {
-          //assert_equals(record.data.title, watchOptions.data.title)
-          //assert_equals(record.data.name, watchOptions.data.name)
-          //assert_equals(record.data.meidaType, watchOptions.data.mediaType)
-          //assert_equals(record.data.recordType, watchOptions.data.recordType)
-          console.log("000")
-          console.log(record)
-          console.log("15151515")
+          continue
         }
         for (options of watchOptions.data) {
-          console.log("1111")
-          console.log(options)
-          console.log("222")
-          console.log(record)
+          continue
         }
+        console.log(record);
+        console.log(options)
       })
     })
 }, "Push and Read JSON 'serialized and deserialized'.")
