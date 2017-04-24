@@ -147,51 +147,38 @@ function testNFCMessage(datas, desc) {
           navigator.nfc.watch((message) => resolve(message), {recordType: datas.recordTypes, mediaType: datas.mediaType});
         }).then((message) => {
           for (let record of message.data) {
+            assert_equals(record.recordType, datas.recordType);
+            assert_equals(record.mediaType, datas.mediaType);
             switch (record.recordType) {
               case "text":
               case "url":
-                assert_equals(record.recordType, datas.recordType);
-                assert_equals(record.mediaType, datas.mediaType);
                 assert_equals(record.data, datas.data);
                 break;
               case "json":
                 for (let prop in record.data) {
                   if (record.data[prop] instanceof Array) {
-                    assert_array_equals(record.data[prop], datas.data[prop])
+                    assert_array_equals(record.data[prop], datas.data[prop]);
                   }else{
-                    assert_equals(record.data[prop], datas.data[prop])
+                    assert_equals(record.data[prop], datas.data[prop]);
                   }
                 }
-                assert_equals(record.recordType, datas.recordType);
-                assert_equals(record.mediaType, datas.mediaType);
                 break;
               case "opaque":
-                if (record.mediaType == "image/png") {
-                  let img = document.createElement("img");
-                  img.src = URL.createObjectURL(new Blob(record.data, record.mediaType));
-                  img.onload = function () {
-                    window.URL.revokeObjectURL(this.src);
-                  };
-                }
-                assert_equals(record.recordType, datas.recordType);
-                assert_equals(record.mediaType, datas.mediaType);
                 for (let i= 0; i<= record.data.byteLength; i++) {
-                  assert_equals(record.data[i], datas.data[i])
+                  assert_equals(record.data[i], datas.data[i]);
                 }
                 break;
               case "empty":
-                assert_equals(record.recordType, datas.recordType);
-                assert_equals(record.mediaType, datas.mediaType);
-                assert_equals(record.data, datas.data);
+                assert_unreached();
                 break;
               default:
                 assert_unreached("Invalid RecordType");
                 break;
             }
           }
-        })
-      })
-  }, desc)
+        });
+      });
+  }, desc);
 }
 
 function testWatchOptions(datas, watchOptions, desc) {
@@ -202,9 +189,31 @@ function testWatchOptions(datas, watchOptions, desc) {
           navigator.nfc.watch((message) => resolve(message), watchOptions);
         }).then((message) => {
           for (let record of message.data) {
-            assert_equals(record.data, datas.data);
             assert_equals(record.recordType, datas.recordType);
             assert_equals(record.mediaType, datas.mediaType);
+            switch (record.recordType) {
+              case "text":
+              case "url":
+                assert_equals(record.data, datas.data);
+                break;
+              case "json":
+                for (let prop in record.data) {
+                  if (record.data[prop] instanceof Array) {
+                    assert_array_equals(record.data[prop], datas.data[prop]);
+                  }else{
+                    assert_equals(record.data[prop], datas.data[prop]);
+                  }
+                }
+                break;
+              case "opaque":
+                for (let i= 0; i<= record.data.byteLength; i++) {
+                  assert_equals(record.data[i], datas.data[i]);
+                }
+                break;
+              default:
+                assert_unreached("Invalid RecordType");
+                break;
+            }
           }
         })
       })
