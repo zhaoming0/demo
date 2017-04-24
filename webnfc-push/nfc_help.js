@@ -193,3 +193,20 @@ function testNFCMessage(datas, desc) {
       })
   }, desc)
 }
+
+function testWatchOptions(datas, watchOptions, desc) {
+  promise_test(t => {
+    return navigator.nfc.push({data: [ { data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
+      .then(() => {
+        return new Promise(resolve => {
+          navigator.nfc.watch((message) => resolve(message), watchOptions);
+        }).then((message) => {
+          for (let record of message.data) {
+            assert_equals(record.data, datas.data);
+            assert_equals(record.recordType, datas.recordType);
+            assert_equals(record.mediaType, datas.mediaType);
+          }
+        })
+      })
+  }, desc)
+}
