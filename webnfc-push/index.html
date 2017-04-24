@@ -218,4 +218,25 @@ testWatchOptions(createJsonRecord(test_json_data), watchOptions, "Test that nfc.
 
 
 
+
+let watchOptions = {
+  recordType : "opaque",
+  mediaType : "application/octet-stream",
+  url : ""
+}
+testWatchOptions(createOpaqueRecord(test_buffer_data), watchOptions, "Test that nfc.watch succeeds when NFCWatchOptions recordType 'opaque' is set.");
+
+let watchOptions = {
+  recordType : "text",
+  mediaType : "text/plain",
+  url : ""
+}
+testWatchOptions(createTextRecord(test_text_data), watchOptions, "Test that nfc.watch succeeds when NFCWatchOptions recordType 'text' is set.");
+
+let watchOptions = {
+  recordType : "url",
+  mediaType : "text/plain",
+  url : "https://w3c.github.io/*"
+}
+testWatchOptions(createUrlRecord(test_url_data), watchOptions, "Test that nfc.watch succeeds when NFCWatchOptions recordType 'url' is set.");
 </script>
