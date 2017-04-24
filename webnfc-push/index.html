@@ -113,9 +113,9 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 promise_test(t => {
   let watchOptions = {
-    mode: "any"
+    mediaType: "text/plain"
   }
-  let datas = createTextRecord(test_text_data);
+  let datas = createTextRecord(test_url_data);
   console.log(datas)
     return navigator.nfc.push({data: [{data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
     .then(() => {
