@@ -153,8 +153,8 @@ promise_test(t => {
   let watchOptions = {
     url: "io"
   }
-  let datas = createTextRecord(test_url_data);
-  console.log(datas)
+  let datas = createUrlRecord(test_url_data);
+  createUrlRecordconsole.log(datas)
     return navigator.nfc.push({data: [{data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
     .then(() => {
       return new Promise(resolve => {
