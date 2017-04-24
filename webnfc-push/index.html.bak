@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2017 Intel Corporation.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+* Redistributions of works must retain the original copyright notice, this list
+  of conditions and the following disclaimer.
+* Redistributions in binary form must reproduce the original copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+* Neither the name of Intel Corporation nor the names of its contributors
+  may be used to endorse or promote products derived from this work without
+  specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY INTEL CORPORATION "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL INTEL CORPORATION BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
+OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+<meta charset=utf-8>
+<title>Web NFC Test: push NFCMessage with 'text' recordType</title>
+<link rel="author" title="Intel" href="http://www.intel.com"/>
+<link rel="author" title="Zhao Ming" href="mailto:mingx.zhao@intel.com"/>
+<link rel="help" href="https://w3c.github.io/web-nfc/#the-nfc-interface"/>
+<script src="./resources/testharness.js"></script>
+<script src="./resources/testharnessreport.js"></script>
+<script src="./nfc_help.js"></script>
+<meta name="flags" content="interact">
+<meta name="timeout" content="long">
+
+<div id="log"></div>
+
+<h2>Precondition</h2>
+<ol>
+  <li>
+   arraybuffer 
+  </li>
+</ol>
+
+
+<script>
+
+"use strict";
+
+//setup({ explicit_timeout: true });
+//function testNFCMessage(datas, desc) {
+//  console.log("Debug -1")
+//  promise_test(t => {
+//    console.log("debug -1.5")
+//    console.log({data: [{data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
+//    return navigator.nfc.push({data: [{data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
+//      .then(() => {
+//        console.log("debug - 1.6")
+//        return new Promise(resolve => {
+//          console.log("Debug -2")
+//          navigator.nfc.watch((message) => resolve(message), {recordType: datas.recordTypes, mediaType: datas.mediaType});
+//        }).then((message) => {
+//          for (let record of message.data) {
+//            console.log("Debug -3 ")
+//            switch (record.recordType) {
+//              case "text":
+//              case "url":
+//                assert_equals(record.recordType, datas.recordType);
+//                assert_equals(record.mediaType, datas.mediaType);
+//                assert_equals(record.data, datas.data);
+//                break;
+//              case "json":
+//                for (let prop in record.data) {
+//                  if (record.data[prop] instanceof Array) {
+//                    assert_array_equals(record.data[prop], datas.data[prop])
+//                  }else{
+//                    assert_equals(record.data[prop], datas.data[prop])
+//                  }
+//                }
+//                assert_equals(record.recordType, datas.recordType);
+//                assert_equals(record.mediaType, datas.mediaType);
+//                break;
+//              case "opaque":
+//                if (record.mediaType == "image/png") {
+//                  let img = document.createElement("img");
+//                  img.src = URL.createObjectURL(new Blob(record.data, record.mediaType));
+//                  img.onload = function () {
+//                    window.URL.revokeObjectURL(this.src);
+//                  };
+//                }
+//                assert_equals(record.recordType, datas.recordType);
+//                assert_equals(record.mediaType, datas.mediaType);
+//                for (let i= 0; i<= record.data.byteLength; i++) {
+//                  assert_equals(record.data[i], datas.data[i])
+//                }
+//                break;
+//              case "empty":
+//                assert_equals(record.recordType, datas.recordType);
+//                assert_equals(record.mediaType, datas.mediaType);
+//                assert_equals(record.data, datas.data);
+//                break;
+//            }
+//          }
+//        })
+//      })
+//  }, desc)
+//}
+
+
+//promise_test(t => {
+//  return navigator.nfc.push(test_text_data, {target: "tag"})
+//    .then(() => {
+//      return new Promise(resolve => {
+//        navigator.nfc.watch(message => resolve(message))
+//      }).then((message) => {
+//        for (let record of message.data) {
+//          console.log("++++++++++++++++")
+//          console.log(record.recordType)
+//          console.log(record.mediaType)
+//          console.log(record.data)
+//          console.log("----------------")
+//          if (record.recordType) {
+//            console.log(record.data)
+//              console.log("9999999")
+//            //assert_equals(record.data, test_text_data);
+//          }
+//        }
+//      })
+//    })
+//}, "test -------");
+
+//promise_test(t => {
+//  return navigator.nfc.watch(reader, {url : "*github*"})
+//  function reader(message) {
+//    console.log("source: " + message.url);
+//    console.log("game state: " + message.data);
+//    
+//    navigator.nfc.push(createUrlRecord(test_url_data)).then(() => {
+//      console.log("progress stored!");
+//    }).catch((error) => {
+//      console.log("failure , please try again")
+//    })
+//  }
+//})
+
+//console.log("2222222")
+//console.log(createNFCWatchOptions(test_message_origin, "json", "application/json", "any"))
+//
+//promise_test(t => {
+//  return navigator.nfc.watch(createUrlRecord(test_url_data))
+//    .then((data) => {
+//      console.log("999999");
+//    })
+//}, "99999999")
+
+console.log("-=-=-=-=-=")
+console.log(createJsonRecord(test_json_data))
+console.log("-=-=-=-=-=")
+
+promise_test(t => {
+  return navigator.nfc.push({ data: [ { recordType: "json", mediaType: "application/json", data: {name: "Benny Jensen", title: "Banker"}},{recordType: "json", mediaType: "application/json", data: { name: "Zoey Braun", title: "Engineer"}}]})
+    .then(() => {
+      return new Promise(resolve => {
+        navigator.nfc.watch((message) => resolve(message), {url: document.baseURL, recordType: "json"})
+      }).then((message) => {
+        for (let record of message.data) {
+          let article = /[aeio]/.test(record.data.title) ? "an" : "a";
+          console.log(article);
+          console.log("00000000000");
+          console.log(`$(record.data.name) is $(article) $(record.data.title)`);
+          console.log("123456789")
+          console.log(record.data.title)
+          console.log(record.data.name)
+        }
+      })
+    })
+}, "99999999999999999999999999999999----------------------------------999999999999999999999999999999999")
+
+function testNFCWatchOptions(args) {
+
+}
+
+</script>
