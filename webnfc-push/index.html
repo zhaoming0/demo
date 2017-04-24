@@ -76,14 +76,14 @@ promise_test(t => {
   let watchOptions = {
     mode: "web-nfc-only"
   }
+  console.log(createTextRecord(test_text_data))
   return navigator.nfc.push(test_text_data)
     .then(() => {
       return new Promise(resolve => {
         navigator.nfc.watch((message) => resolve(message), watchOptions)
       }).then((message) => {
-        console.log("9999999")
         for (let record of message.data) {
-          console.log(record);
+          assert_equals(record.data, test_text_data);
 
         }
       })
