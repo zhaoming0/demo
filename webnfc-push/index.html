@@ -68,31 +68,21 @@ promise_test(t => {
         {recordType: "json", mediaType: "application/json", data: {name: "Zoey Braun", title: "Engineer"}}
     ]
   }
-  console.log(watchOptions);
   console.log(watchOptions.data.length)
-  console.log(watchOptions.data)
-  console.log(watchOptions.data[0])
-  console.log("9999999")
   return navigator.nfc.push(watchOptions)
     .then(() => {
       return new Promise(resolve => {
         navigator.nfc.watch((message) => resolve(message), {url: document.baseURL, recordType: "json"})
       }).then((message) => {
-        for (let record of message.data){
-          console.log(record)
-          console.log("123")
-          console.log(record[0])
-          console.log("8888888888888888888888")
-          console.log(message.data)
-          console.log(message.data.length)
-          console.log("456")
-          console.log(message.data[0])
-          console.log("789")
-          console.log(message)
-          console.log("777777777777777777777")
-          console.log(message[0])
+        for (let i = 0; i< watchOptions.length; i++) {
+          console.log(i)
+          console.log(watchOptions.data[i])
+          console.log("9090909090909090")
+          console.log(message.data[i])
         }
-        console.log("dddd")
+        for (let record of message.data){
+          console.log(message.data.length)
+        }
       })
     })
 }, "Push and Read JSON 'serialized and deserialized'.")
