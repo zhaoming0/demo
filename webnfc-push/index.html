@@ -151,11 +151,11 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 promise_test(t => {
   let watchOptions = {
-    url: "https://w3c.github.io/web-nfc"
+    url: "*/w3c.github.io/*"
   }
   let datas = createUrlRecord(test_url_data);
   console.log(datas)
-    return navigator.nfc.push({data: [{data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
+    return navigator.nfc.push({data: [{data: datas.data, recordType: "json", mediaType: "application/*+json"}]})
     .then(() => {
       console.log("4444")
       return new Promise(resolve => {
