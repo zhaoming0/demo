@@ -62,9 +62,8 @@ promise_test(t => {
       return new Promise(resolve => {
         navigator.nfc.watch((message) => resolve(message), {url: document.baseURL, recordType: "json"})
       }).then((message) => {
-        console.log(watchOptions.length)
-        console.log("999999")
-        for (let record of message.data) {
+        let record, options
+        for (record of message.data) {
           //assert_equals(record.data.title, watchOptions.data.title)
           //assert_equals(record.data.name, watchOptions.data.name)
           //assert_equals(record.data.meidaType, watchOptions.data.mediaType)
@@ -73,7 +72,7 @@ promise_test(t => {
           console.log(record)
           console.log("15151515")
         }
-        for (let options of watchOptions.data) {
+        for (options of watchOptions.data) {
           console.log("1111")
           console.log(options)
           console.log("222")
