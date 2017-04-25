@@ -196,10 +196,10 @@ function testWatchOptions(datas, desc, watchOptions) {
         }).then((message) => {
           for (let record of message.data) {
             assert_equals(record.recordType, datas.recordType);
-            console.log(record.recordType)
+            console.log(record.recordType);
             console.log(datas.recordType);
-            console.log("+++++++++++++++++++++++++++++++++++++")
-            console.log(record.mediaType)
+            console.log("+++++++++++++++++++++++++++++++++++++");
+            console.log(record.mediaType);
             console.log(datas.mediaType);
             assert_equals(record.mediaType, datas.mediaType);
             switch (record.recordType) {
