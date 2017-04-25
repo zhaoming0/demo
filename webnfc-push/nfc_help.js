@@ -139,51 +139,51 @@ function createUrlRecord(url) {
   return createRecord("url", "text/plain", url);
 }
 
-function testNFCMessage(datas, desc) {
-  promise_test(t => {
-    return navigator.nfc.push({data: [{data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
-      .then(() => {
-        return new Promise(resolve => {
-          navigator.nfc.watch((message) => resolve(message), {recordType: datas.recordTypes, mediaType: datas.mediaType});
-        }).then((message) => {
-          for (let record of message.data) {
-            assert_equals(record.recordType, datas.recordType);
-            assert_equals(record.mediaType, datas.mediaType);
-            switch (record.recordType) {
-              case "text":
-              case "url":
-                assert_equals(record.data, datas.data);
-                break;
-              case "json":
-                for (let prop in record.data) {
-                  if (record.data[prop] instanceof Array) {
-                    assert_array_equals(record.data[prop], datas.data[prop]);
-                  }else{
-                    assert_equals(record.data[prop], datas.data[prop]);
-                  }
-                }
-                break;
-              case "opaque":
-                for (let i= 0; i<= record.data.byteLength; i++) {
-                  assert_equals(record.data[i], datas.data[i]);
-                }
-                break;
-              case "empty":
-                assert_unreached();
-                break;
-              default:
-                assert_unreached("Invalid RecordType");
-                break;
-            }
-          }
-        });
-      });
-  }, desc);
-}
+//function testNFCMessage(pushOptions, desc) {
+//  promise_test(t => {
+//    return navigator.nfc.push({data: [{data: pushOptions.data, recordType: pushOptions.recordType, mediaType: pushOptions.mediaType}]})
+//      .then(() => {
+//        return new Promise(resolve => {
+//          navigator.nfc.watch((message) => resolve(message), {recordType: pushOptions.recordTypes, mediaType: pushOptions.mediaType});
+//        }).then((message) => {
+//          for (let record of message.data) {
+//            assert_equals(record.recordType, pushOptions.recordType);
+//            assert_equals(record.mediaType, pushOptions.mediaType);
+//            switch (record.recordType) {
+//              case "text":
+//              case "url":
+//                assert_equals(record.data, pushOptions.data);
+//                break;
+//              case "json":
+//                for (let prop in record.data) {
+//                  if (record.data[prop] instanceof Array) {
+//                    assert_array_equals(record.data[prop], pushOptions.data[prop]);
+//                  }else{
+//                    assert_equals(record.data[prop], pushOptions.data[prop]);
+//                  }
+//                }
+//                break;
+//              case "opaque":
+//                for (let i= 0; i<= record.data.byteLength; i++) {
+//                  assert_equals(record.data[i], pushOptions.data[i]);
+//                }
+//                break;
+//              case "empty":
+//                assert_unreached();
+//                break;
+//              default:
+//                assert_unreached("Invalid RecordType");
+//                break;
+//            }
+//          }
+//        });
+//      });
+//  }, desc);
+//}
 
-function testWatchOptions(datas, desc, watchOptions) {
+function testNFCOptions(pushOptions, desc, watchOptions) {
   promise_test(t => {
-    return navigator.nfc.push({data: [ { data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
+    return navigator.nfc.push({data: [ { data: pushOptions.data, recordType: pushOptions.recordType, mediaType: pushOptions.mediaType}]})
       .then(() => {
         return new Promise(resolve => {
           if (watchOptions !== null && watchOptions !== undefined) {
@@ -195,33 +195,33 @@ function testWatchOptions(datas, desc, watchOptions) {
           }
         }).then((message) => {
           for (let record of message.data) {
-            assert_equals(record.recordType, datas.recordType);
+            assert_equals(record.recordType, pushOptions.recordType);
             console.log(record.recordType);
-            console.log(datas.recordType);
+            console.log(pushOptions.recordType);
             console.log("+++++++++++++++++++++++++++++++++++++");
             console.log(record.mediaType);
-            console.log(datas.mediaType);
-            assert_equals(record.mediaType, datas.mediaType);
+            console.log(pushOptions.mediaType);
+            assert_equals(record.mediaType, pushOptions.mediaType);
             switch (record.recordType) {
               case "text":
               case "url":
-                assert_equals(record.data, datas.data);
+                assert_equals(record.data, pushOptions.data);
                 break;
               case "json":
                 for (let prop in record.data) {
                   if (record.data[prop] instanceof Array) {
-                    assert_array_equals(record.data[prop], datas.data[prop]);
+                    assert_array_equals(record.data[prop], pushOptions.data[prop]);
                   }else{
-                    assert_equals(record.data[prop], datas.data[prop]);
+                    assert_equals(record.data[prop], pushOptions.data[prop]);
                     console.log(record.data[prop]);
-                    console.log(datas.data[prop]);
+                    console.log(pushOptions.data[prop]);
                     console.log("--------------------");
                   }
                 }
                 break;
               case "opaque":
                 for (let i= 0; i<= record.data.byteLength; i++) {
-                  assert_equals(record.data[i], datas.data[i]);
+                  assert_equals(record.data[i], pushOptions.data[i]);
                 }
                 break;
               default:
