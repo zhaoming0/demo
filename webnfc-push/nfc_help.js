@@ -181,12 +181,18 @@ function testNFCMessage(datas, desc) {
   }, desc);
 }
 
-function testWatchOptions(datas, watchOptions, desc) {
+function testWatchOptions(datas, desc, watchOptions) {
   promise_test(t => {
     return navigator.nfc.push({data: [ { data: datas.data, recordType: datas.recordType, mediaType: datas.mediaType}]})
       .then(() => {
         return new Promise(resolve => {
-          navigator.nfc.watch((message) => resolve(message), watchOptions);
+          if (watchOptions !== null && watchOptions !== undefined) {
+            console.log("log info if---->")
+            navigator.nfc.watch((message) => resolve(message), watchOptions);
+          }else{
+            console.log("log info else---->")
+            navigator.nfc.watch((message) => resolve(message));
+          }
         }).then((message) => {
           for (let record of message.data) {
             assert_equals(record.recordType, datas.recordType);
@@ -219,4 +225,9 @@ function testWatchOptions(datas, watchOptions, desc) {
       })
   }, desc)
 }
-console.log("this is nfc_help.js log")
+function testCase(arg1,arg2,arg3) {
+  return new Promise(resolve => {
+    if (arg3 !== null && arg3 !== undefined) {
+    }
+  })
+}
