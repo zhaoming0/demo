@@ -49,22 +49,22 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 setup({ explicit_timeout: true });
 
 promise_test(t => {
-  let watchOptions = { 
+  let pushOptions = { 
     data: [ 
         {recordType: "json", mediaType: "application/json", data: {name: "Benny Jensen", title: "Banker"}},
         {recordType: "json", mediaType: "application/json", data: {name: "Zoey Braun", title: "Engineer"}}
     ]
   }
-  return navigator.nfc.push(watchOptions)
+  return navigator.nfc.push(pushOptions)
     .then(() => {
       return new Promise(resolve => {
         navigator.nfc.watch((message) => resolve(message), {url: document.baseURL, recordType: "json"})
       }).then((message) => {
-        for (let i = 0; i < watchOptions.data.length ; i++) {
-          assert_equals(watchOptions.data[i].mediaType, message.data[i].mediaType);
-          assert_equals(watchOptions.data[i].recordType, message.data[i].recordType);
-          assert_equals(watchOptions.data[i].data.name, message.data[i].data.name);
-          assert_equals(watchOptions.data[i].data.title, message.data[i].data.title);
+        for (let i = 0; i < pushOptions.data.length ; i++) {
+          assert_equals(pushOptions.data[i].mediaType, message.data[i].mediaType);
+          assert_equals(pushOptions.data[i].recordType, message.data[i].recordType);
+          assert_equals(pushOptions.data[i].data.name, message.data[i].data.name);
+          assert_equals(pushOptions.data[i].data.title, message.data[i].data.title);
         }
       })
     })
