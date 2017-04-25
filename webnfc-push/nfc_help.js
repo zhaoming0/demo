@@ -187,10 +187,10 @@ function testWatchOptions(datas, desc, watchOptions) {
       .then(() => {
         return new Promise(resolve => {
           if (watchOptions !== null && watchOptions !== undefined) {
-            console.log("log info if---->")
+            console.log("---------------if watchoptions exists-----------")
             navigator.nfc.watch((message) => resolve(message), watchOptions);
           }else{
-            console.log("log info else---->")
+            console.log("---------------if watchoptions null-----------")
             navigator.nfc.watch((message) => resolve(message));
           }
         }).then((message) => {
@@ -224,10 +224,4 @@ function testWatchOptions(datas, desc, watchOptions) {
         })
       })
   }, desc)
-}
-function testCase(arg1,arg2,arg3) {
-  return new Promise(resolve => {
-    if (arg3 !== null && arg3 !== undefined) {
-    }
-  })
 }

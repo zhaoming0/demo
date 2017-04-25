@@ -78,39 +78,39 @@ const invalid_messages =
   ];
 
 promise_test(t => {
-  return promise_rejects(t, "TypeMismatchError", navigator.nfc.push(undefined));
-}, "Test that passing undefined to nfc.push would raise TypeMismatchError.");
+  return promise_rejects(t, "SyntaxError", navigator.nfc.push(undefined));
+}, "Test that passing undefined to nfc.push would raise SyntaxError.");
 
- promise_test(t => {
-   let promises = [];
-   invalid_messages.forEach(message => {
-     promises.push(
-       promise_rejects(t, "SyntaxError", navigator.nfc.push(message)));
-   });
-   return Promise.all(promises);
- }, "Test that promise is rejected with SyntaxError if NFCMessage is invalid.");
- 
- promise_test(t => {
-   return promise_rejects(t, {name: "TypeError"}, navigator.nfc.push(test_text_data, {target: "invalid"}));
- }, "Test that passing invaild target to nfc.push would raise TypeError.");
- 
- promise_test(t => {
-   return promise_rejects(t, {name: "TypeError"}, navigator.nfc.cancelPush("invalid"));
- }, "Test that passing invaild target to nfc.cancelPush would raise TypeError.");
- 
- promise_test(t => {
-   let promise = navigator.nfc.push(test_text_data);
-   navigator.nfc.cancelPush();
-   return promise_rejects(t, 'AbortError', promise);
- }, "nfc.cancelPush should reject pending promise with AbortError.");
- 
- promise_test(t => {
-   return promise_rejects(t, "NotSupportedError", navigator.nfc.push(new ArrayBuffer(32 * 1024 + 1)));
- }, "Reject promise with NotSupportedError if NFC message size exceeds 32KB.");
- 
- promise_test(t => {
-   return promise_rejects(t, "SyntaxError", navigator.nfc.push({data: [{data: null, mediaType: "", recordType: "empty"}]}))
- }, "Test that nfc.push fails with 'SyntaxError' when message is NFCMessage and recordType is 'empty'.");
+promise_test(t => {
+  let promises = [];
+  invalid_messages.forEach(message => {
+    promises.push(
+      promise_rejects(t, "SyntaxError", navigator.nfc.push(message)));
+  });
+  return Promise.all(promises);
+}, "Test that promise is rejected with SyntaxError if NFCMessage is invalid.");
+
+promise_test(t => {
+  return promise_rejects(t, "SyntaxError", navigator.nfc.push({data: [{data: null, mediaType: "", recordType: "empty"}]}))
+}, "Test that nfc.push fails with 'SyntaxError' when message is NFCMessage and recordType is 'empty'.");
+
+promise_test(t => {
+  return promise_rejects(t, new TypeError(), navigator.nfc.push(test_text_data, {target: "invalid"}));
+}, "Test that passing invaild target to nfc.push would raise TypeError.");
+
+promise_test(t => {
+  return promise_rejects(t, new TypeError(), navigator.nfc.cancelPush("invalid"));
+}, "Test that passing invaild target to nfc.cancelPush would raise TypeError.");
+
+promise_test(t => {
+  let promise = navigator.nfc.push(test_text_data);
+  navigator.nfc.cancelPush();
+  return promise_rejects(t, 'AbortError', promise);
+}, "nfc.cancelPush should reject pending promise with AbortError.");
+
+promise_test(t => {
+  return promise_rejects(t, "NotSupportedError", navigator.nfc.push(new ArrayBuffer(32 * 1024 + 1)));
+}, "Reject promise with NotSupportedError if NFC message size exceeds 32KB.");
 
 promise_test(t => {
   return promise_rejects(t, "SyntaxError", navigator.nfc.push(test_text_data, { timeout: "invalid"}));
@@ -119,7 +119,5 @@ promise_test(t => {
 promise_test(t => {
   return promise_rejects(t, "TimeoutError", navigator.nfc.push(test_text_data, { timeout: 1 }));
 }, "nfc.push should fail with TimeoutError when timer expires.");
-
-
 
 </script>
