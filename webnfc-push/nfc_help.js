@@ -213,6 +213,9 @@ function testWatchOptions(datas, desc, watchOptions) {
                     assert_array_equals(record.data[prop], datas.data[prop]);
                   }else{
                     assert_equals(record.data[prop], datas.data[prop]);
+                    console.log(record.data[prop]);
+                    console.log(datas.data[prop]);
+                    console.log("--------------------")
                   }
                 }
                 break;
