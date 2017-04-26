@@ -110,27 +110,6 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //}
 
 
-//promise_test(t => {
-//  return navigator.nfc.push(test_text_data, {target: "tag"})
-//    .then(() => {
-//      return new Promise(resolve => {
-//        navigator.nfc.watch(message => resolve(message))
-//      }).then((message) => {
-//        for (let record of message.data) {
-//          console.log("++++++++++++++++")
-//          console.log(record.recordType)
-//          console.log(record.mediaType)
-//          console.log(record.data)
-//          console.log("----------------")
-//          if (record.recordType) {
-//            console.log(record.data)
-//              console.log("9999999")
-//            //assert_equals(record.data, test_text_data);
-//          }
-//        }
-//      })
-//    })
-//}, "test -------");
 
 //promise_test(t => {
 //  return navigator.nfc.watch(reader, {url : "*github*"})
@@ -156,31 +135,27 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //    })
 //}, "99999999")
 
-console.log("-=-=-=-=-=")
-console.log(createJsonRecord(test_json_data))
-console.log("-=-=-=-=-=")
-
 promise_test(t => {
-  return navigator.nfc.push({ data: [ { recordType: "json", mediaType: "application/json", data: {name: "Benny Jensen", title: "Banker"}},{recordType: "json", mediaType: "application/json", data: { name: "Zoey Braun", title: "Engineer"}}]})
+  return navigator.nfc.push(test_text_data, {target: "tag"})
     .then(() => {
       return new Promise(resolve => {
-        navigator.nfc.watch((message) => resolve(message), {url: document.baseURL, recordType: "json"})
+        navigator.nfc.watch(message => resolve(message),{null})
       }).then((message) => {
         for (let record of message.data) {
-          let article = /[aeio]/.test(record.data.title) ? "an" : "a";
-          console.log(article);
-          console.log("00000000000");
-          console.log(`$(record.data.name) is $(article) $(record.data.title)`);
-          console.log("123456789")
-          console.log(record.data.title)
-          console.log(record.data.name)
+          console.log("++++++++++++++++")
+          console.log(record.recordType)
+          console.log(record.mediaType)
+          console.log(record.data)
+          console.log("----------------")
+          if (record.recordType) {
+            console.log(record.data)
+              console.log("9999999")
+            //assert_equals(record.data, test_text_data);
+          }
         }
       })
     })
-}, "99999999999999999999999999999999----------------------------------999999999999999999999999999999999")
+}, "test -------");
 
-function testNFCWatchOptions(args) {
-
-}
 
 </script>
