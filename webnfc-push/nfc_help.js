@@ -139,89 +139,37 @@ function createUrlRecord(url) {
   return createRecord("url", "text/plain", url);
 }
 
-//function testNFCMessage(pushOptions, desc) {
-//  promise_test(t => {
-//    return navigator.nfc.push({data: [{data: pushOptions.data, recordType: pushOptions.recordType, mediaType: pushOptions.mediaType}]})
-//      .then(() => {
-//        return new Promise(resolve => {
-//          navigator.nfc.watch((message) => resolve(message), {recordType: pushOptions.recordTypes, mediaType: pushOptions.mediaType});
-//        }).then((message) => {
-//          for (let record of message.data) {
-//            assert_equals(record.recordType, pushOptions.recordType);
-//            assert_equals(record.mediaType, pushOptions.mediaType);
-//            switch (record.recordType) {
-//              case "text":
-//              case "url":
-//                assert_equals(record.data, pushOptions.data);
-//                break;
-//              case "json":
-//                for (let prop in record.data) {
-//                  if (record.data[prop] instanceof Array) {
-//                    assert_array_equals(record.data[prop], pushOptions.data[prop]);
-//                  }else{
-//                    assert_equals(record.data[prop], pushOptions.data[prop]);
-//                  }
-//                }
-//                break;
-//              case "opaque":
-//                for (let i= 0; i<= record.data.byteLength; i++) {
-//                  assert_equals(record.data[i], pushOptions.data[i]);
-//                }
-//                break;
-//              case "empty":
-//                assert_unreached();
-//                break;
-//              default:
-//                assert_unreached("Invalid RecordType");
-//                break;
-//            }
-//          }
-//        });
-//      });
-//  }, desc);
-//}
-
-function testNFCOptions(pushOptions, desc, watchOptions) {
+function testNFCMessage(pushMessage, desc, watchOptions) {
   promise_test(t => {
-    return navigator.nfc.push({data: [ { data: pushOptions.data, recordType: pushOptions.recordType, mediaType: pushOptions.mediaType}]})
+    return navigator.nfc.push({data:[{data: pushMessage.data, recordType: pushMessage.recordType, mediaType: pushMessage.mediaType}]})
       .then(() => {
         return new Promise(resolve => {
           if (watchOptions !== null && watchOptions !== undefined) {
-            console.log("---------------if watchoptions exists-----------")
             navigator.nfc.watch((message) => resolve(message), watchOptions);
-          }else{
-            console.log("---------------if watchoptions null-----------")
+          } else {
             navigator.nfc.watch((message) => resolve(message));
           }
         }).then((message) => {
           for (let record of message.data) {
-            assert_equals(record.recordType, pushOptions.recordType);
-            console.log(record.recordType);
-            console.log(pushOptions.recordType);
-            console.log("+++++++++++++++++++++++++++++++++++++");
-            console.log(record.mediaType);
-            console.log(pushOptions.mediaType);
-            assert_equals(record.mediaType, pushOptions.mediaType);
+            assert_equals(record.recordType, pushMessage.recordType);
+            assert_equals(record.mediaType, pushMessage.mediaType);
             switch (record.recordType) {
               case "text":
               case "url":
-                assert_equals(record.data, pushOptions.data);
+                assert_equals(record.data, pushMessage.data);
                 break;
               case "json":
                 for (let prop in record.data) {
                   if (record.data[prop] instanceof Array) {
-                    assert_array_equals(record.data[prop], pushOptions.data[prop]);
-                  }else{
-                    assert_equals(record.data[prop], pushOptions.data[prop]);
-                    console.log(record.data[prop]);
-                    console.log(pushOptions.data[prop]);
-                    console.log("--------------------");
+                    assert_array_equals(record.data[prop], pushMessage.data[prop]);
+                  } else {
+                    assert_equals(record.data[prop], pushMessage.data[prop]);
                   }
                 }
                 break;
               case "opaque":
                 for (let i= 0; i<= record.data.byteLength; i++) {
-                  assert_equals(record.data[i], pushOptions.data[i]);
+                  assert_equals(record.data[i], pushMessage.data[i]);
                 }
                 break;
               default:
@@ -229,7 +177,7 @@ function testNFCOptions(pushOptions, desc, watchOptions) {
                 break;
             }
           }
-        })
-      })
-  }, desc)
+        });
+      });
+  }, desc);
 }
