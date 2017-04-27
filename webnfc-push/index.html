@@ -165,7 +165,7 @@ let watchOptions= {
 //}, "test -------");
 
 async_test(t => {
-  assert_throws("TypeError", navigator.nfc.watch(noop, watchOptions));
+  assert_throws([name: "TypeError"], navigator.nfc.watch(noop, watchOptions));
   t.done();
 }, "aaa-----aaa")
 
