@@ -165,7 +165,7 @@ let watchOptions= {
 //}, "test -------");
 
 promise_test(t => {
-  return promise_rejects(t, new TypeError(), navigator.nfc.watch(noop, watchOptions));
+  return promise_rejects(t, new TypeError(), navigator.nfc.watch(noop, {mode: "invalid"}));
 }, "bbbb-----bbbbbb")
 
 </script>
