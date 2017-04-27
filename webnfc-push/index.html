@@ -166,6 +166,6 @@ let watchOptions= {
 
 promise_test(t => {
   return promise_rejects(t, new TypeError(), navigator.nfc.watch(noop, {url: 123}));
-}, "bbbb-----bbbbbb")
+}, "Test that nfc watchoptions 'url' invalid type will throws TypeError.")
 
 </script>
