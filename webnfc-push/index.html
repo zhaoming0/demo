@@ -173,5 +173,11 @@ let watchOptions= {
 // }, "Test that nfc watchoptions 'recordType' invalid value will throws TypeError.")
 promise_test(t => {
   return promise_rejects(t, new TypeError(), navigator.nfc.watch(noop, {mediaType: null}))
-}, "Test that nfc watchoptions 'recordType' invalid value will throws TypeError.")
+}, "Test that nfc watchoptions 'mediaType' invalid value will throws TypeError.")
+
+let watchOptions = {
+  recordType : "url",
+  mediaType : "text/plain",
+}
+testNFCMessage(createUrlRecord(test_url_data), "Test that nfc.watch succeeds when NFCWatchOptions recordType is set to 'url'.", watchOptions);
 </script>
