@@ -135,9 +135,11 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //    })
 //}, "99999999")
 
-let watchOptions=null
+let watchOptions= {
+  mode: invalid,
+}
 promise_test(t => {
-  return navigator.nfc.push(test_text_data, {target: "tag"})
+  return navigator.nfc.push(test_text_data)
     .then(() => {
       return new Promise(resolve => {
         navigator.nfc.watch(message => resolve(message),watchOptions)
