@@ -164,9 +164,8 @@ let watchOptions= {
 //    })
 //}, "test -------");
 
-async_test(t => {
-  assert_throws(new TypeError(), navigator.nfc.watch(noop, watchOptions));
-  t.done();
-}, "aaa-----aaa")
+promise_test(t => {
+  return assert_throws(new TypeError(), navigator.nfc.watch(noop, watchOptions));
+}, "bbbb-----bbbbbb")
 
 </script>
