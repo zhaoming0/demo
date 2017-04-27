@@ -157,6 +157,9 @@ promise_test(t => {
           }
         }
       })
+    }).catch((e) => {
+      console.log("this is catch error");
+      console.log(e);
     })
 }, "test -------");
 
