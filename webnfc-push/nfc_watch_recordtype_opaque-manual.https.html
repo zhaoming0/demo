@@ -53,6 +53,6 @@ let watchOptions = {
   mediaType : "application/octet-stream",
   url : ""
 }
-testNFCOptions(createOpaqueRecord(test_buffer_data), "when NFCWatchOptions recordType is set to 'opaque'.", watchOptions);
+testNFCMessage(createOpaqueRecord(test_buffer_data), "Test that nfc.watch succeeds when NFCWatchOptions recordType is set to 'opaque'.", watchOptions);
 
 </script>
