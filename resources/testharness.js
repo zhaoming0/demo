@@ -157,33 +157,14 @@ policies and contribution forms [3].
             var w = self;
             var i = 0;
             var so;
-            var origins = location.ancestorOrigins;
             while (w != w.parent) {
                 w = w.parent;
-                // In WebKit, calls to parent windows' properties that aren't on the same
-                // origin cause an error message to be displayed in the error console but
-                // don't throw an exception. This is a deviation from the current HTML5
-                // spec. See: https://bugs.webkit.org/show_bug.cgi?id=43504
-                // The problem with WebKit's behavior is that it pollutes the error console
-                // with error messages that can't be caught.
-                //
-                // This issue can be mitigated by relying on the (for now) proprietary
-                // `location.ancestorOrigins` property which returns an ordered list of
-                // the origins of enclosing windows. See:
-                // http://trac.webkit.org/changeset/113945.
-                if (origins) {
-                    so = (location.origin == origins[i]);
-                } else {
-                    so = is_same_origin(w);
-                }
+                so = is_same_origin(w);
                 cache.push([w, so]);
                 i++;
             }
             w = window.opener;
             if (w) {
-                // window.opener isn't included in the `location.ancestorOrigins` prop.
-                // We'll just have to deal with a simple check and an error msg on WebKit
-                // browsers in this case.
                 cache.push([w, is_same_origin(w)]);
             }
             this.window_cache = cache;
@@ -567,17 +548,6 @@ policies and contribution forms [3].
 
     function promise_rejects(test, expected, promise, description) {
         return promise.then(test.unreached_func("Should have rejected: " + description)).catch(function(e) {
-          console.log("debug -1")
-          console.log(test)
-          console.log("debug -2")
-          console.log(expected)
-          console.log("debug -3")
-          console.log(promise)
-          console.log("debug -4")
-          console.log(description)
-          console.log("debug -5")
-          console.log(e)
-          console.log("debug -6")
             assert_throws(expected, function() { throw e }, description);
         });
     }
@@ -1280,7 +1250,8 @@ policies and contribution forms [3].
                 ReadOnlyError: 0,
                 VersionError: 0,
                 OperationError: 0,
-                NotAllowedError: 0
+                NotAllowedError: 0,
+                CancelationError: 0,
             };
 
             if (!(name in name_code_map)) {
@@ -1417,7 +1388,6 @@ policies and contribution forms [3].
         this.phase = this.phases.STARTED;
         //If we don't get a result before the harness times out that will be a test timout
         this.set_status(this.TIMEOUT, "Test timed out");
-
 
         tests.started = true;
         tests.notify_test_state(this);
@@ -1606,7 +1576,7 @@ policies and contribution forms [3].
      * as another window or a worker. These events are then used to construct
      * and maintain RemoteTest objects that mirror the tests running in the
      * remote context.
-     * 
+     *
      * An optional third parameter can be used as a predicate to filter incoming
      * MessageEvents.
      */
@@ -2010,6 +1980,7 @@ policies and contribution forms [3].
             }
         } else if (is_shared_worker(worker)) {
             message_port = worker.port;
+            message_port.start();
         } else {
             message_port = worker;
         }
@@ -2216,7 +2187,7 @@ policies and contribution forms [3].
         }
 
         var harness_url = get_harness_url();
-        if (harness_url !== null) {
+        if (harness_url !== undefined) {
             var stylesheet = output_document.createElementNS(xhtml_ns, "link");
             stylesheet.setAttribute("rel", "stylesheet");
             stylesheet.setAttribute("href", harness_url + "testharness.css");
@@ -2570,6 +2541,7 @@ policies and contribution forms [3].
         this.message = message;
         this.stack = this.get_stack();
     }
+    expose(AssertionError, "AssertionError");
 
     AssertionError.prototype = Object.create(Error.prototype);
 
