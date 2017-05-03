@@ -40,11 +40,6 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 "use strict";
 const invalid_messages =
   [
-    //Invalid NFCPushMessage type
-    undefined,
-    // NFCMessage.data: should have at least 1 valid record.
-    // https://w3c.github.io/web-nfc/#the-push-method - Step 8.
-    createMessage([{}]),
     // https://w3c.github.io/web-nfc/#dfn-map-text-to-ndef
     // NFCRecord must have data.
     createMessage([createTextRecord()]),
@@ -78,24 +73,36 @@ const invalid_messages =
     createMessage([createOpaqueRecord(test_number_data)]),
     createMessage([createOpaqueRecord(test_json_data)])
   ];
-console.log(invalid_messages)
-console.log("+++++++++++++++")
+
+const typeerror_message = [
+  //Invalid NFCPushMessage type
+  undefined,
+  // NFCMessage.data: should have at least 1 valid record.
+  // https://w3c.github.io/web-nfc/#the-push-method - Step 8.
+  createMessage([{}])
+];
+
 promise_test(t => {
   return promise_rejects(t, new TypeError(), navigator.nfc.push(undefined));
 }, "Test that passing undefined to nfc.push would raise TypeError.");
 
 promise_test(t => {
   let promises = [];
-  invalid_messages.forEach(message => {
-    console.log(message);
-    console.log("123")
-    console.log(typeof(message));
-    console.log("-------")
+  typeerror_message.forEach(message => {
     promises.push(
       promise_rejects(t, new TypeError(), navigator.nfc.push(message)));
   });
   return Promise.all(promises);
-}, "Test that promise is rejected with TypeError if NFCMessage is invalid.");
+}, "Test that promise is rejected with TypeError if message.data is an empty sequence or is not of type defined by the NFCPushMessage union.");
+
+promise_test(t => {
+  let promises = [];
+  invalid_messages.forEach(message => {
+    promises.push(
+      promise_rejects(t, 'SyntaxError', navigator.nfc.push(message)));
+  });
+  return Promise.all(promises);
+}, "Test that promise is rejected with SyntaxError if NFCMessage is invalid.");
 
 promise_test(t => {
   return promise_rejects(t, new TypeError(), navigator.nfc.push({data: [{data: null, mediaType: "", recordType: "empty"}]}))
