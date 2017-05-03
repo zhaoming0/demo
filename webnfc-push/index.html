@@ -1,22 +1,33 @@
-<!doctype html>
-<meta charset='utf-8'>
-<ul>
-<li><a href='idlharness.https.html'>idlharness.https.html</a></li>
-<li><a href='nfc_block_iframe.https.html'>nfc_block_iframe.https.html</a></li>
-<li><a href='nfc_hw_disabled-manual.https.html'>nfc_hw_disabled-manual.https.html</a></li>
-<li><a href='nfc_hw_notsupported-manual.https.html'>nfc_hw_notsupported-manual.https.html</a></li>
-<li><a href='nfc_insecure_context.html'>nfc_insecure_context.html</a></li>
-<li><a href='nfc_push_arraybuffer-manual.https.html'>nfc_push_arraybuffer-manual.https.html</a></li>
-<li><a href='nfc_push_exceptions.https.html'>nfc_push_exceptions.https.html</a></li>
-<li><a href='nfc_push_ignoreread_false-manual.https.html'>nfc_push_ignoreread_false-manual.https.html</a></li>
-<li><a href='nfc_push_nfcmessage_json-manual.https.html'>nfc_push_nfcmessage_json-manual.https.html</a></li>
-<li><a href='nfc_push_nfcmessage_opaque-manual.https.html'>nfc_push_nfcmessage_opaque-manual.https.html</a></li>
-<li><a href='nfc_push_nfcmessage_text-manual.https.html'>nfc_push_nfcmessage_text-manual.https.html</a></li>
-<li><a href='nfc_push_nfcmessage_url-manual.https.html'>nfc_push_nfcmessage_url-manual.https.html</a></li>
-<li><a href='nfc_push_string-manual.https.html'>nfc_push_string-manual.https.html</a></li>
-<li><a href='nfc_watch.https.html'>nfc_watch.https.html</a></li>
-<li><a href='nfc_watch_recordtype_json-manual.https.html'>nfc_watch_recordtype_json-manual.https.html</a></li>
-<li><a href='nfc_watch_recordtype_text-manual.https.html'>nfc_watch_recordtype_text-manual.https.html</a></li>
-<li><a href='nfc_watch_recordtype_url-manual.https.html'>nfc_watch_recordtype_url-manual.https.html</a></li>
-<li><a href='nfc_watch_recordtype_opaque-manual.https.html'>nfc_watch_recordtype_opaque-manual.https.html</a></li>
-</ul>
+<meta charset=utf-8>
+<title>Web NFC: Test exceptions in nfc.push</title>
+<link rel="author" title="Intel" href="http://www.intel.com"/>
+<link rel="author" title="Zhao Ming" href="mailto:mingx.zhao@intel.com"/>
+<link rel="help" href="https://w3c.github.io/web-nfc/#the-nfc-interface"/>
+<script src="../resources/testharness.js"></script>
+<script src="../resources/testharnessreport.js"></script>
+<script src="nfc_help.js"></script>
+
+<div id="log"></div>
+
+<script>
+"use strict";
+
+promise_test(t => {
+  return promise_rejects(t, new TypeError(), navigator.nfc.push({data: [{data: null, mediaType: "", recordType: "empty"}]}))
+}, "Test that nfc.push fails with 'TypeError' when message is NFCMessage and recordType is 'empty'.");
+
+//promise_test(t => {
+//  let promise = navigator.nfc.push(test_text_data);
+//  navigator.nfc.cancelPush();
+//  return promise_rejects(t, 'AbortError', promise);
+//}, "nfc.cancelPush should reject pending promise with AbortError.");
+
+//  return promise_rejects(t, "TimeoutError", navigator.nfc.push(test_text_data, { timeout: 1 }));
+//}, "nfc.push should fail with TimeoutError when timer expires.");
+
+//promise_test(t => {
+//  return promise_rejects(t, new TypeError(), navigator.nfc.push(test_number_data));
+//}, "nfc.push should fail with TypeError when parameter is 'number'.");
+
+
+</script>
