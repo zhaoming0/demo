@@ -87,6 +87,8 @@ promise_test(t => {
 promise_test(t => {
   let promises = [];
   invalid_messages.forEach(message => {
+    console.log(message);
+    console.log("-------")
     promises.push(
       promise_rejects(t, new TypeError(), navigator.nfc.push(message)));
   });
