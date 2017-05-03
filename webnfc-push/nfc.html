@@ -22,9 +22,9 @@
 //  return promise_rejects(t, 'AbortError', promise);
 //}, "nfc.cancelPush should reject pending promise with AbortError.");
 
-promise_test(t => {
-  return promise_rejects(t, "TimeoutError", navigator.nfc.push(test_text_data, { timeout: 1 }));
-}, "nfc.push should fail with TimeoutError when timer expires.");
+//promise_test(t => {
+//  return promise_rejects(t, "TimeoutError", navigator.nfc.push(test_text_data, { timeout: 1 }));
+//}, "nfc.push should fail with TimeoutError when timer expires.");
 
 promise_test(t => {
   return promise_rejects(t, new TypeError(), navigator.nfc.push(test_number_data));
