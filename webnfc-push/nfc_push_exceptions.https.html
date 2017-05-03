@@ -138,8 +138,8 @@ promise_test(t => {
   return promise_rejects(t, new TypeError(), navigator.nfc.push(test_text_data, { timeout: -1 }));
 }, "nfc.push should fail with TypeError when timeout value is negative.");
 
-promise_test(t => {
-  return promise_rejects(t, new TypeError(), navigator.nfc.push(test_number_data));
-}, "nfc.push should fail with TypeError when parameter is 'number'.");
+//promise_test(t => {
+//  return promise_rejects(t, new TypeError(), navigator.nfc.push(test_number_data));
+//}, "nfc.push should fail with TypeError when parameter is 'number'.");
 
 </script>
