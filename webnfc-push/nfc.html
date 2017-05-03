@@ -12,15 +12,15 @@
 <script>
 "use strict";
 
-promise_test(t => {
-  return promise_rejects(t, new TypeError(), navigator.nfc.push({data: [{data: null, mediaType: "", recordType: "empty"}]}))
-}, "Test that nfc.push fails with 'TypeError' when message is NFCMessage and recordType is 'empty'.");
-
 //promise_test(t => {
-//  let promise = navigator.nfc.push(test_text_data);
-//  navigator.nfc.cancelPush();
-//  return promise_rejects(t, 'AbortError', promise);
-//}, "nfc.cancelPush should reject pending promise with AbortError.");
+//  return promise_rejects(t, new TypeError(), navigator.nfc.push({data: [{data: null, mediaType: "", recordType: "empty"}]}))
+//}, "Test that nfc.push fails with 'TypeError' when message is NFCMessage and recordType is 'empty'.");
+
+promise_test(t => {
+  let promise = navigator.nfc.push(test_text_data);
+  navigator.nfc.cancelPush();
+  return promise_rejects(t, 'AbortError', promise);
+}, "nfc.cancelPush should reject pending promise with AbortError.");
 
 //  return promise_rejects(t, "TimeoutError", navigator.nfc.push(test_text_data, { timeout: 1 }));
 //}, "nfc.push should fail with TimeoutError when timer expires.");
