@@ -42,7 +42,7 @@
 
 promise_test(t => {
   return navigator.getVRDisplays().then((displays) => {
-    if (display.length > 0){
+    if (displays.length > 0){
       console.log("here has available vrdisplay");
     }else{
       console.log("could not found vrdisplay");
