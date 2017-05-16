@@ -1,0 +1,54 @@
+<meta charset=utf-8>
+<title>Web vr: Test exceptions </title>
+<link rel="author" title="Intel" href="http://www.intel.com"/>
+<link rel="author" title="Zhao Ming" href="mailto:mingx.zhao@intel.com"/>
+<link rel="help" href="https://w3c.github.io/web-nfc/#the-nfc-interface"/>
+<script src="../resources/testharness.js"></script>
+<script src="../resources/testharnessreport.js"></script>
+<!--<script src="nfc_help.js"></script>
+--!>
+
+<div id="log"></div>
+
+<script>
+"use strict";
+
+//promise_test(t => {
+//  return promise_rejects(t, new TypeError(), navigator.nfc.push({data: [{data: null, mediaType: "", recordType: "empty"}]}))
+//}, "Test that nfc.push fails with 'TypeError' when message is NFCMessage and recordType is 'empty'.");
+//
+//
+//promise_test(t => {
+//  let watcherDone = new Event("watcherdone");
+//  let eventWatcher = new EventWatcher(t, window,["vrdisplayactivate", "watcherdone"]);
+//  eventWatcher.wait_for(["vrdisplayactivate", "watcherdone"])
+//    .then(() => {
+//      t.done();
+//    });
+//  return navigator.getVRDisplays().then((displays) => {
+//    let display = displays[0];
+//
+//    function onDisplayActivate() {
+//      display.requestPresent([{source: webglCanvas}]).then(() => {
+//        window.dispatchEvent(watcherDone)
+//      }, (err) => {
+//        t.step(() => {
+//          assert_unreached(err);
+//        }, "requestPresent rejected");
+//        t.done();
+//      });
+//    }
+//    window.addEventListener("vrdisplayactivate", onDisplayActivate, false);
+
+promise_test(t => {
+  return navigator.getVRDisplays().then((displays) => {
+    if (display.length > 0){
+      console.log("here has available vrdisplay");
+    }else{
+      console.log("could not found vrdisplay");
+    }
+    assert_greater_than(displays.length, 0);
+  })
+});
+
+</script>
