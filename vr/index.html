@@ -49,6 +49,35 @@ promise_test(t => {
       .then(() => {
         t.done();
       });
+    runWithUserGesture(() => {
+      display.requestPresent(() => {
+        display.requestPresent([{ source : webglCanvas }]).then(() => {
+          display.requestPresent([{ source : webglCanvas }]).then(() => {
+            display.exitPresent().then(() => {
+              t.step(() => {
+                assert_unreached();
+              }, "Second exitPresent succeeded");
+              t.done();
+            }, (err) => {
+              t.step(() => {
+                assert_unreached(err);
+              }, "second requestPresent rejected");
+              t.done();
+            });
+          }, (err) => {
+            t.step(() => {
+              assert_unreached(err);
+            }, "requestPresent rejected");
+          });
+        });
+      }, (err) => {
+        t.step(() => {
+          assert_unreached();
+        }, "getVRDisplays rejected");
+        t.done();
+      });
+    }, [fakeDisplays["Pixel"]], "Test vrdisplaypresentchange fires only when expected");
+
     if (displays.length > 0){
       console.log("here has available vrdisplay");
     }else{
