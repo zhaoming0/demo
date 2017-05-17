@@ -45,7 +45,7 @@ promise_test(t => {
     let display = displays[0];
     let watcherDone = new Event("watcherdone");
     let eventWatcher = new EventWatcher(t, window, ["vrdisplaypressentchange", "watcherdone"]);
-    eventWatcher.wat_for(["vrdisplaypressentchange", "vrdisplaypressentchange", "watcherdone"])
+    eventWatcher.wait_for(["vrdisplaypressentchange", "vrdisplaypressentchange", "watcherdone"])
       .then(() => {
         t.done();
       });
