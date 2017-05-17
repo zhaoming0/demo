@@ -13,32 +13,7 @@
 <script>
 "use strict";
 
-//promise_test(t => {
-//  return promise_rejects(t, new TypeError(), navigator.nfc.push({data: [{data: null, mediaType: "", recordType: "empty"}]}))
-//}, "Test that nfc.push fails with 'TypeError' when message is NFCMessage and recordType is 'empty'.");
-//
-//
-//promise_test(t => {
-//  let watcherDone = new Event("watcherdone");
-//  let eventWatcher = new EventWatcher(t, window,["vrdisplayactivate", "watcherdone"]);
-//  eventWatcher.wait_for(["vrdisplayactivate", "watcherdone"])
-//    .then(() => {
-//      t.done();
-//    });
-//  return navigator.getVRDisplays().then((displays) => {
-//    let display = displays[0];
-//
-//    function onDisplayActivate() {
-//      display.requestPresent([{source: webglCanvas}]).then(() => {
-//        window.dispatchEvent(watcherDone)
-//      }, (err) => {
-//        t.step(() => {
-//          assert_unreached(err);
-//        }, "requestPresent rejected");
-//        t.done();
-//      });
-//    }
-//    window.addEventListener("vrdisplayactivate", onDisplayActivate, false);
+let fakeDisplays = fakeVRDisplays();
 
 promise_test(t => {
   return navigator.getVRDisplays().then((displays) => {
