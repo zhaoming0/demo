@@ -42,6 +42,13 @@
 
 promise_test(t => {
   return navigator.getVRDisplays().then((displays) => {
+    let display = displays[0];
+    let watcherDone = new Event("watcherdone");
+    let eventWatcher = new EventWatcher(t, window, ["vrdisplaypressentchange", "watcherdone"]);
+    eventWatcher.wat_for(["vrdisplaypressentchange", "vrdisplaypressentchange", "watcherdone"])
+      .then(() => {
+        t.done();
+      });
     if (displays.length > 0){
       console.log("here has available vrdisplay");
     }else{
