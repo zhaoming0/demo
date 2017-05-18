@@ -13,7 +13,7 @@
 <script>
 "use strict";
 
-let fakeDisplays = fakeVRDisplays();
+//let fakeDisplays = fakeVRDisplays();
 
 promise_test(t => {
   return navigator.getVRDisplays().then((displays) => {
@@ -51,7 +51,8 @@ promise_test(t => {
         }, "getVRDisplays rejected");
         t.done();
       });
-    }, [fakeDisplays["Pixel"]], "Test vrdisplaypresentchange fires only when expected");
+    }//, [fakeDisplays["Pixel"]], "Test vrdisplaypresentchange fires only when expected");
+    )
 
     if (displays.length > 0){
       console.log("here has available vrdisplay");
