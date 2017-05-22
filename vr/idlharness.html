@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>WebVR IDL test</title>
+    <link rel="help" href="https://w3c.github.io/webvr/">
+
+    <script src="../resources/testharness.js"></script>
+    <script src="../resources/testharnessreport.js"></script>
+    <script src="../resources/WebIDLParser.js"></script>
+    <script src="../resources/idlharness.js"></script>
+<script id="webvr_idl" type=text/plain>
+interface VR : EventTarget {
+  // Methods
+  Promise<sequence<VRDevice>> getDevices();
+
+  // Events
+  attribute EventHandler ondeviceconnect;
+  attribute EventHandler ondevicedisconnect;
+  attribute EventHandler onnavigate;
+};
+
+interface VRDevice : EventTarget {
+  // Attributes
+  readonly attribute DOMString deviceName;
+  readonly attribute boolean isExternal;
+
+  attribute VRSession? activeSession;
+
+  // Methods
+  Promise<boolean> supportsSession(VRSessionCreateParametersInit parameters);
+  Promise<VRSession> requestSession(VRSessionCreateParametersInit parameters);
+
+  // Events
+  attribute EventHandler onsessionchange;
+  attribute EventHandler onactivate;
+  attribute EventHandler ondeactivate;
+};
+
+interface VRSession : EventTarget {
+  // Attributes
+  readonly attribute VRDevice device;
+  readonly attribute VRSessionCreateParameters createParameters;
+
+  attribute double depthNear;
+  attribute double depthFar;
+  attribute VRLayer baseLayer;
+
+  // Methods
+  VRSourceProperties getSourceProperties(optional double scale);
+  Promise<VRFrameOfReference> createFrameOfReference(VRFrameOfReferenceType type);
+  VRDevicePose? getDevicePose(VRCoordinateSystem coordinateSystem);
+  Promise<void> endSession();
+
+  // Events
+  attribute EventHandler onblur;
+  attribute EventHandler onfocus;
+  attribute EventHandler onresetpose;
+};
+
+dictionary VRSessionCreateParametersInit {
+  required boolean exclusive = true;
+};
+
+interface VRSessionCreateParameters {
+  readonly attribute boolean exclusive;
+};
+
+interface VRDevicePose {
+  readonly attribute Float32Array leftProjectionMatrix;
+  readonly attribute Float32Array leftViewMatrix;
+
+  readonly attribute Float32Array rightProjectionMatrix;
+  readonly attribute Float32Array rightViewMatrix;
+
+  readonly attribute Float32Array poseModelMatrix;
+};
+
+interface VRLayer {};
+
+typedef (HTMLCanvasElement or
+         OffscreenCanvas) VRCanvasSource;
+
+[Constructor(VRSession session, optional VRCanvasSource source)]
+interface VRCanvasLayer : VRLayer {
+  // Attributes
+  attribute VRCanvasSource source;
+
+  // Methods
+  void setLeftBounds(double left, double bottom, double right, double top);
+  FrozenArray<double> getLeftBounds();
+
+  void setRightBounds(double left, double bottom, double right, double top);
+  FrozenArray<double> getRightBounds();
+
+  Promise<DOMHighResTimeStamp> commit();
+};
+
+interface VRSourceProperties {
+  readonly attribute double scale;
+  readonly attribute unsigned long width;
+  readonly attribute unsigned long height;
+};
+
+interface VRCoordinateSystem {
+  Float32Array? getTransformTo(VRCoordinateSystem other);
+};
+
+enum VRFrameOfReferenceType {
+  "headModel",
+  "eyeLevel",
+  "stage",
+};
+
+interface VRFrameOfReference : VRCoordinateSystem {
+  readonly attribute VRStageBounds? bounds;
+};
+
+interface VRStageBounds {
+  readonly attribute double minX;
+  readonly attribute double maxX;
+  readonly attribute double minZ;
+  readonly attribute double maxZ;
+};
+
+[Constructor(DOMString type, VRDeviceEventInit eventInitDict)]
+interface VRDeviceEvent : Event {
+  readonly attribute VRDevice device;
+};
+
+dictionary VRDeviceEventInit : EventInit {
+  required VRDevice device;
+};
+
+[Constructor(DOMString type, VRSessionEventInit eventInitDict)]
+interface VRSessionEvent : Event {
+  readonly attribute VRSession session;
+};
+
+dictionary VRSessionEventInit : EventInit {
+  required VRSession session;
+};
+
+partial interface Navigator {
+  [SameObject] readonly attribute VR vr;
+};
+
+
+</script>
+  </head>
+  <body>
+    <h1 class="instructions">Description</h1>
+    <p class="instructions">
+      This test verifies that implementations of the WebVR API match its WebIDL definition.
+    </p>
+
+    <div id='log'></div>
+
+    <script>
+      setup( () => {
+        var idl_array = new IdlArray();
+        idl_array.add_untested_idls("[PrimaryGlobal] interface Window {};");
+        idl_array.add_untested_idls("interface Navigator {};");
+        idl_array.add_untested_idls("interface Event {};");
+        idl_array.add_untested_idls("interface EventTarget {};");
+        idl_array.add_untested_idls("interface HTMLIFrameElement {};");
+        idl_array.add_untested_idls("interface Gamepad {};");
+
+        idl_array.add_idls(document.getElementById("webvr_idl").textContent);
+
+        idl_array.test();
+        done();
+      }, {explicit_done: true});
+    </script>
+  </body>
+</html>

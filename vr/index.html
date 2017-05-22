@@ -6,6 +6,7 @@
 <script src="../resources/testharness.js"></script>
 <script src="../resources/testharnessreport.js"></script>
 <canvas id="webgl-canvas"></canvas>
+<canvas id="webgl-canvas2"></canvas>
 <script src="vr_help.js"></script>
 
 <div id="log"></div>
@@ -15,52 +16,87 @@
 
 //let fakeDisplays = fakeVRDisplays();
 
+//promise_test(t => {
+//  return navigator.getVRDisplays().then((displays) => {
+//    let display = displays[0];
+//    let watcherDone = new Event("watcherdone");
+//    let eventWatcher = new EventWatcher(t, window, ["vrdisplaypressentchange", "watcherdone"]);
+//    eventWatcher.wait_for(["vrdisplaypressentchange", "vrdisplaypressentchange", "watcherdone"])
+//      .then(() => {
+//        t.done();
+//      });
+//    runWithUserGesture(() => {
+//      display.requestPresent(() => {
+//        display.requestPresent([{ source : webglCanvas }]).then(() => {
+//          display.requestPresent([{ source : webglCanvas }]).then(() => {
+//            display.exitPresent().then(() => {
+//              t.step(() => {
+//                assert_unreached();
+//              }, "Second exitPresent succeeded");
+//              t.done();
+//            }, (err) => {
+//              t.step(() => {
+//                assert_unreached(err);
+//              }, "second requestPresent rejected");
+//              t.done();
+//            });
+//          }, (err) => {
+//            t.step(() => {
+//              assert_unreached(err);
+//            }, "requestPresent rejected");
+//          });
+//        });
+//      }, (err) => {
+//        t.step(() => {
+//          assert_unreached();
+//        }, "getVRDisplays rejected");
+//        t.done();
+//      });
+//    }//, [fakeDisplays["Pixel"]], "Test vrdisplaypresentchange fires only when expected");
+//    )
+//
+//    if (displays.length > 0){
+//      console.log("here has available vrdisplay");
+//    }else{
+//      console.log("could not found vrdisplay");
+//    }
+//    assert_greater_than(displays.length, 0);
+//  })
+//});
+//let display;
+//
+//navigator.getVRDisplays().then((displays) => {
+//  display = displays[0];
+//  if (displays.length > 0) {
+//    console.log("here have VR displays");
+//  }else{
+//    console.log("not found VR devices");
+//  }
+//  let watcherDone = new Event("watcherdone");
+//}).then(() => {
+//  return display.requestPresent(() =>{
+//    console.log("debug -2 !")
+//    return display.requestPresent([{ source : webglCanas }]).then(() =>{
+//      console.log("debug -1 !");
+//    })
+//  })
+//})
+let webglCanvas2 = document.getElementById("webgl-canvas2");
+let gl2 = webglCanvas2.getContext("webgl", glAttributes);
+
 promise_test(t => {
   return navigator.getVRDisplays().then((displays) => {
     let display = displays[0];
-    let watcherDone = new Event("watcherdone");
-    let eventWatcher = new EventWatcher(t, window, ["vrdisplaypressentchange", "watcherdone"]);
-    eventWatcher.wait_for(["vrdisplaypressentchange", "vrdisplaypressentchange", "watcherdone"])
-      .then(() => {
-        t.done();
-      });
-    runWithUserGesture(() => {
-      display.requestPresent(() => {
-        display.requestPresent([{ source : webglCanvas }]).then(() => {
-          display.requestPresent([{ source : webglCanvas }]).then(() => {
-            display.exitPresent().then(() => {
-              t.step(() => {
-                assert_unreached();
-              }, "Second exitPresent succeeded");
-              t.done();
-            }, (err) => {
-              t.step(() => {
-                assert_unreached(err);
-              }, "second requestPresent rejected");
-              t.done();
-            });
-          }, (err) => {
-            t.step(() => {
-              assert_unreached(err);
-            }, "requestPresent rejected");
-          });
-        });
-      }, (err) => {
-        t.step(() => {
-          assert_unreached();
-        }, "getVRDisplays rejected");
-        t.done();
-      });
-    }//, [fakeDisplays["Pixel"]], "Test vrdisplaypresentchange fires only when expected");
-    )
+    t.step(() => {
+      assert_equals(display.getLayers().length, 0);
+    }, "No layers initially returned");
 
-    if (displays.length > 0){
-      console.log("here has available vrdisplay");
-    }else{
-      console.log("could not found vrdisplay");
-    }
-    assert_greater_than(displays.length, 0);
-  })
-});
+    runWithUserGesture(() => {
+      display.requestPresent([{ source: canvas}]).then(() => {
+        console.log("-1-1");
+      })
+    })
+  })  
+})
 
 </script>
